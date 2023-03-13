@@ -2,10 +2,13 @@
        position: sticky;
        top: 0;
        height: 60px;
-       background-color: #fff;
        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
        z-index: 100;
        transition: all 0.7s ease-in-out !important;
+       width: 80% !important;
+       margin: auto !important;
+       border-radius: 0 0 20px 20px;
+       left: 0 !important;
 }
      
 .navbar--hidden {
@@ -16,4 +19,5 @@
 .navbar--visible {
        transform: translateY(0);
        position: sticky;
+       background: rgba(101,104,253,.8) !important;
      }
