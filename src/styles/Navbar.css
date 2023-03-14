@@ -1,7 +1,7 @@
 .navbar {
        position: sticky;
        top: 0;
-       height: 60px;
+       height: 70px;
        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
        z-index: 100;
        transition: all 0.7s ease-in-out !important;
@@ -12,12 +12,14 @@
 }
      
 .navbar--hidden {
-       transform: translateY(-60px);
+       transform: translateY(-70px);
        position: sticky;
+       transition: 0.7s;
      }
      
 .navbar--visible {
        transform: translateY(0);
        position: sticky;
-       background: rgba(101,104,253,.8) !important;
+       /* background: rgba(101,104,253,.8) !important; */
+       background-image: linear-gradient(to bottom, #6e5cbe, #8951b3, #a045a8, #a6379b, #721e90);
      }

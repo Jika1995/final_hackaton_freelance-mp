@@ -5,6 +5,10 @@
 
 }
 
+.header-profile-page {
+       height: 300px;
+}
+
 .body-profile-content {
        position: relative;
        width: 80%;
