@@ -79,15 +79,20 @@
     margin: 15px 0;
 }
 .reg-btn {
-   border-radius: 30px;
+   border-radius: 30px !important;
    font-family: 'Mulish', sans-serif !important;
    font-weight: 400;
-   background-color: #A658B3;
+   background-color: #A658B3 !important;
 
 }
 .reg-btn:hover {
     color: #A658B3;
-    background-color: #1E1E1E;
+    background-color: #1E1E1E !important;
     box-shadow: 4px 4px 8px 0px rgba(10, 16, 20, 0.801);
 }
-
+/* #auth-img {
+    box-shadow: rgba(233, 166, 214, 0.3) 0px 8px 15px, rgba(226, 186, 231, 0.22) 0px 15px 12px;      
+} */
+#sign-nav:hover {
+   color: #A658B3 !important;
+}
