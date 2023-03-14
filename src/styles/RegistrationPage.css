@@ -1,7 +1,9 @@
+/* font-family: 'Mulish', sans-serif; */
+
 .auth-main {
     width: 100% !important;
     height: 100% !important;
-    background-color: blueviolet;
+    background-color: #1F1720;
 }
 .auth-container {
     width: 70% !important;
@@ -10,23 +12,87 @@
     justify-content: space-between;
     color: rgb(255, 255, 255);
     padding-top: 150px !important;
+    font-family: 'Mulish', sans-serif !important;
 }
 .left-block {
     width: 45%;
+ 
 }
 .welcome-block {
-    background: rgba(49, 49, 49, 0.75);
+    background: #29212A;
     border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    height: 300px;
+    transition: 0.7s;
+}
+.welcome-block:hover {
+    transform: scale(1.02);
+    box-shadow: rgba(233, 166, 214, 0.3) 0px 8px 15px, rgba(226, 186, 231, 0.22) 0px 15px 12px;      
+    transition: 0.8s;
 }
 .welcome-info {
     width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: start;
+    margin-top: 60px;
+    font-family: 'Mulish', sans-serif !important;
+}
+#zamok {
+    position: absolute;
+    top: -80px;
+    left: 5px;
 }
 .right-block {
     width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-block {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: rgb(255, 255, 255);
+    transition: 0.7s;
+}
+.auth-block:hover {
+    transform: scale(1.02);
+    box-shadow: rgba(233, 166, 214, 0.3) 0px 8px 15px, rgba(226, 186, 231, 0.22) 0px 15px 12px;      
+    transition: 0.8s;
+}
+.reg-block {
+    width: 80%;
+    margin: 20px 0;
+}
+.sign-block {
+    display: flex;
+    justify-content: space-between;
+}
+.inputs-block {
+    margin: 15px 0;
+}
+.reg-btn {
+   border-radius: 30px !important;
+   font-family: 'Mulish', sans-serif !important;
+   font-weight: 400;
+   background-color: #A658B3 !important;
+
+}
+.reg-btn:hover {
+    color: #A658B3;
+    background-color: #1E1E1E !important;
+    box-shadow: 4px 4px 8px 0px rgba(10, 16, 20, 0.801);
+}
+/* #auth-img {
+    box-shadow: rgba(233, 166, 214, 0.3) 0px 8px 15px, rgba(226, 186, 231, 0.22) 0px 15px 12px;      
+} */
+#sign-nav:hover {
+   color: #A658B3 !important;
 }
