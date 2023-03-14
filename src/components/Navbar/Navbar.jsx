@@ -27,6 +27,10 @@ const pages = [
     type: "Chat",
     path: "/chat",
   },
+  {
+    type: "Market",
+    path: "/market",
+  },
 ];
 
 const settings = [
