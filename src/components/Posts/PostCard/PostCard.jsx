@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {postsContext} from '../../../contexts/PostContextProvider';
 
-
 const PostCard = ({item}) => {
   const navigate = useNavigate();
   // const {toggleLike} = useContext(postsContext);
+  const {deletePost} = useContext(postsContext)
 
   return (
     <div>
@@ -21,12 +21,12 @@ const PostCard = ({item}) => {
     </p>
     <p>{item.description}</p>
     {/* <button onClick={() => toggleLike(item.id)}>Like</button> */}
-    {/* {item.is_author ? (
+    {item.is_owner ? (
       <>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={() => navigate(`/edit/${item.id}`)}>Edit</button>
+        <button onClick={() => deletePost(item.id)}>Delete</button>
       </>
-    ) : null} */}
+    ) : null}
   </div>
   )
 }

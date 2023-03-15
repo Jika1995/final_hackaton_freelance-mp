@@ -7,6 +7,10 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ChatPage from "./pages/ChatPage";
 import ProfilePage from "./pages/ProfilePage";
 import OrdersPage from "./pages/OrdersPage";
+import PostsPage from './pages/PostsPage';
+import PostDetailsPage from "./pages/PostDetailsPage";
+import EditPostPage from './pages/EditPostPage';
+import AddPostPage from './pages/AddPostPage';
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -45,6 +49,27 @@ const MainRoutes = () => {
       element: <OrdersPage />,
       id: 7,
     },
+    {
+      link: "/posts",
+      element: <PostsPage />,
+      id: 8,
+    },
+    {
+      link: "/details/:id",
+      element: <PostDetailsPage />,
+      id: 9,
+    },
+    {
+      link: "/edit/:id",
+      element: <EditPostPage />,
+      id: 10,
+    },
+    {
+      link: "/addpost/",
+      element: <AddPostPage />,
+      id: 11,
+    },
+
   ];
   
   return (
