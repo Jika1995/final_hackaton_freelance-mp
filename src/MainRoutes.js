@@ -46,6 +46,7 @@ const MainRoutes = () => {
       id: 7,
     },
   ];
+  
   return (
     <Routes>
       {PUBLIC_ROUTES.map((item) => (

@@ -10,7 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { authContext } from "../contexts/AuthContextProvider";
 
 const RegistrationPage = () => {
+
   const navigate = useNavigate();
+
   const { handleRegister, error, setError, loading } = useContext(authContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,20 +28,19 @@ const RegistrationPage = () => {
       return;
     }
 
-    const newUser = {
-      email: email,
-      password: password,
-      password2: passwordConfirm,
-    };
-    console.log(newUser);
-    handleRegister(newUser, navigate);
-    // let formData = new FormData();
-    // formData.append("email", email);
-    // formData.append("password", password);
-    // formData.append("password2", passwordConfirm);
-    // console.log(formData);
-    // handleRegister(formData, navigate);
+    let formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('password2', passwordConfirm);
+
+    handleRegister(formData, navigate);
+
   }
+
+    //др вариант === условной отрисовке
+    if(loading) {
+      return <h1>Loading..</h1>
+    };
 
   return (
     <div className="auth-main">
@@ -115,6 +116,7 @@ const RegistrationPage = () => {
                   label="Password*"
                   placeholder="Enter your password"
                   color="secondary"
+                  // value={error ? error.password : null}
                   fullWidth
                   sx={{ mb: "10px" }}
                   className="reg-inp"
@@ -125,6 +127,7 @@ const RegistrationPage = () => {
                   label="Password Confirmation*"
                   placeholder="Confirm your password"
                   color="secondary"
+                  // value={error ? error.password2 : null}
                   fullWidth
                   sx={{ mb: "10px" }}
                   className="reg-inp"
@@ -143,6 +146,7 @@ const RegistrationPage = () => {
           </Box>
         </Box>
         <Box className="right-block">
+          {error ? <h2>{error}</h2> : null} 
           <img
             src="https://i.ibb.co/xH1gDVL/kid-30637-unscreen.gif"
             alt="error"

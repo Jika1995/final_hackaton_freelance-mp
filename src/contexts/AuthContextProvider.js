@@ -12,16 +12,19 @@ const AuthContextProvider = ({ children }) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  async function handleRegister(newUser, navigate) {
+  async function handleRegister(formData, navigate) {
     setLoading(true);
+
     try {
-      const res = await axios.post(`${API}/account/register/`, newUser);
+      const res = await axios.post(`${API}/account/register/`, formData);
       console.log(res);
       alert("Success!");
       navigate("/profile");
+
     } catch (err) {
       console.log(err);
-      setError(Object.values(err.response.data));
+      setError(Object.values(err.response.data).flat(2));
+
     } finally {
       setLoading(false);
     }
