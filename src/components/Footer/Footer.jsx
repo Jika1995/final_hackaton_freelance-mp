@@ -30,9 +30,6 @@ const Footer = () => {
               >
                 <Hub /> **COUNT** Our Users
               </Typography>
-              <Typography variant="body2" align="center">
-                &copy; {new Date().getFullYear()} My Awesome Website
-              </Typography>
             </div>
           </div>
           <div className="footer-info">
@@ -55,10 +52,26 @@ const Footer = () => {
             <div className="footer-block-4">
               <ul>
                 <h3>Our Family</h3>
-                <li>Makers</li>
-                <li>Udemy</li>
-                <li>Habr</li>
-                <li>HeadHunter</li>
+                <li>
+                  <a href="https://makers.kg/" target="_blank">
+                    Makers
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.udemy.com/ru/" target="_blank">
+                    Udemy
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.udemy.com/ru/" target="_blank">
+                    Habr
+                  </a>
+                </li>
+                <li>
+                  <a href="https://bishkek.headhunter.kg/" target="_blank">
+                    HeadHunter
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -70,8 +83,9 @@ const Footer = () => {
             target="_blank"
             rel="noopener"
             aria-label="instagram"
+            className="icons-btns"
           >
-            <Instagram />
+            <Instagram className="icons" />
           </IconButton>
           <IconButton
             component={Link}
@@ -79,8 +93,9 @@ const Footer = () => {
             target="_blank"
             rel="noopener"
             aria-label="twitter"
+            className="icons-btns"
           >
-            <Twitter />
+            <Twitter className="icons" />
           </IconButton>
           <IconButton
             component={Link}
@@ -88,8 +103,9 @@ const Footer = () => {
             target="_blank"
             rel="noopener"
             aria-label="youtube"
+            className="icons-btns"
           >
-            <YouTube />
+            <YouTube className="icons" />
           </IconButton>
           <IconButton
             component={Link}
@@ -97,8 +113,9 @@ const Footer = () => {
             target="_blank"
             rel="noopener"
             aria-label="telegram"
+            className="icons-btns"
           >
-            <Telegram />
+            <Telegram className="icons" />
           </IconButton>
           <IconButton
             component={Link}
@@ -106,62 +123,17 @@ const Footer = () => {
             target="_blank"
             rel="noopener"
             aria-label="github"
+            className="icons-btns"
           >
-            <GitHub />
+            <GitHub className="icons" />
           </IconButton>
         </div>
       </div>
+      <Typography variant="body2" align="center">
+        &copy; {new Date().getFullYear()} My Awesome Website
+      </Typography>
     </footer>
   );
 };
 
 export default Footer;
-
-{
-  /* <Container maxWidth="lg">
-        <Grid container justifyContent="space-between" alignItems="center">
-          <Grid item>
-            <Grid container spacing={2}>
-        
-                <IconButton
-                  component={Link}
-                  href="https://www.instagram.com/"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="instagram"
-                >
-                  <Instagram />
-                </IconButton>
-              </Grid>
-              <Grid item>
-                <IconButton
-                  component={Link}
-                  href="https://telegram.org/"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="telegram"
-                >
-                  <Telegram />
-                </IconButton>
-              </Grid>
-              <Grid item>
-                <IconButton
-                  component={Link}
-                  href="https://github.com/"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="github"
-                >
-                  <GitHub />
-                </IconButton>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Typography variant="body2" align="center">
-              &copy; {new Date().getFullYear()} My Awesome Website
-            </Typography>
-          </Grid>
-        </Grid>
-      </Container> */
-}
