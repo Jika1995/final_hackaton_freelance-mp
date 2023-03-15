@@ -3,7 +3,6 @@ footer {
        bottom: 0 !important;
        background-color: #683770 !important;
        width: 100%;
-       height: 250px;
        color: rgb(202, 199, 199) !important;
 }
 
@@ -12,17 +11,19 @@ footer {
        margin: auto;
        padding: 20px;
        color: whitesmoke !important;
-
+       flex-wrap: wrap;
 }
 
 .footer-content {
        display: flex;
        justify-content: center;
-       margin: auto;
+       margin: auto 20px;
+       align-items: center;
+       flex-wrap: wrap;
 }
 
 .footer-logo {
-       width: 30%;
+       width: 20%;
        display: flex;
        justify-content: space-around;
        align-items: center;
@@ -31,6 +32,7 @@ footer {
 .footer-logo>img {
        width: 100px;
        height: 100px;
+       border-radius: 20px !important;
 }
 
 #footer-logo-desc-count {
@@ -41,39 +43,77 @@ footer {
 .footer-info {
        width: 60%;
        display: flex;
-       justify-content: space-around;
+       justify-content: center;
        color: whitesmoke !important;
+       flex-wrap: wrap;
+       margin: auto 20px;
+       text-align: center;
 }
 
-.footer-info>a {
+.footer-info a {
        text-decoration: none !important;
        color: whitesmoke !important;
 }
 
 .footer-info ul {
        list-style-type: none !important;
+       padding: 0%;
+}
+
+.footer-block-1 {
+       margin: 0 30px;
+       width: 100px;
+}
+
+.footer-block-2 {
+       margin: 0 30px;
+       width: 100px;
+
+}
+
+.footer-block-3 {
+       margin: 0 30px;
+              width: 100px;
+
+}
+
+.footer-block-4 {
+       margin: 0 30px;
+              width: 100px;
+
 }
 
 .footer-icons {
        width: 40%;
        display: flex;
        flex-wrap: wrap;
-       justify-content: space-between;
+       justify-content: center;
        text-align: center;
        margin: auto;
 }
 
-.icons {
-       color: gainsboro;
+.footer-icons>a {
+       margin: auto 20px;
 }
 
-.icons:hover {
-       transition: 0.4s ease-in-out;
-       color: #d841c9;
+.icons {
+       color: rgb(185, 181, 181);
+       /* padding: auto 20px; */
+       /* margin: 30px; */
+
 }
+
+/* .icons-btns {
+       margin: 30px;
+} */
 
 .icons-btns:hover {
-       transition: 0.8s;
-       box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+       transition: 0.4s ease-in-out;
        border-radius: 10px;
+       box-shadow: rgba(208, 30, 231, 0.623) 0px 0px 0px 2px, rgb(224, 32, 238) 0px 4px 6px -1px, rgba(255, 255, 255, 0.875) 0px 1px 0px inset;
+}
+
+.icons-btns:hover>.icons {
+       color: rgb(240, 93, 245);
+       transition: 0.4s ease-in-out;
 }

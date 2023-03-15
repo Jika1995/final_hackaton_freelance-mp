@@ -23,13 +23,13 @@ const Footer = () => {
               alt="error:("
             />
             <div className="footer-logo-desc">
-              <Typography
+              {/* <Typography
                 variant="body2"
                 align="center"
                 id="footer-logo-desc-count"
               >
                 <Hub /> **COUNT** Our Users
-              </Typography>
+              </Typography> */}
             </div>
           </div>
           <div className="footer-info">
@@ -130,7 +130,7 @@ const Footer = () => {
         </div>
       </div>
       <Typography variant="body2" align="center">
-        &copy; {new Date().getFullYear()} My Awesome Website
+        &copy; {new Date().getFullYear()} My Final Website
       </Typography>
     </footer>
   );
