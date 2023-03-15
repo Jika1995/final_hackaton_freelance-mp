@@ -19,7 +19,7 @@ const AuthContextProvider = ({ children }) => {
       const res = await axios.post(`${API}/account/register/`, formData);
       console.log(res);
       alert("Success!");
-      navigate("/profile");
+      navigate("/login");
 
     } catch (err) {
       console.log(err);
@@ -27,6 +27,26 @@ const AuthContextProvider = ({ children }) => {
 
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleLogin (formData, email, navigate) {
+    setLoading(true);
+
+    try {
+      const res = await axios.post(`${API}/account/login/`, formData);
+      localStorage.setItem('tokens', JSON.stringify(res.data));
+      localStorage.setItem('email', email);
+      setCurrentUser(email);
+      console.log(res);
+      navigate('/profile');
+
+    } catch(err) {
+      console.log(err);
+      setError([err.response.data.detail]);
+
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -38,6 +58,7 @@ const AuthContextProvider = ({ children }) => {
     setCurrentUser,
     setError,
     handleRegister,
+    handleLogin
   };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };
