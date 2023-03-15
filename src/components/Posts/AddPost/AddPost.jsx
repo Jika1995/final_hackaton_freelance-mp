@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postsContext } from '../../../contexts/PostContextProvider';
+import {usePosts} from '../../../contexts/PostContextProvider';
 import { authContext } from '../../../contexts/AuthContextProvider';
 
 const AddPost = () => {
     const navigate = useNavigate();
-    const {createPost} = useContext(postsContext);
+    const {createPost} = usePosts();
     const {currentUser} = useContext(authContext)
 
     const [owner, setOwner] = useState(currentUser);
@@ -18,7 +18,7 @@ const AddPost = () => {
         newPost.append('owner', owner);
         newPost.append('title', title);
         newPost.append('description', desc);
-        newProduct.append('image', image);
+        newPost.append('image', image);
     
         createPost(newPost, navigate);
         
