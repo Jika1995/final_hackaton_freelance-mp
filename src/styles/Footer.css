@@ -1,7 +1,9 @@
 footer {
        position: static;
        bottom: 0 !important;
-       background-color: #683770 !important;
+       /* background-color: #683770 !important; */
+       background-image: linear-gradient(to bottom, #4e4188, #75459a, #7b3381, #731f69, #501565);
+
        width: 100%;
        color: rgb(202, 199, 199) !important;
 }
@@ -25,7 +27,7 @@ footer {
 .footer-logo {
        width: 20%;
        display: flex;
-       justify-content: space-around;
+       justify-content: center;
        align-items: center;
 }
 

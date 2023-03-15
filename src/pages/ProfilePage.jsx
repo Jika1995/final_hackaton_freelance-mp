@@ -1,7 +1,12 @@
 import React from "react";
 import "../styles/ProfilePage.css";
+import { useNavigate } from "react-router-dom";
+
+import Button from "@mui/material/Button";
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="profile-page">
       <div className="header-profile-page">
@@ -25,7 +30,13 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className="right-body-profile">
-          <button>Update</button>
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={() => navigate("/settings")}
+          >
+            Settings
+          </Button>
           <div className="about-user">
             <h2>Username</h2>
             <p>Some text about users</p>

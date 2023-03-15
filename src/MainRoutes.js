@@ -7,10 +7,14 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ChatPage from "./pages/ChatPage";
 import ProfilePage from "./pages/ProfilePage";
 import OrdersPage from "./pages/OrdersPage";
+
 import PostsPage from './pages/PostsPage';
 import PostDetailsPage from "./pages/PostDetailsPage";
 import EditPostPage from './pages/EditPostPage';
 import AddPostPage from './pages/AddPostPage';
+
+import SettingsPage from "./pages/SettingsPage";
+
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -50,6 +54,7 @@ const MainRoutes = () => {
       id: 7,
     },
     {
+
       link: "/posts",
       element: <PostsPage />,
       id: 8,
@@ -70,8 +75,13 @@ const MainRoutes = () => {
       id: 11,
     },
 
+      link: "/settings",
+      element: <SettingsPage />,
+      id: 12,
+    },
+
   ];
-  
+
   return (
     <Routes>
       {PUBLIC_ROUTES.map((item) => (
