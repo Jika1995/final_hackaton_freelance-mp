@@ -50,6 +50,43 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+  function handleLogout(navigate) {
+    localStorage.removeItem("tokens");
+    localStorage.removeItem("email");
+    setCurrentUser(false);
+    navigate("/");
+  };
+
+  async function checkAuth() {
+    console.log('WORKED!');
+    let tokens = JSON.parse(localStorage.getItem('tokens')) //будет JS объект с двумя ключами, refresh и access
+
+    try {
+        const Authorization = `Bearer ${tokens.access}`; //получили авторизацию
+        let res = await axios.post(
+            `${API}/account/refresh/`, //куда - запрос должен быть авторизованный
+            { refresh: tokens.refresh }, //что отправить
+            { headers: { Authorization }} //кто такой - просто передается как объект
+        ); //res - ответ от сервера на мой отправленный запрос post
+
+        //ОТВЕТ ПОЛУЧАЕШЬ ВСЕГДА при запросах, и put post patch delete, а НЕ ТОЛЬКО get
+
+        console.log(res);
+
+        localStorage.setItem('tokens', JSON.stringify({
+            refresh: tokens.refresh,
+            access: res.data.access
+        }));
+
+        let currentUser = localStorage.getItem('email'); //на всякий случай обновляем юзера
+        setCurrentUser(currentUser);
+
+    } catch (error) {
+        console.log(error);
+        handleLogout();
+    }
+}
+
   const values = {
     currentUser,
     error,
@@ -58,7 +95,9 @@ const AuthContextProvider = ({ children }) => {
     setCurrentUser,
     setError,
     handleRegister,
-    handleLogin
+    handleLogin,
+    handleLogout,
+    checkAuth
   };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };
