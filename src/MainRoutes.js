@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ChatPage from "./pages/ChatPage";
 import ProfilePage from "./pages/ProfilePage";
 import OrdersPage from "./pages/OrdersPage";
+import SettingsPage from "./pages/SettingsPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -45,8 +46,13 @@ const MainRoutes = () => {
       element: <OrdersPage />,
       id: 7,
     },
+    {
+      link: "/settings",
+      element: <SettingsPage />,
+      id: 8,
+    },
   ];
-  
+
   return (
     <Routes>
       {PUBLIC_ROUTES.map((item) => (
