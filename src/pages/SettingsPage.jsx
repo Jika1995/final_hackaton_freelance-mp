@@ -79,7 +79,7 @@ const SettingsPage = () => {
               style={{ marginBottom: 10 }}
             />
             <br />
-            <Button variant="contained" color="warning" onClick={handleSave}>
+            <Button variant="contained" color="primary" onClick={handleSave}>
               Save changes
             </Button>
           </form>
