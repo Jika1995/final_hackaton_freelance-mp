@@ -1,21 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import {postsContext} from '../../../contexts/PostContextProvider';
+import { postsContext } from "../../../contexts/PostContextProvider";
 
 const EditPost = () => {
-    const {getOnePost, onePost, saveEditedPost} = useContext(postsContext);
-    const [post, setPost] = useState(onePost);
-    const navigate = useNavigate();
-    const { id } = useParams();
+  const { getOnePost, onePost, saveEditedPost } = useContext(postsContext);
+  const [post, setPost] = useState(onePost);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    useEffect(() => {
-        getOnePost(id)
-      }, []);
-    
-      useEffect(() => {
-        setPost(onePost)
-      }, [onePost, ]);
+  useEffect(() => {
+    getOnePost(id);
+  }, []);
+
 
       useEffect(() => {
         console.log(post);
@@ -56,8 +53,9 @@ const EditPost = () => {
             navigate('/posts')
     }}>Save changes</button>
     </>) : (<></>) }
-    </>
-  )
-}
 
-export default EditPost
+    </>
+  );
+};
+
+export default EditPost;

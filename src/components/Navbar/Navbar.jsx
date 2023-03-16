@@ -32,6 +32,14 @@ const pages = [
     type: "Market",
     path: "/market",
   },
+  {
+    type: "Posts",
+    path: "/posts",
+  },
+  {
+    type: "Add Post",
+    path: "/addpost",
+  },
 ];
 
 const settingsNoAuth = [
@@ -48,14 +56,13 @@ const settingsNoAuth = [
 const settingsAuth = [
   {
     type: "Profile",
-    path: "/profile"
+    path: "/profile",
   },
   {
     type: "Logout",
-    path: "/"
-  }
-]
-
+    path: "/",
+  },
+];
 
 function Navbar() {
   // MUI
@@ -79,18 +86,19 @@ function Navbar() {
 
   // custom
   const navigate = useNavigate();
-  const {currentUser, handleLogout, checkAuth} = useContext(authContext);
+  const { currentUser, handleLogout, checkAuth } = useContext(authContext);
 
   useEffect(() => {
     console.log(currentUser);
-  }, [currentUser, ]);
+  }, [currentUser]);
 
-  React.useEffect( () => {
-    if (localStorage.getItem('tokens')) {
+  React.useEffect(() => {
+    if (localStorage.getItem("tokens")) {
       checkAuth();
     }
   }, []);
 
+  // for animate nav
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
@@ -272,31 +280,45 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {currentUser ? (
-                settingsAuth.map((setting) => (
-                  setting.type === "Logout" ? (
-                <MenuItem key={setting.type} onClick={handleCloseUserMenu}>
-                  <Typography textalign="center" onClick={() => handleLogout(navigate)}>Logout</Typography>
-                </MenuItem> ) : (
-                <MenuItem key={setting.type} onClick={handleCloseUserMenu}>
-                  <Typography textalign="center" onClick={() => navigate(setting.path)}>
-                    {setting.type}
-                  </Typography>
-                </MenuItem>
-              )
-              ))
-              )
-              : ( settingsNoAuth.map((setting) => (
-                <MenuItem key={setting.type} onClick={handleCloseUserMenu}>
-                  <Typography
-                    textalign="center"
-                    onClick={() => navigate(setting.path)}
-                  >
-                    {setting.type}
-                  </Typography>
-                </MenuItem>
-              ))
-              )}
+              {currentUser
+                ? settingsAuth.map((setting) =>
+                    setting.type === "Logout" ? (
+                      <MenuItem
+                        key={setting.type}
+                        onClick={handleCloseUserMenu}
+                      >
+                        <Typography
+                          textalign="center"
+                          onClick={() => handleLogout(navigate)}
+                          id="logout-btn"
+                        >
+                          Logout
+                        </Typography>
+                      </MenuItem>
+                    ) : (
+                      <MenuItem
+                        key={setting.type}
+                        onClick={handleCloseUserMenu}
+                      >
+                        <Typography
+                          textalign="center"
+                          onClick={() => navigate(setting.path)}
+                        >
+                          {setting.type}
+                        </Typography>
+                      </MenuItem>
+                    )
+                  )
+                : settingsNoAuth.map((setting) => (
+                    <MenuItem key={setting.type} onClick={handleCloseUserMenu}>
+                      <Typography
+                        textalign="center"
+                        onClick={() => navigate(setting.path)}
+                      >
+                        {setting.type}
+                      </Typography>
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
         </Toolbar>
@@ -306,4 +328,3 @@ function Navbar() {
 }
 
 export default Navbar;
-

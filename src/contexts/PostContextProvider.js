@@ -1,14 +1,15 @@
-import React, { useReducer, useContext } from 'react';
-import axios from 'axios';
+import React, { useReducer, useContext } from "react";
+import axios from "axios";
 
 export const postsContext = React.createContext();
 export const usePosts = () => useContext(postsContext); //custom hook
 
 const INIT_STATE = {
-    posts: [],
-    pages: 0,
-    onePost: null,
+  posts: [],
+  pages: 0,
+  onePost: null,
 };
+
 
 function reducer (state=INIT_STATE, action) {
     switch(action.type) {
@@ -164,41 +165,148 @@ const PostContextProvider = ({children}) => {
             console.log(err);
         }
     }
+      dispatch({
+        type: "GET_POSTS",
+        payload: res.data.results,
+      });
+    } catch (err) {
+      console.log(err); //здесь только консоль, потому что пользователю это показывать не нужно. Дефолтное окошко можно "что то пошло не так"
+    }
+  }
 
-    // const fetchByParams = (query, value) => {
-    //     const search = new URLSearchParams(location.search); //грамотно меняет между собой несколько параметров поиска
-    
-    //     if (value === "all") {
-    //       search.delete(query); //ключ - значение
-    //     } else {
-    //       search.set(query, value);
-    //     }
-    
-    //     const url = `${location.pathname}?${search.toString()}`;
-    //     navigate(url);
-    //   };
+  async function createPost(newPost, navigate) {
+    try {
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
 
-    // async function toggleLike (id) {
-    //     try {
-    //         const tokens = JSON.parse(localStorage.getItem('tokens'));
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+      // const currentUser = localStorage.getItem('email');
+      // const Authorization = `${currentUser}`;
+      // const config = {
+      //     headers: {
+      //         Authorization //ключ со значением
+      //     }
+      // };
 
-    //         //config
-    //         const Authorization = `Bearer ${tokens.access}`;
-    //         const config = {
-    //             headers: {
-    //                 Authorization //ключ со значением
-    //             }
-    //         };
+      const res = await axios.post(`${API}/post/create_post/`, newPost, config); //куда что кто такой
+      console.log(res);
+      navigate("/posts");
+      getPosts();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-    //         const res = await axios(`${API}/products/${id}/toggle_like/`, config);
-    //         getProducts();
-    //     } catch (err) {
-    //         console.log(err);
-    //     };
-    // }
+  async function getOnePost(id) {
+    try {
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
+
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+
+      dispatch({
+        type: "GET_ONE_POST",
+        payload: null,
+      });
+
+      const { data } = await axios(`${API}/post/change/${id}/`, config);
+
+      dispatch({
+        type: "GET_ONE_POST",
+        payload: data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function deletePost(id) {
+    try {
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
+
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+
+      await axios.delete(`${API}/post/change/${id}/`, config);
+      getPosts();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function saveEditedPost(editedPost) {
+    try {
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
+
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+
+      await axios.patch(
+        `${API}/post/change/${editedPost.id}/`,
+        editedPost,
+        config
+      );
+      getPosts();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // const fetchByParams = (query, value) => {
+  //     const search = new URLSearchParams(location.search); //грамотно меняет между собой несколько параметров поиска
+
+  //     if (value === "all") {
+  //       search.delete(query); //ключ - значение
+  //     } else {
+  //       search.set(query, value);
+  //     }
+
+  //     const url = `${location.pathname}?${search.toString()}`;
+  //     navigate(url);
+  //   };
+
+  // async function toggleLike (id) {
+  //     try {
+  //         const tokens = JSON.parse(localStorage.getItem('tokens'));
+
+  //         //config
+  //         const Authorization = `Bearer ${tokens.access}`;
+  //         const config = {
+  //             headers: {
+  //                 Authorization //ключ со значением
+  //             }
+  //         };
+
+  //         const res = await axios(`${API}/products/${id}/toggle_like/`, config);
+  //         getProducts();
+  //     } catch (err) {
+  //         console.log(err);
+  //     };
+  // }
 
   return (
-    <postsContext.Provider value = {{
+    <postsContext.Provider
+      value={{
         posts: state.posts,
         pages: state.pages,
         onePost: state.onePost,
@@ -210,10 +318,11 @@ const PostContextProvider = ({children}) => {
         saveEditedPost,
         // toggleLike,
         // fetchByParams
-    }}>
-        {children}
+      }}
+    >
+      {children}
     </postsContext.Provider>
-  )
-}
+  );
+};
 
-export default PostContextProvider
+export default PostContextProvider;

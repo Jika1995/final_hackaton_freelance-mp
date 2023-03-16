@@ -1,43 +1,42 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom'; //следит за состоянием адресной строки и отсюда можно что то добавить в адресную строку
-import { postsContext } from '../../../contexts/PostContextProvider';
-import PostCard from '../PostCard/PostCard';
+import React, { useContext, useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom"; //следит за состоянием адресной строки и отсюда можно что то добавить в адресную строку
+import { postsContext } from "../../../contexts/PostContextProvider";
+import PostCard from "../PostCard/PostCard";
 // import {Pagination} from '@mui/material'
 
 const PostsList = () => {
+  const { getPosts, posts, pages } = useContext(postsContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(posts);
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const { getPosts, posts, pages } = useContext(postsContext);
-    const [ searchParams, setSearchParams ] = useSearchParams();
-  
-    const [currentPage, setCurrentPage] = useState(1);
-  
-    useEffect(() => {
-      getPosts();
-    }, []);
+  useEffect(() => {
+    getPosts();
+  }, []);
 
-    function getPagesCount () {
-        let pageCountArr = [];
-        for(let i = 1; i < pages +1; i++) {
-          pageCountArr.push(i);
-        };
-        return pageCountArr;
-    };
+  function getPagesCount() {
+    let pageCountArr = [];
+    for (let i = 1; i < pages + 1; i++) {
+      pageCountArr.push(i);
+    }
+    return pageCountArr;
+  }
 
-    useEffect(() => {
-        getPosts();
-    }, [searchParams, ]);
+  useEffect(() => {
+    getPosts();
+  }, [searchParams]);
 
-    useEffect(() => {
-        setSearchParams({
-          page: currentPage //adress?page=...
-        })
-    }, [currentPage]);
-    
+  useEffect(() => {
+    setSearchParams({
+      page: currentPage, //adress?page=...
+    });
+  }, [currentPage]);
+
   return (
     <div>
-         <h2>Posts</h2>
-      {posts?.map(item => (
-        <PostCard key={item.id} item={item}/>
+      <h2>Posts</h2>
+      {posts?.map((item) => (
+        <PostCard key={item.id} item={item} />
       ))}
       {/* <Pagination>
        <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)}/>
@@ -51,7 +50,7 @@ const PostsList = () => {
        <Pagination.Next onClick={() => setCurrentPage(currentPage + 1)}/>
       </Pagination> */}
     </div>
-  )
-}
+  );
+};
 
-export default PostsList
+export default PostsList;

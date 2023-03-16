@@ -36,7 +36,13 @@
 .right-body-profile {
        text-align: center;
        width: 65%;
-       margin: 30px auto;
+       margin: 20px auto;
+       background: rgba(247, 235, 235, 0.508);
+       border-radius: 30px;
+}
+
+.right-body-profile>form {
+       padding: 30px;
 }
 
 .avatar>img {
