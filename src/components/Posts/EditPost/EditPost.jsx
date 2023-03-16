@@ -18,23 +18,45 @@ const EditPost = () => {
       }, [onePost, ]);
 
       const handleInp = (e) => {
-        let obj = {
+        
+        if(e.target.name === 'image') {
+          let obj = {
+            ...post,
+            image: e.target.files[0]
+          }
+          setPost(obj);
+        } else {
+          let obj = {
             ...post,
             [e.target.name]: e.target.value
-        };
-        setPost(obj)
+          };
+          setPost(obj)
+        }
+
+        // let newPost = new FormData();
+        // for (let i in post) {
+        //   newPost.append(`${i}`, post[i])
+        //   // console.log(post[i]);
+        // };
+        // console.log(newPost);
+        // setPost(newPost)
+
       }
+
+
 
   return (
     <>
     {post ? (<>
     <h2>Edit Product</h2>
     <input type="text" name="title" onChange={handleInp} value={post.title}/>
-    <input type="text" name="desc" onChange={handleInp} value={post.desc}/>
+    <input type="text" name="description" onChange={handleInp} value={post.description}/>
     <input type="text" name="image" onChange={handleInp} value={post.image}/>
+    <input type="file" accept="image/*" name="image" onChange={handleInp} />
+
     {/* <input type="text" name="price" onChange={handleInp} value={post.price}/> */}
     <button onClick={() => {
-            saveEditedPost(post)
+            saveEditedPost(post);
             navigate('/posts')
     }}>Save changes</button>
     </>) : (<></>) }

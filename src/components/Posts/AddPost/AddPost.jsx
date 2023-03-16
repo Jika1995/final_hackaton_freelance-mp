@@ -15,7 +15,6 @@ const AddPost = () => {
 
     function handleSave () {
         let newPost = new FormData();
-        newPost.append('owner', owner);
         newPost.append('title', title);
         newPost.append('description', desc);
         newPost.append('image', image);
@@ -29,7 +28,7 @@ const AddPost = () => {
     <h2>Add Post</h2>
     <input type="text" placeholder='Title' value={title} onChange={e => setTitle(e.target.value)}/>
     <input type="text" placeholder='Description' value={desc} onChange={e => setDesc(e.target.value)}/>
-    <input type="file" accept="image/*" onChange={e => setImage(e.target.files[0])} />
+    <input type="file" accept="image/*" onChange={e => setImage(e.target.files[0])} /> 
 
     <button onClick={handleSave}>Save Post</button>
   </div>
