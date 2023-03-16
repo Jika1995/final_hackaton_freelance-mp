@@ -10,7 +10,7 @@ const PostCard = ({item}) => {
   const {currentUser} = useContext(authContext);
 
   return (
-    <div>
+    <div className="main-postCard">
     <h2>Title: {item.title}</h2>
     <h2>by {item.owner}</h2>
     <img
