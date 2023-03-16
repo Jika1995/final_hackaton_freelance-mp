@@ -165,14 +165,6 @@ const PostContextProvider = ({children}) => {
             console.log(err);
         }
     }
-      dispatch({
-        type: "GET_POSTS",
-        payload: res.data.results,
-      });
-    } catch (err) {
-      console.log(err); //здесь только консоль, потому что пользователю это показывать не нужно. Дефолтное окошко можно "что то пошло не так"
-    }
-  }
 
   async function createPost(newPost, navigate) {
     try {
