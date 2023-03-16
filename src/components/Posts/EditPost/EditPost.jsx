@@ -1,18 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { postsContext } from "../../../contexts/PostContextProvider";
+import {postsContext} from '../../../contexts/PostContextProvider';
 
 const EditPost = () => {
-  const { getOnePost, onePost, saveEditedPost } = useContext(postsContext);
-  const [post, setPost] = useState(onePost);
-  const navigate = useNavigate();
-  const { id } = useParams();
+    const {getOnePost, onePost, saveEditedPost} = useContext(postsContext);
+    const [post, setPost] = useState(onePost);
+    const navigate = useNavigate();
+    const { id } = useParams();
 
-  useEffect(() => {
-    getOnePost(id);
-  }, []);
-
+    useEffect(() => {
+        getOnePost(id)
+      }, []);
+    
+      useEffect(() => {
+        setPost(onePost)
+      }, [onePost, ]);
 
       useEffect(() => {
         console.log(post);
@@ -41,21 +44,16 @@ const EditPost = () => {
     <h2>Edit Product</h2>
     <input type="text" name="title" onChange={handleInp} value={post.title}/>
     <input type="text" name="description" onChange={handleInp} value={post.description}/>
-    {/* <input type="text" name="image" onChange={handleInp} value={post.image}/> */}
     <input type="file" accept="image/*" name="image" onChange={handleInp} value={undefined}/>
-
     {/* <input type="text" name="price" onChange={handleInp} value={post.price}/> */}
-    {/* <button onClick={() => {
-      createFormData()
-    }}>Form</button> */}
+    
     <button onClick={() => {
             saveEditedPost(post);
             navigate('/posts')
     }}>Save changes</button>
     </>) : (<></>) }
-
     </>
-  );
-};
+  )
+}
 
-export default EditPost;
+export default EditPost
