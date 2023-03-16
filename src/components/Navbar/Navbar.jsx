@@ -32,6 +32,14 @@ const pages = [
     type: "Market",
     path: "/market",
   },
+  {
+    type: "Posts",
+    path: "/posts",
+  },
+  {
+    type: "Add Post",
+    path: "/addpost",
+  },
 ];
 
 const settingsNoAuth = [
