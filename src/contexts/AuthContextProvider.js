@@ -40,6 +40,12 @@ const AuthContextProvider = ({ children }) => {
       setCurrentUser(email);
       console.log(res);
       navigate('/profile');
+      let cart = {
+        posts: [],
+        totalPrice: 0,
+      };
+
+      localStorage.setItem("cart", JSON.stringify(cart));
 
     } catch(err) {
       console.log(err);

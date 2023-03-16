@@ -1,14 +1,14 @@
-import axios from "axios";
+import React from 'react'
 
-export const API = "http://34.141.58.26";
+export function getCountPostsInCart() {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  return cart ? cart.posts.length : 0;
+}
 
-export const ACTIONS = {
-  GET_USERS: "GET_USERS",
-  GET_USERS_DETAILS: "GET_USERS_DETAILS",
-};
+export const calcSubPrice = (post) => +post.count * post.item.price;
 
-export const GET_USERS = async () => {
-  const data = await axios(API);
-  const users = res.data;
-  return users;
+export const calcTotalPrice = (posts) => {
+  return posts.reduce((prev, cur) => {
+    return (prev += cur.subPrice);
+  }, 0);
 };
