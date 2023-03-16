@@ -242,7 +242,18 @@ const PostContextProvider = ({children}) => {
   }
 
   async function saveEditedPost(editedPost) {
+
     try {
+        let newPost = new FormData();
+
+        for (let i in editedPost) {
+            newPost.append(`${i}`, editedPost[i]);
+        }
+
+        for (var pair of newPost.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
       //config
@@ -255,7 +266,7 @@ const PostContextProvider = ({children}) => {
 
       await axios.patch(
         `${API}/post/change/${editedPost.id}/`,
-        editedPost,
+        newPost,
         config
       );
       getPosts();
