@@ -13,77 +13,47 @@ const EditPost = () => {
     getOnePost(id);
   }, []);
 
-  useEffect(() => {
-    setPost(onePost);
-  }, [onePost]);
 
-  const handleInp = (e) => {
-    if (e.target.name === "image") {
-      let obj = {
-        ...post,
-        image: e.target.files[0],
-      };
-      setPost(obj);
-    } else {
-      let obj = {
-        ...post,
-        [e.target.name]: e.target.value,
-      };
-      setPost(obj);
-    }
+      useEffect(() => {
+        console.log(post);
+      }, [post, ]);
 
-    // let newPost = new FormData();
-    // for (let i in post) {
-    //   newPost.append(`${i}`, post[i])
-    //   // console.log(post[i]);
-    // };
-    // console.log(newPost);
-    // setPost(newPost)
-  };
+      const handleInp = (e) => {
+        
+        if(e.target.name === 'image') {
+          let obj = {
+            ...post,
+            image: e.target.files[0]
+          }
+          setPost(obj);
+        } else {
+          let obj = {
+            ...post,
+            [e.target.name]: e.target.value
+          };
+          setPost(obj)
+        }
+      }
 
   return (
     <>
-      {post ? (
-        <>
-          <h2>Edit Product</h2>
-          <input
-            type="text"
-            name="title"
-            onChange={handleInp}
-            value={post.title}
-          />
-          <input
-            type="text"
-            name="description"
-            onChange={handleInp}
-            value={post.description}
-          />
-          <input
-            type="text"
-            name="image"
-            onChange={handleInp}
-            value={post.image}
-          />
-          <input
-            type="file"
-            accept="image/*"
-            name="image"
-            onChange={handleInp}
-          />
+    {post ? (<>
+    <h2>Edit Product</h2>
+    <input type="text" name="title" onChange={handleInp} value={post.title}/>
+    <input type="text" name="description" onChange={handleInp} value={post.description}/>
+    {/* <input type="text" name="image" onChange={handleInp} value={post.image}/> */}
+    <input type="file" accept="image/*" name="image" onChange={handleInp} value={undefined}/>
 
-          {/* <input type="text" name="price" onChange={handleInp} value={post.price}/> */}
-          <button
-            onClick={() => {
-              saveEditedPost(post);
-              navigate("/posts");
-            }}
-          >
-            Save changes
-          </button>
-        </>
-      ) : (
-        <></>
-      )}
+    {/* <input type="text" name="price" onChange={handleInp} value={post.price}/> */}
+    {/* <button onClick={() => {
+      createFormData()
+    }}>Form</button> */}
+    <button onClick={() => {
+            saveEditedPost(post);
+            navigate('/posts')
+    }}>Save changes</button>
+    </>) : (<></>) }
+
     </>
   );
 };
