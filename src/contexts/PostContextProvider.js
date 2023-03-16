@@ -15,13 +15,13 @@ function reducer (state=INIT_STATE, action) {
         case 'GET_POSTS':
             return {
                 ...state,
-                posts: action.payload.results,
-                pages: Math.ceil(action.payload.count / 6)  //пагинация? сколько постов?
+                posts: action.payload,
+                // pages: Math.ceil(action.payload.count / 6)  //пагинация? сколько постов?
             }
-        case 'GET_ONE_PRODUCT': 
+        case 'GET_ONE_POST': 
             return {
                 ...state,
-                onePost: action.payload
+                onePost: action.payload,
             };
         default: 
             return state
@@ -36,19 +36,11 @@ const PostContextProvider = ({children}) => {
 
     async function getPosts () {
         try {
-            const tokens = JSON.parse(localStorage.getItem('tokens'));
 
-            //config
-            const Authorization = `Bearer ${tokens.access}`;
-            const config = {
-                headers: {
-                    Authorization //ключ со значением
-                }
-            };
+            const url = `${API}/post/get_post`; //параметры запроса из адресной строки ${window.location.search}
 
-            const url = `${API}/post/get_post${window.location.search}`; //параметры запроса из адресной строки
-
-            const res = await axios(url, config);
+            const res = await axios(url);
+            console.log(res.data);
 
             dispatch({
                 type: 'GET_POSTS',
@@ -71,6 +63,13 @@ const PostContextProvider = ({children}) => {
                     Authorization //ключ со значением
                 }
             };
+            // const currentUser = localStorage.getItem('email');
+            // const Authorization = `${currentUser}`;
+            // const config = {
+            //     headers: {
+            //         Authorization //ключ со значением
+            //     }
+            // };
 
             const res = await axios.post(`${API}/post/create_post/`, newPost, config) //куда что кто такой
             console.log(res);
@@ -84,12 +83,23 @@ const PostContextProvider = ({children}) => {
 
     async function getOnePost (id) {
         try {
+
+            const tokens = JSON.parse(localStorage.getItem('tokens'));
+
+            //config
+            const Authorization = `Bearer ${tokens.access}`;
+            const config = {
+                headers: {
+                    Authorization //ключ со значением
+                }
+            };
+
             dispatch({
                 type: 'GET_ONE_POST',
                 payload: null
             });
     
-            const {data} = await axios(`${API}/post/get_post/${id}`);
+            const {data} = await axios(`${API}/post/change/${id}/`, config);
     
             dispatch({
                 type: 'GET_ONE_POST',
@@ -114,7 +124,7 @@ const PostContextProvider = ({children}) => {
                 }
             };
 
-            await axios.delete(`${API}/post/change/${id}`);
+            await axios.delete(`${API}/post/change/${id}/`, config);
             getPosts();
 
         } catch(err) {
@@ -135,8 +145,8 @@ const PostContextProvider = ({children}) => {
                 }
             };
 
-            await axios.patch(`${API}/post/change/${editedPost.id}`, editedPost);
-            getPosts()
+            await axios.patch(`${API}/post/change/${editedPost.id}/`, editedPost, config);
+            getPosts();
 
         } catch(err) {
             console.log(err);
