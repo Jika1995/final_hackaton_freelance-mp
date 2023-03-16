@@ -15,8 +15,8 @@ function reducer (state=INIT_STATE, action) {
         case 'GET_POSTS':
             return {
                 ...state,
-                posts: action.payload,
-                // pages: Math.ceil(action.payload.count / 6)  //пагинация? сколько постов?
+                posts: action.payload.results,
+                pages: Math.ceil(action.payload.count / 6)  //пагинация? сколько постов?
             }
         case 'GET_ONE_POST': 
             return {
@@ -37,7 +37,7 @@ const PostContextProvider = ({children}) => {
     async function getPosts () {
         try {
 
-            const url = `${API}/post/get_post`; //параметры запроса из адресной строки ${window.location.search}
+            const url = `${API}/post/get_post${window.location.search}`; //параметры запроса из адресной строки ${window.location.search}
 
             const res = await axios(url);
             console.log(res.data);
@@ -133,7 +133,19 @@ const PostContextProvider = ({children}) => {
     };
 
     async function saveEditedPost(editedPost) {
+       
+
         try {
+
+            let newPost = new FormData();
+            for (let i in editedPost) {
+              newPost.append(`${i}`, editedPost[i])
+              // console.log(post[i]);
+            };
+            // console.log(newPost.entries);
+            for (var pair of newPost.entries()) {
+              console.log(pair[0]+ ', ' + pair[1]); 
+            }
 
             const tokens = JSON.parse(localStorage.getItem('tokens'));
 
@@ -145,7 +157,7 @@ const PostContextProvider = ({children}) => {
                 }
             };
 
-            await axios.patch(`${API}/post/change/${editedPost.id}/`, editedPost, config);
+            await axios.put(`${API}/post/change/${editedPost.id}/`, newPost, config);
             getPosts();
 
         } catch(err) {
