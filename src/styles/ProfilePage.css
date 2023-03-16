@@ -28,7 +28,7 @@
 }
 
 .left-body-profile {
-       width: 30%;
+       width: 300px;
        margin: 30px auto;
        text-align: center;
 }
@@ -36,7 +36,7 @@
 .right-body-profile {
        text-align: center;
        width: 65%;
-       margin: 20px auto;
+       margin: 30px auto;
        background: rgba(247, 235, 235, 0.508);
        border-radius: 30px;
 }
@@ -62,4 +62,23 @@
 .avatar>img {
        width: 200px;
        height: 200px;
+}
+
+.settings-inputs {
+       width: 310px !important;
+       margin: 10px 10px !important;
+}
+
+.about-user {
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       margin: 20px;
+}
+
+.profile-info-text {
+       width: 310px;
+       border: 1px solid whitesmoke;
+       border-radius: 10px;
+       margin: 10px;
 }
