@@ -14,6 +14,7 @@ import EditPostPage from "./pages/EditPostPage";
 import AddPostPage from "./pages/AddPostPage";
 
 import SettingsPage from "./pages/SettingsPage";
+import CartPage from './pages/CartPage';
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -77,6 +78,12 @@ const MainRoutes = () => {
       element: <SettingsPage />,
       id: 12,
     },
+    {
+      link: "/cart",
+      element: <CartPage />,
+      id: 13,
+    },
+    
   ];
 
   return (
