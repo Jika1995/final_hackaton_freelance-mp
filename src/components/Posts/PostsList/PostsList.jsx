@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom"; //следит за сост
 import { postsContext } from "../../../contexts/PostContextProvider";
 import PostCard from "../PostCard/PostCard";
 import { Pagination } from "@mui/material";
+import '../../../styles/PostsPage.css'
 
 const PostsList = ({page, setPage}) => {
   const { getPosts, posts, pages } = useContext(postsContext);
@@ -28,7 +29,7 @@ const PostsList = ({page, setPage}) => {
   }, [page, ]);
 
   return (
-    <div>
+    <div className="posts-main">
       <h2>Posts</h2>
       {posts ? (
           posts.map((item) => <PostCard key={item.id} item={item} />)
