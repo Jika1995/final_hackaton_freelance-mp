@@ -1,0 +1,46 @@
+.main-postCard {
+    backdrop-filter: blur(16px) saturate(169%);
+    -webkit-backdrop-filter: blur(16px) saturate(169%);
+    background-color: rgba(41, 33, 42, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    width: 20%;
+    margin: 10px 0;
+}
+.card-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.card-img {
+    object-fit: contain;
+    height: 270px;
+    border-radius: 30px 30px 0 0;
+    margin: 5px 0;
+}
+.card-titles{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+.card-price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    border-radius: 10px;
+    border: #A658B3 2px solid;
+    height: 24px;
+}
+.owner-btns {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+.edit-btn {
+    width: 40%;
+}
+.delete-btn {
+    width: 40%;
+}
