@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "../../styles/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../contexts/AuthContextProvider";
+import {useCart} from '../../contexts/CartContextProvider';
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -87,6 +88,7 @@ function Navbar() {
   // custom
   const navigate = useNavigate();
   const { currentUser, handleLogout, checkAuth } = useContext(authContext);
+  const {cartLength} = useCart()
 
   useEffect(() => {
     console.log(currentUser);
@@ -246,7 +248,7 @@ function Navbar() {
               className="icon-btns-nav"
             >
               <Badge
-                //   badgeContent={cartLength}
+                  badgeContent={cartLength}
                 color="error"
                 className="nav-badge"
               >

@@ -122,7 +122,7 @@ const CartContextProvider = ({ children }) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
 
     if (cart) {
-      let obj = cart.post.find((elem) => elem.item.id === id);
+      let obj = cart.posts.find((elem) => elem.item.id === id);
 
       if(obj) {
         return true
