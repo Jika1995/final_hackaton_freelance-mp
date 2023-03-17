@@ -5,9 +5,15 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 const SettingsPage = () => {
+  const [name, setName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [dateBirth, setDateBirth] = useState("");
+  const [city, setCity] = useState("");
+  const [bio, setBio] = useState("");
+  const [profileImage, setProfileImage] = useState(null);
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSave = () => {
@@ -27,6 +33,24 @@ const SettingsPage = () => {
 
   const navigate = useNavigate();
 
+  const [user, setUser] = useState("");
+
+  const handleInp = (e) => {
+    if (e.target.name === "profileImage") {
+      let userObj = {
+        ...user,
+        image: e.target.files[0],
+      };
+      setUser(userObj);
+    } else {
+      let userObj = {
+        ...user,
+        [e.target.name]: e.target.value,
+      };
+      setUser(userObj);
+    }
+  };
+
   return (
     <div className="profile-page">
       <div className="header-profile-page">
@@ -43,6 +67,7 @@ const SettingsPage = () => {
               alt=""
             />
             <div className="profile-reviews">
+              {user.is_buyer ? <h4>Buyer</h4> : <h4>Executant</h4>}
               <h4>Rating</h4>
               <h4>Reviews</h4>
               <h4>Followers</h4>
@@ -55,32 +80,111 @@ const SettingsPage = () => {
           </div>
           <form>
             <TextField
-              label="First Name"
-              value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
+              className="settings-inputs"
+              label="Username"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                handleInp(e);
+              }}
               error={!!errorMessage && !firstName}
               helperText={!!errorMessage && !firstName && errorMessage}
               style={{ marginBottom: 10 }}
             />
             <TextField
+              className="settings-inputs"
+              label="First Name"
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+                handleInp(e);
+              }}
+              error={!!errorMessage && !firstName}
+              helperText={!!errorMessage && !firstName && errorMessage}
+              style={{ marginBottom: 10 }}
+            />
+            <TextField
+              className="settings-inputs"
               label="Last Name"
               value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
+              onChange={(e) => {
+                setLastName(e.target.value);
+                handleInp(e);
+              }}
               error={!!errorMessage && !lastName}
               helperText={!!errorMessage && !lastName && errorMessage}
               style={{ marginBottom: 10 }}
             />
             <TextField
+              className="settings-inputs"
               label="Email"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                handleInp(e);
+              }}
               error={!!errorMessage && !email}
               helperText={!!errorMessage && !email && errorMessage}
               style={{ marginBottom: 10 }}
             />
+            <TextField
+              className="settings-inputs"
+              label="Date Birth"
+              value={dateBirth}
+              onChange={(e) => {
+                setDateBirth(e.target.value);
+                handleInp(e);
+              }}
+              error={!!errorMessage && !email}
+              helperText={!!errorMessage && !email && errorMessage}
+              style={{ marginBottom: 10 }}
+            />
+            <TextField
+              className="settings-inputs"
+              label="City"
+              value={city}
+              onChange={(e) => {
+                setCity(e.target.value);
+                handleInp(e);
+              }}
+              error={!!errorMessage && !email}
+              helperText={!!errorMessage && !email && errorMessage}
+              style={{ marginBottom: 10 }}
+            />
+            <TextField
+              className="settings-inputs"
+              label="About me"
+              value={bio}
+              onChange={(e) => {
+                setBio(e.target.value);
+                handleInp(e);
+              }}
+              error={!!errorMessage && !email}
+              helperText={!!errorMessage && !email && errorMessage}
+              style={{ marginBottom: 10 }}
+            />
+            <TextField
+              className="settings-inputs"
+              value={profileImage}
+              onChange={(e) => {
+                setProfileImage(e.target.value);
+                handleInp(e);
+              }}
+              error={!!errorMessage && !email}
+              helperText={!!errorMessage && !email && errorMessage}
+              style={{ marginBottom: 10 }}
+              type="file"
+            />
             <br />
             <Button variant="contained" color="primary" onClick={handleSave}>
               Save changes
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => navigate("/profile")}
+            >
+              Back
             </Button>
           </form>
         </div>

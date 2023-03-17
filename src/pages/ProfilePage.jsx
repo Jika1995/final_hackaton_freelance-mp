@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/ProfilePage.css";
 import { useNavigate } from "react-router-dom";
+import { useProfile } from "../contexts/ProfileContextProvider";
+import { useContext } from "react";
 
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const { user, getCurrentUser } = useProfile();
+
+  console.log(user.date_birth);
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   return (
     <div className="profile-page">
@@ -23,6 +32,7 @@ const ProfilePage = () => {
               alt=""
             />
             <div className="profile-reviews">
+              {user.is_buyer ? <h4>Buyer</h4> : <h4>Executant</h4>}
               <h4>Rating</h4>
               <h4>Reviews</h4>
               <h4>Followers</h4>
@@ -30,6 +40,64 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className="right-body-profile">
+          <div className="about-user">
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className="profile-info-text"
+            >
+              Username: {user.name}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className="profile-info-text"
+            >
+              First Name: {user.first_name}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className="profile-info-text"
+            >
+              Last Name: {user.last_name}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className="profile-info-text"
+            >
+              Email: {user.email}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className="profile-info-text"
+            >
+              Birthday: {user.date_birth}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className="profile-info-text"
+            >
+              City: {user.city}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className="profile-info-text"
+            >
+              About Me: {user.bio}{" "}
+            </Typography>
+          </div>
           <Button
             variant="contained"
             color="warning"
@@ -37,10 +105,9 @@ const ProfilePage = () => {
           >
             Settings
           </Button>
-          <div className="about-user">
-            <h2>Username</h2>
-            <p>Some text about users</p>
-          </div>
+          <Button variant="contained" color="error" onClick={getCurrentUser}>
+            GET
+          </Button>
         </div>
       </div>
       <div className="promo-profile">
