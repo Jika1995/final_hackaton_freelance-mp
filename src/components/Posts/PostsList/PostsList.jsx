@@ -42,8 +42,9 @@ const PostsList = ({page, setPage}) => {
         page={page}
         onChange={handlePage}
         id="pagination"
-        color="warning"
-        style={{ marginTop: "30px" }}
+        color="secondary"
+        variant="outlined" 
+        style={{ marginTop: "30px", marginBottom: '30px' }}
       />
     </div>
   );
