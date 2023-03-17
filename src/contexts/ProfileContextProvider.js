@@ -61,6 +61,16 @@ const ProfileContextProvider = ({ children }) => {
 
   async function saveEditProfile(editedProfile) {
     try {
+      let newObj = new FormData();
+      for (let i in editedProfile) {
+        newObj.append(`${i}`, editedProfile[i]);
+        // console.log(post[i]);
+      }
+      // console.log(newPost.entries);
+      for (var pair of newObj.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
+
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
       //config
@@ -71,7 +81,7 @@ const ProfileContextProvider = ({ children }) => {
         },
       };
 
-      await axios.put(`${API}/account/edit_profile/`, editedProfile, config);
+      await axios.put(`${API}/account/edit_profile/`, newObj, config);
       getCurrentUser();
     } catch (err) {
       console.log(err);
