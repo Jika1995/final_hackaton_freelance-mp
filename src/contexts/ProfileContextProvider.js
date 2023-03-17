@@ -71,11 +71,7 @@ const ProfileContextProvider = ({ children }) => {
         },
       };
 
-      await axios.patch(
-        `${API}//account/profile/change/${editedProfile.id}/`,
-        editedProfile,
-        config
-      );
+      await axios.put(`${API}/account/edit_profile/`, editedProfile, config);
       getCurrentUser();
     } catch (err) {
       console.log(err);

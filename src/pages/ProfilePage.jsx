@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "../styles/ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 import { useProfile } from "../contexts/ProfileContextProvider";
-import { useContext } from "react";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -11,12 +10,12 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const { user, getCurrentUser } = useProfile();
 
-  console.log(user.date_birth);
+  // console.log(user.date_birth);
   useEffect(() => {
     getCurrentUser();
   }, []);
 
-  return (
+  return user ? (
     <div className="profile-page">
       <div className="header-profile-page">
         <img
@@ -95,19 +94,22 @@ const ProfilePage = () => {
               component="div"
               className="profile-info-text"
             >
-              About Me: {user.bio}{" "}
+              About Me: {user.bio}
             </Typography>
           </div>
           <Button
             variant="contained"
             color="warning"
-            onClick={() => navigate("/settings")}
+            onClick={() => {
+              getCurrentUser();
+              navigate("/settings");
+            }}
           >
             Settings
           </Button>
-          <Button variant="contained" color="error" onClick={getCurrentUser}>
+          {/* <Button variant="contained" color="error" onClick={getCurrentUser}>
             GET
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div className="promo-profile">
@@ -119,6 +121,8 @@ const ProfilePage = () => {
         </video>
       </div>
     </div>
+  ) : (
+    <h3>Sorry, something wrong</h3>
   );
 };
 
