@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useProfile } from "../contexts/ProfileContextProvider";
+import { profileContext } from "../contexts/ProfileContextProvider";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { useContext } from "react";
+import { useEffect } from "react";
 
 const SettingsPage = () => {
   // const [name, setName] = useState("");
@@ -16,8 +18,20 @@ const SettingsPage = () => {
   // const [profileImage, setProfileImage] = useState(null);
 
   const navigate = useNavigate();
-  const { user, saveEditProfile } = useProfile();
+  const { user, saveEditProfile, getCurrentUser } = useContext(profileContext);
   const [userData, setUserData] = useState(user);
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  useEffect(() => {
+    setUserData(user);
+  }, [user]);
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   const handleInp = (e) => {
     if (e.target.name === "image") {
@@ -72,8 +86,8 @@ const SettingsPage = () => {
           <div className="avatar">
             <img
               src={
-                user.profile_image
-                  ? user.profile_image
+                userData.profile_image
+                  ? userData.profile_image
                   : "https://img.freepik.com/free-psd/3d-illustration-person-with-rainbow-sunglasses_23-2149436196.jpg?w=826&t=st=1678773461~exp=1678774061~hmac=af704675ddfb235ae0bf146fef2ebabda7285fe6d5d02aecbbd13aa0688aaaa9"
               }
               alt="error:("
@@ -81,17 +95,17 @@ const SettingsPage = () => {
             <TextField
               className="settings-inputs"
               name="image"
-              // value={user.profile_image}
-              onChange={(e) => handleInp(e.target.files[0])}
+              value={userData.profile_image}
+              onChange={handleInp}
               // error={!!errorMessage && !email}
               // // helperText={!!errorMessage && !email && errorMessage}
               style={{ marginBottom: 10 }}
               type="file"
               accept="image/*"
-              value={undefined}
+              // value={undefined}
             />
             <div className="profile-reviews">
-              {user.is_buyer ? <h4>Buyer</h4> : <h4>Executant</h4>}
+              {userData.is_buyer ? <h4>Buyer</h4> : <h4>Executor</h4>}
               <h4>Rating</h4>
               <h4>Reviews</h4>
               <h4>Followers</h4>
@@ -106,71 +120,64 @@ const SettingsPage = () => {
                 className="settings-inputs"
                 label="Username"
                 name="name"
-                value={user.name}
-                onChange={(e) => handleInp(e.target.value)}
+                value={userData.name}
+                onChange={handleInp}
                 // // error={!!errorMessage && !firstName}
                 // helperText={!!errorMessage && !firstName && errorMessage}
-                style={{ marginBottom: 10 }}
               />
               <TextField
                 className="settings-inputs"
                 label="First Name"
                 name="first_name"
-                value={user.first_name}
-                onChange={(e) => handleInp(e.target.value)}
+                value={userData.first_name}
+                onChange={handleInp}
                 // // error={!!errorMessage && !firstName}
                 // helperText={!!errorMessage && !firstName && errorMessage}
-                style={{ marginBottom: 10 }}
               />
               <TextField
                 className="settings-inputs"
                 label="Last Name"
                 name="last_name"
-                value={user.last_name}
-                onChange={(e) => handleInp(e.target.value)}
+                value={userData.last_name}
+                onChange={handleInp}
                 // // error={!!errorMessage && !lastName}
                 // helperText={!!errorMessage && !lastName && errorMessage}
-                style={{ marginBottom: 10 }}
               />
               <TextField
                 className="settings-inputs"
                 label="Email"
                 name="email"
-                value={user.email}
-                onChange={(e) => handleInp(e.target.value)}
+                value={userData.email}
+                onChange={handleInp}
                 // // error={!!errorMessage && !email}
                 // helperText={!!errorMessage && !email && errorMessage}
-                style={{ marginBottom: 10 }}
               />
               {/* <TextField
                 className="settings-inputs"
                 label="Date Birth"
                 name="date_birth"
                 value={user.date_birth}
-                onChange={(e) => handleInp(e.target.value)}
+                onChange={handleInp}
                 error={!!errorMessage && !email}
                 helperText={!!errorMessage && !email && errorMessage}
-                style={{ marginBottom: 10 }}
               /> */}
               <TextField
                 className="settings-inputs"
                 label="City"
                 name="city"
-                value={user.city}
-                onChange={(e) => handleInp(e.target.value)}
+                value={userData.city}
+                onChange={handleInp}
                 // error={!!errorMessage && !email}
                 // helperText={!!errorMessage && !email && errorMessage}
-                style={{ marginBottom: 10 }}
               />
               <TextField
                 className="settings-inputs"
                 label="About me"
                 name="bio"
-                value={user.bio}
-                onChange={(e) => handleInp(e.target.value)}
+                value={userData.bio}
+                onChange={handleInp}
                 // error={!!errorMessage && !email}
                 // helperText={!!errorMessage && !email && errorMessage}
-                style={{ marginBottom: 10 }}
               />
 
               <br />

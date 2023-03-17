@@ -15,6 +15,10 @@ const ProfilePage = () => {
     getCurrentUser();
   }, []);
 
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
   return user ? (
     <div className="profile-page">
       <div className="header-profile-page">
@@ -31,7 +35,7 @@ const ProfilePage = () => {
               alt=""
             />
             <div className="profile-reviews">
-              {user.is_buyer ? <h4>Buyer</h4> : <h4>Executant</h4>}
+              {user.is_buyer ? <h4>Buyer</h4> : <h4>Executor</h4>}
               <h4>Rating</h4>
               <h4>Reviews</h4>
               <h4>Followers</h4>
