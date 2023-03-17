@@ -30,12 +30,13 @@ const PostsList = ({page, setPage}) => {
 
   return (
     <div className="posts-main">
-      <h2>Posts</h2>
+      <div className="posts-block">
       {posts ? (
           posts.map((item) => <PostCard key={item.id} item={item} />)
         ) : (
           <h3>Loading...</h3>
         )}
+      </div>
       <Pagination
         count={pages}
         page={page}
