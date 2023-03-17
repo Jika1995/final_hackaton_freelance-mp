@@ -6,37 +6,22 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 const SettingsPage = () => {
-  const [name, setName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  // const [dateBirth, setDateBirth] = useState("");
-  const [city, setCity] = useState("");
-  const [bio, setBio] = useState("");
-  const [profileImage, setProfileImage] = useState(null);
-
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleSave = () => {
-    if (!firstName || !lastName || !email) {
-      let message = "";
-      if (!firstName) {
-        firstName = "First name is required";
-      }
-      if (!lastName) message += "Last name is required. ";
-      if (!email) message += "Email is required. ";
-      setErrorMessage(message);
-      //       navigate("/profile");
-    }
-  };
+  // const [name, setName] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [email, setEmail] = useState("");
+  // // const [dateBirth, setDateBirth] = useState("");
+  // const [city, setCity] = useState("");
+  // const [bio, setBio] = useState("");
+  // const [profileImage, setProfileImage] = useState(null);
 
   const navigate = useNavigate();
-  const { user } = useProfile();
-
+  const { user, saveEditProfile } = useProfile();
   const [userData, setUserData] = useState(user);
 
   const handleInp = (e) => {
-    if (e.target.name === "profileImage") {
+    if (e.target.name === "image") {
+      console.log(e);
       let userObj = {
         ...userData,
         profile_image: e.target.files[0],
@@ -49,7 +34,30 @@ const SettingsPage = () => {
       };
       setUserData(userObj);
     }
+
+    // for (let key in user) {
+    //   if (!user[key]) {
+    //     user[key] = "Required this area";
+    //     return;
+    //   }
+    // }
   };
+
+  // CHECK INP
+  // const [errorMessage, setErrorMessage] = useState("");
+
+  // const handleSave = () => {
+  //   if (!firstame || !lastName || !email) {
+  //     let message = "";
+  //     if (!firstName) {
+  //       firstName = "First name is required";
+  //     }
+  //     if (!lastName) message += "Last name is required. ";
+  //     if (!email) message += "Email is required. ";
+  //     setErrorMessage(message);
+  //     //       navigate("/profile");
+  //   }
+  // };
 
   return user ? (
     <div className="profile-page">
@@ -63,8 +71,24 @@ const SettingsPage = () => {
         <div className="left-body-profile">
           <div className="avatar">
             <img
-              src="https://img.freepik.com/free-psd/3d-illustration-person-with-rainbow-sunglasses_23-2149436196.jpg?w=826&t=st=1678773461~exp=1678774061~hmac=af704675ddfb235ae0bf146fef2ebabda7285fe6d5d02aecbbd13aa0688aaaa9"
+              src={
+                user.profile_image
+                  ? user.profile_image
+                  : "https://img.freepik.com/free-psd/3d-illustration-person-with-rainbow-sunglasses_23-2149436196.jpg?w=826&t=st=1678773461~exp=1678774061~hmac=af704675ddfb235ae0bf146fef2ebabda7285fe6d5d02aecbbd13aa0688aaaa9"
+              }
               alt="error:("
+            />
+            <TextField
+              className="settings-inputs"
+              name="image"
+              // value={user.profile_image}
+              onChange={(e) => handleInp(e.target.files[0])}
+              // error={!!errorMessage && !email}
+              // // helperText={!!errorMessage && !email && errorMessage}
+              style={{ marginBottom: 10 }}
+              type="file"
+              accept="image/*"
+              value={undefined}
             />
             <div className="profile-reviews">
               {user.is_buyer ? <h4>Buyer</h4> : <h4>Executant</h4>}
@@ -81,101 +105,80 @@ const SettingsPage = () => {
               <TextField
                 className="settings-inputs"
                 label="Username"
+                name="name"
                 value={user.name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                  handleInp(e);
-                }}
-                error={!!errorMessage && !firstName}
-                helperText={!!errorMessage && !firstName && errorMessage}
+                onChange={(e) => handleInp(e.target.value)}
+                // // error={!!errorMessage && !firstName}
+                // helperText={!!errorMessage && !firstName && errorMessage}
                 style={{ marginBottom: 10 }}
               />
               <TextField
                 className="settings-inputs"
                 label="First Name"
+                name="first_name"
                 value={user.first_name}
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                  handleInp(e);
-                }}
-                error={!!errorMessage && !firstName}
-                helperText={!!errorMessage && !firstName && errorMessage}
+                onChange={(e) => handleInp(e.target.value)}
+                // // error={!!errorMessage && !firstName}
+                // helperText={!!errorMessage && !firstName && errorMessage}
                 style={{ marginBottom: 10 }}
               />
               <TextField
                 className="settings-inputs"
                 label="Last Name"
+                name="last_name"
                 value={user.last_name}
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                  handleInp(e);
-                }}
-                error={!!errorMessage && !lastName}
-                helperText={!!errorMessage && !lastName && errorMessage}
+                onChange={(e) => handleInp(e.target.value)}
+                // // error={!!errorMessage && !lastName}
+                // helperText={!!errorMessage && !lastName && errorMessage}
                 style={{ marginBottom: 10 }}
               />
               <TextField
                 className="settings-inputs"
                 label="Email"
+                name="email"
                 value={user.email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  handleInp(e);
-                }}
-                error={!!errorMessage && !email}
-                helperText={!!errorMessage && !email && errorMessage}
+                onChange={(e) => handleInp(e.target.value)}
+                // // error={!!errorMessage && !email}
+                // helperText={!!errorMessage && !email && errorMessage}
                 style={{ marginBottom: 10 }}
               />
               {/* <TextField
-              className="settings-inputs"
-              label="Date Birth"
-              value={user.date_birth}
-              onChange={(e) => {
-                setDateBirth(e.target.value);
-                handleInp(e);
-              }}
-              error={!!errorMessage && !email}
-              helperText={!!errorMessage && !email && errorMessage}
-              style={{ marginBottom: 10 }}
-            /> */}
+                className="settings-inputs"
+                label="Date Birth"
+                name="date_birth"
+                value={user.date_birth}
+                onChange={(e) => handleInp(e.target.value)}
+                error={!!errorMessage && !email}
+                helperText={!!errorMessage && !email && errorMessage}
+                style={{ marginBottom: 10 }}
+              /> */}
               <TextField
                 className="settings-inputs"
                 label="City"
+                name="city"
                 value={user.city}
-                onChange={(e) => {
-                  setCity(e.target.value);
-                  handleInp(e);
-                }}
-                error={!!errorMessage && !email}
-                helperText={!!errorMessage && !email && errorMessage}
+                onChange={(e) => handleInp(e.target.value)}
+                // error={!!errorMessage && !email}
+                // helperText={!!errorMessage && !email && errorMessage}
                 style={{ marginBottom: 10 }}
               />
               <TextField
                 className="settings-inputs"
                 label="About me"
+                name="bio"
                 value={user.bio}
-                onChange={(e) => {
-                  setBio(e.target.value);
-                  handleInp(e);
-                }}
-                error={!!errorMessage && !email}
-                helperText={!!errorMessage && !email && errorMessage}
+                onChange={(e) => handleInp(e.target.value)}
+                // error={!!errorMessage && !email}
+                // helperText={!!errorMessage && !email && errorMessage}
                 style={{ marginBottom: 10 }}
               />
-              <TextField
-                className="settings-inputs"
-                value={profileImage}
-                onChange={(e) => {
-                  setProfileImage(e.target.value);
-                  handleInp(e);
-                }}
-                error={!!errorMessage && !email}
-                helperText={!!errorMessage && !email && errorMessage}
-                style={{ marginBottom: 10 }}
-                type="file"
-              />
+
               <br />
-              <Button variant="contained" color="primary" onClick={handleSave}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => saveEditProfile(userData)}
+              >
                 Save changes
               </Button>
               <Button
