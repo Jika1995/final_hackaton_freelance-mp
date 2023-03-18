@@ -1,8 +1,5 @@
 .profile-page {
-       /* position: relative; */
-       /* background-image: linear-gradient(to bottom, #935cbe, #9a51b3, #a045a8, #a6379b, #aa278e); */
        background: #000;
-
 }
 
 .header-profile-page {
@@ -25,12 +22,16 @@
        color: aliceblue;
        background-image: linear-gradient(to bottom, #6e5cbe, #8951b3, #a045a8, #a6379b, #721e90);
        border-radius: 20px;
+       box-shadow: rgb(160, 171, 183) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
 .left-body-profile {
        width: 300px;
        margin: 30px auto;
        text-align: center;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
 }
 
 .right-body-profile {
@@ -51,6 +52,7 @@
        height: 200px;
        object-fit: cover;
        border-radius: 50% !important;
+       margin: 15px;
 }
 
 .promo-profile>video{
@@ -66,7 +68,7 @@
 }
 
 .settings-inputs {
-       width: 310px !important;
+       width: 300px !important;
        margin: 10px 10px !important;
 }
 
@@ -74,12 +76,42 @@
        display: flex;
        flex-wrap: wrap;
        justify-content: center;
-       margin: 20px;
+       margin: auto 20px;
+       /* height: 100%; */
+       align-items: center;
+}
+
+.about-user>h2 {
+       font-size: 2rem;
+       color: #000;
+}
+
+.about-user-info {
+       margin: 60px auto;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       color: azure;
+       text-shadow: 1px 1px 1px #626060;
+}
+
+.header-user-info {
+       width: 60%;
+       border-bottom: 2px solid #ede3f1;
+}
+
+.user-details {
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       align-items: center;
+       height: 100%;
 }
 
 .profile-info-text {
        width: 310px;
-       border: 1px solid whitesmoke;
+       /* border: 1px solid whitesmoke; */
        border-radius: 10px;
        margin: 10px !important;
 }
@@ -98,6 +130,11 @@
        border-radius: 10px;
 }
 
+.window-email>button:hover {
+       background: #ad1fe0;
+       transition: 0.4s ease-in-out;
+}
+
 #inp-email-reset{
        height: 40px;
        width: 270px !important;
@@ -108,7 +145,7 @@
        font-size: 1.2rem;
        border: 2px solid whitesmoke;
        margin: 15px;
-       
+       padding: 0;
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -123,3 +160,80 @@
    :-ms-input-placeholder { /* Internet Explorer 10+ */
        color:    whitesmoke;
    }
+
+.window-reset-page {
+       width: 310px;
+       background: #392e5bd0;
+       text-align: center;
+       color: azure;
+       border: #6e5cbe solid 2px;
+       margin: auto;
+       border-radius: 10px;
+}
+
+.window-reset-page>button {
+       margin: 5px auto 20px;
+       background: #721e90;
+       border: 2px solid #6e5cbe;
+       border-radius: 10px;
+}
+
+.window-reset-page>button:hover {
+       background: #ad1fe0;
+       transition: 0.4s ease-in-out;
+}
+
+#btn-back-profile {
+       background: #a6379b;
+       width: 60%;
+       border-radius: 10px;
+       color: azure;
+       margin: auto;
+       box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+       transition: box-shadow 0.7s ease-in-out;
+}
+
+#btn-back-profile:hover {
+       box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+       transition: box-shadow 0.7s ease-in-out;
+}
+
+#btn-reset-pass {
+       background: #947ef7;
+       font-weight: 600;
+       transition: 0.7s;
+       border: 1px solid;
+}
+
+#btn-reset-pass:hover {
+       color: rgba(199, 48, 48, 0.984);
+       transition: 0.4s ease-in-out;
+       box-shadow: rgb(224, 31, 31) 0px 20px 30px -10px;
+}
+
+#btn-settings {
+       background: #947ef7;
+       font-weight: 600;
+       box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+       transition: 1s ease-in-out !important;
+}
+
+#btn-settings:hover {
+       box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+       transition: 0.6s ease-in-out !important;
+}
+
+#btn-save-settings {
+       background: #a6379b;
+       width: 200px;
+       border-radius: 10px;
+       color: azure;
+       margin: auto;
+       box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+       transition: box-shadow 0.7s ease-in-out;
+}
+
+#btn-save-settings:hover {
+       box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+       transition: box-shadow 0.7s ease-in-out;
+}

@@ -32,6 +32,7 @@ const API = "http://34.141.58.26";
 
 const ProfileContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  const [error, setError] = useState("");
 
   async function getCurrentUser() {
     try {
@@ -91,6 +92,7 @@ const ProfileContextProvider = ({ children }) => {
   async function resetPassword(email) {
     try {
       const tokens = JSON.parse(localStorage.getItem("tokens"));
+
       //config
       const Authorization = `Bearer ${tokens.access}`;
       const config = {
@@ -99,10 +101,13 @@ const ProfileContextProvider = ({ children }) => {
         },
       };
 
+      console.log(email);
+
       await axios.post(`${API}/account/reset_password/`, email, config);
       getCurrentUser();
     } catch (err) {
       console.log(err);
+      setError(Object.values(err.response.data).flat(2));
     }
   }
 
@@ -125,17 +130,20 @@ const ProfileContextProvider = ({ children }) => {
       );
       getCurrentUser();
     } catch (err) {
+      setError(Object.values(err.response.data).flat(2));
       console.log(err);
     }
   }
 
   const values = {
     user: state.user,
+    error,
 
     getCurrentUser,
     saveEditProfile,
     resetPassword,
     setNewPassword,
+    setError,
   };
   return (
     <profileContext.Provider value={values}>{children}</profileContext.Provider>

@@ -14,8 +14,9 @@ import EditPostPage from "./pages/EditPostPage";
 import AddPostPage from "./pages/AddPostPage";
 
 import SettingsPage from "./pages/SettingsPage";
-import CartPage from './pages/CartPage';
+import CartPage from "./pages/CartPage";
 import TESTPage from "./pages/TESTPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -89,7 +90,11 @@ const MainRoutes = () => {
       element: <TESTPage />,
       id: 14,
     },
-    
+    {
+      link: "/reset",
+      element: <ResetPasswordPage />,
+      id: 15,
+    },
   ];
 
   return (

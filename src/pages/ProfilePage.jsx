@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 import { useProfile } from "../contexts/ProfileContextProvider";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -34,6 +35,17 @@ const ProfilePage = () => {
               src="https://img.freepik.com/free-psd/3d-illustration-person-with-rainbow-sunglasses_23-2149436196.jpg?w=826&t=st=1678773461~exp=1678774061~hmac=af704675ddfb235ae0bf146fef2ebabda7285fe6d5d02aecbbd13aa0688aaaa9"
               alt=""
             />
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={() => {
+                getCurrentUser();
+                navigate("/settings");
+              }}
+              id="btn-settings"
+            >
+              <ManageAccountsIcon /> Settings
+            </Button>
             <div className="profile-reviews">
               {user.is_buyer ? <h4>Buyer</h4> : <h4>Executor</h4>}
               <h4>Rating</h4>
@@ -43,78 +55,54 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className="right-body-profile">
-          <div className="about-user">
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              className="profile-info-text"
-              label="Username"
-            >
-              Username: {user.name}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              className="profile-info-text"
-            >
-              First Name: {user.first_name}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              className="profile-info-text"
-            >
-              Last Name: {user.last_name}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              className="profile-info-text"
-            >
-              Email: {user.email}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              className="profile-info-text"
-            >
-              Birthday: {user.date_birth}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              className="profile-info-text"
-            >
-              City: {user.city}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              className="profile-info-text"
-            >
-              About Me: {user.bio}
-            </Typography>
+          <div className="about-user-info">
+            <div className="header-user-info">
+              <h1>{user.name}</h1>
+              <h2>{user.bio}</h2>
+            </div>
+            <div className="user-details">
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="div"
+                className="profile-info-text"
+              >
+                First Name: {user.first_name}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="div"
+                className="profile-info-text"
+              >
+                Last Name: {user.last_name}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="div"
+                className="profile-info-text"
+              >
+                Email: {user.email}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="div"
+                className="profile-info-text"
+              >
+                Birthday: {user.date_birth}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="div"
+                className="profile-info-text"
+              >
+                City: {user.city}
+              </Typography>
+            </div>
           </div>
-          <Button
-            variant="contained"
-            color="warning"
-            onClick={() => {
-              getCurrentUser();
-              navigate("/settings");
-            }}
-          >
-            Settings
-          </Button>
-          {/* <Button variant="contained" color="error" onClick={getCurrentUser}>
-            GET
-          </Button> */}
         </div>
       </div>
       <div className="promo-profile">
