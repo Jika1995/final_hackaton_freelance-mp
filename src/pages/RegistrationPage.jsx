@@ -3,6 +3,9 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 import "../styles/RegistrationPage.css";
 import React, { useState, useEffect, useContext } from "react";
@@ -17,7 +20,9 @@ const RegistrationPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-
+  const [isBuyer, setIsBuyer] = useState(false);
+  const [isExecutant, setIsExecutant] = useState(false);
+ 
   useEffect(() => {
     setError(false);
   }, []);
@@ -27,11 +32,14 @@ const RegistrationPage = () => {
       alert("Some inputs are empty!");
       return;
     }
+    console.log(isBuyer, isExecutant);
 
     let formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
     formData.append('password2', passwordConfirm);
+    formData.append('is_buyer', isBuyer);
+    formData.append('is_executant', isExecutant);
 
     handleRegister(formData, navigate);
 
@@ -133,6 +141,10 @@ const RegistrationPage = () => {
                   className="reg-inp"
                   onChange={(e) => setPasswordConfirm(e.target.value)}
                 ></TextField>
+                <FormGroup className="checkbox-block">
+                  <FormControlLabel disabled={isExecutant} control={<Checkbox onChange={(e) => setIsBuyer(e.target.checked)}/>} label="I'm buyer"/>
+                  <FormControlLabel disabled={isBuyer}  control={<Checkbox onChange={(e) => setIsExecutant(e.target.checked)}/>} label="I'm executer" />
+                </FormGroup>
               </div>
               <Button
                 variant="contained"
