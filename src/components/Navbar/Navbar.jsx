@@ -22,19 +22,11 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 
 const pages = [
   {
-    type: "Orders",
-    path: "/orders",
-  },
-  {
     type: "Chat",
     path: "/chat",
   },
   {
     type: "Market",
-    path: "/market",
-  },
-  {
-    type: "Posts",
     path: "/posts",
   },
   {
