@@ -67,7 +67,8 @@ const ProfilePage = () => {
                 component="div"
                 className="profile-info-text"
               >
-                First Name: {user.first_name}
+                First Name: <br />
+                {user.first_name}
               </Typography>
               <Typography
                 gutterBottom
@@ -75,7 +76,7 @@ const ProfilePage = () => {
                 component="div"
                 className="profile-info-text"
               >
-                Last Name: {user.last_name}
+                Last Name: <br /> {user.last_name}
               </Typography>
               <Typography
                 gutterBottom
@@ -83,7 +84,7 @@ const ProfilePage = () => {
                 component="div"
                 className="profile-info-text"
               >
-                Email: {user.email}
+                Email: <br /> {user.email}
               </Typography>
               <Typography
                 gutterBottom
@@ -91,7 +92,7 @@ const ProfilePage = () => {
                 component="div"
                 className="profile-info-text"
               >
-                Birthday: {user.date_birth}
+                Birthday: <br /> {user.date_birth}
               </Typography>
               <Typography
                 gutterBottom
