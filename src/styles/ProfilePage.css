@@ -35,6 +35,7 @@
 
 .right-body-profile {
        text-align: center;
+       align-items: center;
        width: 65%;
        margin: 30px auto;
        background: rgba(247, 235, 235, 0.508);
@@ -80,5 +81,45 @@
        width: 310px;
        border: 1px solid whitesmoke;
        border-radius: 10px;
-       margin: 10px;
+       margin: 10px !important;
 }
+
+.window-email {
+       background: #392e5bd0;
+       text-align: center;
+       color: azure;
+       border: #6e5cbe solid 2px;
+}
+
+.window-email>button {
+       margin: 0 auto 15px;
+       background: #721e90;
+       border: 2px solid #6e5cbe;
+       border-radius: 10px;
+}
+
+#inp-email-reset{
+       height: 40px;
+       width: 270px !important;
+       border-radius: 10px;
+       background: #947ef7;
+       margin: auto;
+       text-align: center;
+       font-size: 1.2rem;
+       border: 2px solid whitesmoke;
+       margin: 15px;
+       
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+       color:    whitesmoke;
+   }
+   :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+       color:    whitesmoke;
+   }
+   ::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color:    whitesmoke;
+   }
+   :-ms-input-placeholder { /* Internet Explorer 10+ */
+       color:    whitesmoke;
+   }

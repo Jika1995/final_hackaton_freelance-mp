@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import '../../../styles/AddPost.css'
+import "../../../styles/AddPost.css";
 
-import {postsContext} from '../../../contexts/PostContextProvider';
+import { postsContext } from "../../../contexts/PostContextProvider";
 
 //mui
 import Container from "@mui/material/Container";
@@ -12,47 +12,45 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 
 const EditPost = () => {
-    const {getOnePost, onePost, saveEditedPost} = useContext(postsContext);
-    const [post, setPost] = useState(onePost);
-    const navigate = useNavigate();
-    const { id } = useParams();
+  const { getOnePost, onePost, saveEditedPost } = useContext(postsContext);
+  const [post, setPost] = useState(onePost);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    useEffect(() => {
-        getOnePost(id)
-      }, []);
-    
-      useEffect(() => {
-        setPost(onePost)
-      }, [onePost, ]);
+  useEffect(() => {
+    getOnePost(id);
+  }, []);
 
-      useEffect(() => {
-        console.log(post);
-      }, [post, ]);
+  useEffect(() => {
+    setPost(onePost);
+  }, [onePost]);
 
-      const handleInp = (e) => {
-        
-        if(e.target.name === 'image') {
-          let obj = {
-            ...post,
-            image: e.target.files[0]
-          }
-          setPost(obj);
-        } else {
-          let obj = {
-            ...post,
-            [e.target.name]: e.target.value
-          };
-          setPost(obj)
-        }
-      }
+  useEffect(() => {
+    console.log(post);
+  }, [post]);
+
+  const handleInp = (e) => {
+    if (e.target.name === "image") {
+      let obj = {
+        ...post,
+        image: e.target.files[0],
+      };
+      setPost(obj);
+    } else {
+      let obj = {
+        ...post,
+        [e.target.name]: e.target.value,
+      };
+      setPost(obj);
+    }
+  };
 
   return (
-
-    <div className='add-main'>
- {post ? (
-  <Container className='add-container'>
-      <Box className="add-block">
-            <Box className= 'add-main-block'>
+    <div className="add-main">
+      {post ? (
+        <Container className="add-container">
+          <Box className="add-block">
+            <Box className="add-main-block">
               <div className="addinfo-block">
                 <Typography
                   variant="h2"
@@ -76,8 +74,10 @@ const EditPost = () => {
                   fullWidth
                   sx={{ mb: "10px" }}
                   className="add-inp"
-                  type='text'
-                  name="title" onChange={handleInp} value={post.title}
+                  type="text"
+                  name="title"
+                  onChange={handleInp}
+                  value={post.title}
                 ></TextField>
                 <TextField
                   variant="standard"
@@ -87,8 +87,10 @@ const EditPost = () => {
                   fullWidth
                   sx={{ mb: "10px" }}
                   className="add-inp"
-                  type='text'
-                  name="description" onChange={handleInp} value={post.description}
+                  type="text"
+                  name="description"
+                  onChange={handleInp}
+                  value={post.description}
                 ></TextField>
                 <TextField
                   variant="standard"
@@ -96,11 +98,12 @@ const EditPost = () => {
                   placeholder="Price"
                   color="secondary"
                   fullWidth
-                  type='number'
+                  type="number"
                   sx={{ mb: "10px" }}
                   className="add-inp"
                   name="price"
-                  onChange={handleInp} value={post.price}
+                  onChange={handleInp}
+                  value={post.price}
                 ></TextField>
                 <TextField
                   variant="standard"
@@ -112,7 +115,9 @@ const EditPost = () => {
                   accept="image/*"
                   sx={{ mb: "10px" }}
                   className="add-inp"
-                  name="image" onChange={handleInp} value={undefined}
+                  name="image"
+                  onChange={handleInp}
+                  value={undefined}
                 ></TextField>
               </div>
               <Button
@@ -121,22 +126,19 @@ const EditPost = () => {
                 fullWidth
                 onClick={() => {
                   saveEditedPost(post);
-                  navigate('/posts')
+                  navigate("/posts");
                 }}
               >
                 Save changes
               </Button>
             </Box>
           </Box>
-      </Container>
+        </Container>
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+};
 
-   ) : (<></>) }
-
-
-  </div>
-   
-
-  )
-}
-
-export default EditPost
+export default EditPost;

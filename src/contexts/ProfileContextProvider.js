@@ -59,17 +59,17 @@ const ProfileContextProvider = ({ children }) => {
     }
   }
 
-  async function saveEditProfile(editedProfile) {
+  async function saveEditProfile(userData) {
     try {
-      let newObj = new FormData();
-      for (let i in editedProfile) {
-        newObj.append(`${i}`, editedProfile[i]);
-        // console.log(post[i]);
-      }
-      // console.log(newPost.entries);
-      for (var pair of newObj.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
+      //       let newObj = new FormData();
+      //       for (let i in editedProfile) {
+      //         newObj.append(`${i}`, userData[i]);
+      //         // console.log(post[i]);
+      //       }
+      //       // console.log(newPost.entries);
+      //       for (var pair of newObj.entries()) {
+      //         console.log(pair[0] + ", " + pair[1]);
+      //       }
 
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
@@ -81,7 +81,48 @@ const ProfileContextProvider = ({ children }) => {
         },
       };
 
-      await axios.put(`${API}/account/edit_profile/`, newObj, config);
+      await axios.put(`${API}/account/edit_profile/`, userData, config);
+      getCurrentUser();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function resetPassword(email) {
+    try {
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+
+      await axios.post(`${API}/account/reset_password/`, email, config);
+      getCurrentUser();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function setNewPassword(newData) {
+    try {
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
+
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+
+      await axios.post(
+        `${API}/account/reset_password_complete/`,
+        newData,
+        config
+      );
       getCurrentUser();
     } catch (err) {
       console.log(err);
@@ -93,6 +134,8 @@ const ProfileContextProvider = ({ children }) => {
 
     getCurrentUser,
     saveEditProfile,
+    resetPassword,
+    setNewPassword,
   };
   return (
     <profileContext.Provider value={values}>{children}</profileContext.Provider>
