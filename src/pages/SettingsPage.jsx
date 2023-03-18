@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { profileContext } from "../contexts/ProfileContextProvider";
-
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import { useContext } from "react";
 import { useEffect } from "react";
 
-const SettingsPage = () => {
-  // const [name, setName] = useState("");
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [email, setEmail] = useState("");
-  // // const [dateBirth, setDateBirth] = useState("");
-  // const [city, setCity] = useState("");
-  // const [bio, setBio] = useState("");
-  // const [profileImage, setProfileImage] = useState(null);
+import { Button, Modal, TextField } from "@mui/material";
 
+const SettingsPage = () => {
   const navigate = useNavigate();
-  const { user, saveEditProfile, getCurrentUser } = useContext(profileContext);
+  const {
+    user,
+    saveEditProfile,
+    getCurrentUser,
+    resetPassword,
+    setNewPassword,
+  } = useContext(profileContext);
   const [userData, setUserData] = useState(user);
 
   useEffect(() => {
@@ -48,32 +44,27 @@ const SettingsPage = () => {
       };
       setUserData(userObj);
     }
-
-    // for (let key in user) {
-    //   if (!user[key]) {
-    //     user[key] = "Required this area";
-    //     return;
-    //   }
-    // }
   };
 
-  // CHECK INP
-  // const [errorMessage, setErrorMessage] = useState("");
+  // MODAL
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState("");
 
-  // const handleSave = () => {
-  //   if (!firstame || !lastName || !email) {
-  //     let message = "";
-  //     if (!firstName) {
-  //       firstName = "First name is required";
-  //     }
-  //     if (!lastName) message += "Last name is required. ";
-  //     if (!email) message += "Email is required. ";
-  //     setErrorMessage(message);
-  //     //       navigate("/profile");
-  //   }
-  // };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-  return user ? (
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(data); // отправка данных
+    handleClose();
+  };
+
+  return userData ? (
     <div className="profile-page">
       <div className="header-profile-page">
         <img
@@ -97,8 +88,6 @@ const SettingsPage = () => {
               name="image"
               value={userData.profile_image}
               onChange={handleInp}
-              // error={!!errorMessage && !email}
-              // // helperText={!!errorMessage && !email && errorMessage}
               style={{ marginBottom: 10 }}
               type="file"
               accept="image/*"
@@ -122,8 +111,6 @@ const SettingsPage = () => {
                 name="name"
                 value={userData.name}
                 onChange={handleInp}
-                // // error={!!errorMessage && !firstName}
-                // helperText={!!errorMessage && !firstName && errorMessage}
               />
               <TextField
                 className="settings-inputs"
@@ -131,8 +118,6 @@ const SettingsPage = () => {
                 name="first_name"
                 value={userData.first_name}
                 onChange={handleInp}
-                // // error={!!errorMessage && !firstName}
-                // helperText={!!errorMessage && !firstName && errorMessage}
               />
               <TextField
                 className="settings-inputs"
@@ -140,8 +125,6 @@ const SettingsPage = () => {
                 name="last_name"
                 value={userData.last_name}
                 onChange={handleInp}
-                // // error={!!errorMessage && !lastName}
-                // helperText={!!errorMessage && !lastName && errorMessage}
               />
               <TextField
                 className="settings-inputs"
@@ -149,8 +132,6 @@ const SettingsPage = () => {
                 name="email"
                 value={userData.email}
                 onChange={handleInp}
-                // // error={!!errorMessage && !email}
-                // helperText={!!errorMessage && !email && errorMessage}
               />
               {/* <TextField
                 className="settings-inputs"
@@ -167,8 +148,6 @@ const SettingsPage = () => {
                 name="city"
                 value={userData.city}
                 onChange={handleInp}
-                // error={!!errorMessage && !email}
-                // helperText={!!errorMessage && !email && errorMessage}
               />
               <TextField
                 className="settings-inputs"
@@ -176,15 +155,74 @@ const SettingsPage = () => {
                 name="bio"
                 value={userData.bio}
                 onChange={handleInp}
-                // error={!!errorMessage && !email}
-                // helperText={!!errorMessage && !email && errorMessage}
               />
+              <br />
 
+              {/* MODAL */}
+              <Modal open={open} onClose={handleClose}>
+                <form onSubmit={handleSubmit}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "30%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      // bgcolor: "background.blue",
+                      // boxShadow: 24,
+                      // p: 4,
+                      width: 310,
+                      outline: "none",
+                      borderRadius: "20px",
+                    }}
+                    className="window-email"
+                  >
+                    <h2>Enter email address</h2>
+                    {/* <TextField
+                      variant="filled"
+                      autoFocus
+                      margin="dense"
+                      label="email..."
+                      type="text"
+                      fullWidth
+                      value={data}
+                      onChange={(e) => setData(e.target.value)}
+                      id="inp-email-reset"
+                    /> */}
+                    <input
+                      id="inp-email-reset"
+                      type="text"
+                      name=""
+                      value={data}
+                      placeholder="email..."
+                      onChange={(e) => setData(e.target.value)}
+                    />
+                    <br />
+                    <Button variant="contained" color="primary">
+                      Send
+                    </Button>
+                  </div>
+                </form>
+              </Modal>
+
+              <TextField
+                className="settings-inputs"
+                label="Email"
+                name="email"
+                value={userData.bio}
+                onChange={handleInp}
+              />
+              <br />
+              <Button variant="contained" color="error" onClick={handleOpen}>
+                Reset Password
+              </Button>
               <br />
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => saveEditProfile(userData)}
+                onClick={() => {
+                  saveEditProfile(userData);
+                  navigate("/profile");
+                }}
               >
                 Save changes
               </Button>

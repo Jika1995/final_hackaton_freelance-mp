@@ -49,6 +49,7 @@ const ProfilePage = () => {
               variant="h6"
               component="div"
               className="profile-info-text"
+              label="Username"
             >
               Username: {user.name}
             </Typography>

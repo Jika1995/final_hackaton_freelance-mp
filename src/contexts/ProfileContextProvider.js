@@ -88,11 +88,54 @@ const ProfileContextProvider = ({ children }) => {
     }
   }
 
+  async function resetPassword(email) {
+    try {
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+
+      await axios.post(`${API}/account/reset_password/`, email, config);
+      getCurrentUser();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function setNewPassword(newData) {
+    try {
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
+
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+
+      await axios.post(
+        `${API}/account/reset_password_complete/`,
+        newData,
+        config
+      );
+      getCurrentUser();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const values = {
     user: state.user,
 
     getCurrentUser,
     saveEditProfile,
+    resetPassword,
+    setNewPassword,
   };
   return (
     <profileContext.Provider value={values}>{children}</profileContext.Provider>
