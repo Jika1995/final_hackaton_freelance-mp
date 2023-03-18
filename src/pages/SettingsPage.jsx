@@ -5,11 +5,18 @@ import { useContext } from "react";
 import { useEffect } from "react";
 
 import { Button, Modal, TextField } from "@mui/material";
+import GppMaybeIcon from "@mui/icons-material/GppMaybe";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const SettingsPage = () => {
   const navigate = useNavigate();
   const {
     user,
+    error,
+    setError,
     saveEditProfile,
     getCurrentUser,
     resetPassword,
@@ -28,6 +35,10 @@ const SettingsPage = () => {
   useEffect(() => {
     console.log(userData);
   }, [userData]);
+
+  useEffect(() => {
+    setError(false);
+  }, []);
 
   const handleInp = (e) => {
     if (e.target.name === "image") {
@@ -64,6 +75,28 @@ const SettingsPage = () => {
     handleClose();
   };
 
+  const [emailReset, setEmailReset] = useState("");
+
+  useEffect(() => {
+    setEmailReset();
+  }, []);
+
+  useEffect(() => {
+    console.log(emailReset);
+  }, [emailReset]);
+
+  const handleResetEmail = (e) => {
+    const email = {
+      email: e.target.value,
+    };
+
+    setEmailReset(email);
+  };
+
+  // FOR CALENDAR
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [openCalendar, setOpenCalendar] = useState(false);
+
   return userData ? (
     <div className="profile-page">
       <div className="header-profile-page">
@@ -74,6 +107,14 @@ const SettingsPage = () => {
       </div>
       <div className="body-profile-content">
         <div className="left-body-profile">
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => navigate("/profile")}
+            id="btn-back-profile"
+          >
+            <ArrowCircleLeftIcon /> Back
+          </Button>
           <div className="avatar">
             <img
               src={
@@ -98,6 +139,17 @@ const SettingsPage = () => {
               <h4>Rating</h4>
               <h4>Reviews</h4>
               <h4>Followers</h4>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => {
+                  handleOpen();
+                  setError(false);
+                }}
+                id="btn-reset-pass"
+              >
+                Reset Password <ErrorOutlineIcon />
+              </Button>
             </div>
           </div>
         </div>
@@ -133,15 +185,27 @@ const SettingsPage = () => {
                 value={userData.email}
                 onChange={handleInp}
               />
-              {/* <TextField
+              <TextField
                 className="settings-inputs"
                 label="Date Birth"
                 name="date_birth"
-                value={user.date_birth}
+                value={userData.date_birth}
                 onChange={handleInp}
-                error={!!errorMessage && !email}
-                helperText={!!errorMessage && !email && errorMessage}
-              /> */}
+                // onClick={() => setOpenCalendar(true)}
+              />
+              {/* {openCalendar && (
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => {
+                    setSelectedDate(date);
+                    setOpenCalendar(false);
+                  }}
+                  onClose={() => setOpenCalendar(false)}
+                  showYearDropdown
+                  dateFormat="dd/MM/yyyy"
+                  inline
+                />
+              )} */}
               <TextField
                 className="settings-inputs"
                 label="City"
@@ -157,7 +221,6 @@ const SettingsPage = () => {
                 onChange={handleInp}
               />
               <br />
-
               {/* MODAL */}
               <Modal open={open} onClose={handleClose}>
                 <form onSubmit={handleSubmit}>
@@ -167,9 +230,6 @@ const SettingsPage = () => {
                       top: "30%",
                       left: "50%",
                       transform: "translate(-50%, -50%)",
-                      // bgcolor: "background.blue",
-                      // boxShadow: 24,
-                      // p: 4,
                       width: 310,
                       outline: "none",
                       borderRadius: "20px",
@@ -177,44 +237,34 @@ const SettingsPage = () => {
                     className="window-email"
                   >
                     <h2>Enter email address</h2>
-                    {/* <TextField
-                      variant="filled"
-                      autoFocus
-                      margin="dense"
-                      label="email..."
-                      type="text"
-                      fullWidth
-                      value={data}
-                      onChange={(e) => setData(e.target.value)}
-                      id="inp-email-reset"
-                    /> */}
+                    {error ? (
+                      <h2 style={{ color: "red", fontSize: "1.2rem" }}>
+                        ! {error}
+                      </h2>
+                    ) : null}
                     <input
                       id="inp-email-reset"
                       type="text"
-                      name=""
-                      value={data}
+                      name="email-reset"
                       placeholder="email..."
-                      onChange={(e) => setData(e.target.value)}
+                      onChange={handleResetEmail}
                     />
                     <br />
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        resetPassword(emailReset);
+                        navigate("/reset");
+                      }}
+                    >
                       Send
                     </Button>
                   </div>
                 </form>
               </Modal>
+              {/* END MODAL */}
 
-              <TextField
-                className="settings-inputs"
-                label="Email"
-                name="email"
-                value={userData.bio}
-                onChange={handleInp}
-              />
-              <br />
-              <Button variant="contained" color="error" onClick={handleOpen}>
-                Reset Password
-              </Button>
               <br />
               <Button
                 variant="contained"
@@ -223,15 +273,9 @@ const SettingsPage = () => {
                   saveEditProfile(userData);
                   navigate("/profile");
                 }}
+                id="btn-save-settings"
               >
                 Save changes
-              </Button>
-              <Button
-                variant="contained"
-                color="success"
-                onClick={() => navigate("/profile")}
-              >
-                Back
               </Button>
             </form>
           </div>
