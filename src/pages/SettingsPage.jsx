@@ -93,10 +93,6 @@ const SettingsPage = () => {
     setEmailReset(email);
   };
 
-  // FOR CALENDAR
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [openCalendar, setOpenCalendar] = useState(false);
-
   return userData ? (
     <div className="profile-page">
       <div className="header-profile-page">
@@ -150,77 +146,7 @@ const SettingsPage = () => {
               >
                 Reset Password <ErrorOutlineIcon />
               </Button>
-            </div>
-          </div>
-        </div>
-        <div className="right-body-profile">
-          <div className="about-user">
-            <h2>Settings</h2>
-            <form>
-              <TextField
-                className="settings-inputs"
-                label="Username"
-                name="name"
-                value={userData.name}
-                onChange={handleInp}
-              />
-              <TextField
-                className="settings-inputs"
-                label="First Name"
-                name="first_name"
-                value={userData.first_name}
-                onChange={handleInp}
-              />
-              <TextField
-                className="settings-inputs"
-                label="Last Name"
-                name="last_name"
-                value={userData.last_name}
-                onChange={handleInp}
-              />
-              <TextField
-                className="settings-inputs"
-                label="Email"
-                name="email"
-                value={userData.email}
-                onChange={handleInp}
-              />
-              <TextField
-                className="settings-inputs"
-                label="Date Birth"
-                name="date_birth"
-                value={userData.date_birth}
-                onChange={handleInp}
-                // onClick={() => setOpenCalendar(true)}
-              />
-              {/* {openCalendar && (
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={(date) => {
-                    setSelectedDate(date);
-                    setOpenCalendar(false);
-                  }}
-                  onClose={() => setOpenCalendar(false)}
-                  showYearDropdown
-                  dateFormat="dd/MM/yyyy"
-                  inline
-                />
-              )} */}
-              <TextField
-                className="settings-inputs"
-                label="City"
-                name="city"
-                value={userData.city}
-                onChange={handleInp}
-              />
-              <TextField
-                className="settings-inputs"
-                label="About me"
-                name="bio"
-                value={userData.bio}
-                onChange={handleInp}
-              />
-              <br />
+
               {/* MODAL */}
               <Modal open={open} onClose={handleClose}>
                 <form onSubmit={handleSubmit}>
@@ -264,8 +190,65 @@ const SettingsPage = () => {
                 </form>
               </Modal>
               {/* END MODAL */}
-
+            </div>
+          </div>
+        </div>
+        <div className="right-body-profile">
+          <div className="about-user">
+            <h2>Settings</h2>
+            <form>
+              <TextField
+                className="settings-inputs"
+                label="Username"
+                name="name"
+                value={userData.name}
+                onChange={handleInp}
+              />
+              <TextField
+                className="settings-inputs"
+                label="First Name"
+                name="first_name"
+                value={userData.first_name}
+                onChange={handleInp}
+              />
+              <TextField
+                className="settings-inputs"
+                label="Last Name"
+                name="last_name"
+                value={userData.last_name}
+                onChange={handleInp}
+              />
+              <TextField
+                className="settings-inputs"
+                label="Email"
+                name="email"
+                value={userData.email}
+                onChange={handleInp}
+              />
+              <TextField
+                className="settings-inputs"
+                label="Date Birth"
+                name="date_birth"
+                value={userData.date_birth}
+                onChange={handleInp}
+                type="date"
+              />
+              <TextField
+                className="settings-inputs"
+                label="City"
+                name="city"
+                value={userData.city}
+                onChange={handleInp}
+              />
+              <TextField
+                className="settings-inputs"
+                label="About me"
+                name="bio"
+                value={userData.bio}
+                onChange={handleInp}
+              />
               <br />
+
               <Button
                 variant="contained"
                 color="primary"

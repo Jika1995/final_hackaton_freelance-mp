@@ -5,35 +5,53 @@ import { useContext } from "react";
 import { useEffect } from "react";
 
 import { Button, Modal, TextField } from "@mui/material";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
-  const { user, error, setError, setNewPassword } = useContext(profileContext);
+  const { user, error, setError, setNewPassword, checkReset, setCheckReset } =
+    useContext(profileContext);
   const [userData, setUserData] = useState(user);
 
-  const [passReset, setPassReset] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConf, setPasswordConf] = useState("");
+  const [code, setConf] = useState("");
+
+  const [passResetInput, setPassResetInput] = useState("");
 
   useEffect(() => {
     setError(false);
   }, []);
 
   useEffect(() => {
-    setPassReset();
+    setPassResetInput();
   }, []);
 
   useEffect(() => {
-    console.log(passReset);
-  }, [passReset]);
+    console.log(passResetInput);
+  }, [passResetInput]);
 
   const handleResetPass = (e) => {
     const newData = {
-      password: e.target.value,
-      password_confirm: e.target.value,
-      code: e.target.value,
+      ...passResetInput,
+      [e.target.name]: e.target.value,
     };
 
-    setPassReset(newData);
+    console.log(newData);
+
+    setPassResetInput(newData);
   };
+
+  // MODAL
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <div className="profile-page">
@@ -60,14 +78,14 @@ const ResetPasswordPage = () => {
           <input
             id="inp-email-reset"
             type="text"
-            name="password-conf"
+            name="password_confirm"
             placeholder="new password confirm"
             onChange={handleResetPass}
           />
           <input
             id="inp-email-reset"
             type="text"
-            name="verif-code"
+            name="code"
             placeholder="verification code"
             onChange={handleResetPass}
           />
@@ -76,8 +94,7 @@ const ResetPasswordPage = () => {
             variant="contained"
             color="primary"
             onClick={() => {
-              setNewPassword(passReset);
-              navigate("/profile");
+              setNewPassword(passResetInput, handleOpen, navigate);
             }}
           >
             Apply
@@ -93,6 +110,32 @@ const ResetPasswordPage = () => {
           />
         </video>
       </div>
+
+      {/* MODAL */}
+      <Modal open={open}>
+        <div
+          style={{
+            position: "absolute",
+            top: "30%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 310,
+            outline: "none",
+            borderRadius: "20px",
+          }}
+          className="modal-success-reset"
+        >
+          <h2>PASSWORD СHANGED SUCCESSFULLY</h2>
+          <TaskAltIcon />
+          <img
+            src="https://www.freeiconspng.com/thumbs/forgot-password-icon/forgot-password-icon-17.png"
+            // https://www.freeiconspng.com/thumbs/forgot-password-icon/forgot-password-icon-17.png
+            alt="error:("
+            height="100px"
+          />
+        </div>
+      </Modal>
+      {/* END MODAL */}
     </div>
   );
 };

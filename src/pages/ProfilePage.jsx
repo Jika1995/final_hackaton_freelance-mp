@@ -92,7 +92,10 @@ const ProfilePage = () => {
                 component="div"
                 className="profile-info-text"
               >
-                Birthday: <br /> {user.date_birth}
+                Birthday: <br />
+                {`${user.date_birth.split("-").slice(2, 3)}.${user.date_birth
+                  .split("-")
+                  .slice(1, 2)}.${user.date_birth.split("-").slice(0, 1)}`}
               </Typography>
               <Typography
                 gutterBottom

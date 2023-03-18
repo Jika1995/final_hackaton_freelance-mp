@@ -111,7 +111,9 @@ const ProfileContextProvider = ({ children }) => {
     }
   }
 
-  async function setNewPassword(newData) {
+  const [checkReset, setCheckReset] = useState(false);
+
+  async function setNewPassword(newData, handleOpen, navigate) {
     try {
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
@@ -123,11 +125,19 @@ const ProfileContextProvider = ({ children }) => {
         },
       };
 
+      console.log(newData);
+
       await axios.post(
         `${API}/account/reset_password_complete/`,
         newData,
         config
       );
+
+      setCheckReset(true);
+      console.log("Password reset WORKED!!!");
+      handleOpen();
+      setTimeout(() => navigate("/profile"), 3000);
+      setCheckReset(false);
       getCurrentUser();
     } catch (err) {
       setError(Object.values(err.response.data).flat(2));
@@ -138,12 +148,14 @@ const ProfileContextProvider = ({ children }) => {
   const values = {
     user: state.user,
     error,
+    checkReset,
 
     getCurrentUser,
     saveEditProfile,
     resetPassword,
     setNewPassword,
     setError,
+    setCheckReset,
   };
   return (
     <profileContext.Provider value={values}>{children}</profileContext.Provider>
