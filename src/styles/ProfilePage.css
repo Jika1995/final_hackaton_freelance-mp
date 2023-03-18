@@ -14,7 +14,7 @@
 
 .body-profile-content {
        position: relative;
-       width: 80%;
+       width: 90%;
        margin: 20px auto;
        display: flex;
        flex-wrap: wrap;
@@ -84,6 +84,7 @@
 .about-user>h2 {
        font-size: 2rem;
        color: #000;
+       margin-top: 100px;
 }
 
 .about-user-info {
@@ -228,7 +229,7 @@
        width: 200px;
        border-radius: 10px;
        color: azure;
-       margin: auto;
+       margin: 15px auto;
        box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
        transition: box-shadow 0.7s ease-in-out;
 }
@@ -236,4 +237,21 @@
 #btn-save-settings:hover {
        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
        transition: box-shadow 0.7s ease-in-out;
+}
+
+@media all and (max-width: 550px) {
+       .settings-inputs {
+              width: 280px !important;
+       }
+
+       .right-body-profile {
+              width: 90%;
+              margin: 30px auto;
+       }
+}
+
+@media all and (max-width: 370px) {
+       .settings-inputs {
+              width: 230px !important;
+       }
 }
