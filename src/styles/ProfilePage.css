@@ -94,7 +94,7 @@
        justify-content: center;
        align-items: center;
        color: azure;
-       text-shadow: 1px 1px 1px #626060;
+       text-shadow: 2px 2px 2px #651789;
 }
 
 .header-user-info {
@@ -248,6 +248,26 @@
               width: 90%;
               margin: 30px auto;
        }
+}
+
+#calendar {
+       background: #6e5cbe;
+       display: flex !important;
+}
+
+.modal-success-reset {
+       width: 310px;
+       height: 200px;
+       background: #241d39;
+       text-align: center;
+       color: azure;
+       border: #6e5cbe solid 2px;
+       margin: auto;
+       border-radius: 10px;
+       align-items: center;
+       color: rgb(92, 255, 47);
+       display: flex;
+       flex-direction: column;
 }
 
 @media all and (max-width: 370px) {
