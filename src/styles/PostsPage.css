@@ -11,7 +11,7 @@
 .posts-block {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
     width: 90%;
     margin: auto;
     padding-top: 150px;
