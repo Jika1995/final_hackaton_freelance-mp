@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "../../styles/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../contexts/AuthContextProvider";
-import {useCart} from '../../contexts/CartContextProvider';
+import { useCart } from "../../contexts/CartContextProvider";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -19,6 +19,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Badge from "@mui/material/Badge";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
 const pages = [
   {
@@ -57,6 +63,11 @@ const settingsAuth = [
   },
 ];
 
+// FOR MODAL LOGOUT
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 function Navbar() {
   // MUI
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -80,7 +91,7 @@ function Navbar() {
   // custom
   const navigate = useNavigate();
   const { currentUser, handleLogout, checkAuth } = useContext(authContext);
-  const {cartLength} = useCart()
+  const { cartLength } = useCart();
 
   useEffect(() => {
     console.log(currentUser);
@@ -107,6 +118,17 @@ function Navbar() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos, visible]);
+
+  // FOR MODAL LOGOUT
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     //     <nav className={`navbar ${visible ? "navbar--visible" : "navbar--hidden"}`}>
@@ -240,7 +262,7 @@ function Navbar() {
               className="icon-btns-nav"
             >
               <Badge
-                  badgeContent={cartLength}
+                badgeContent={cartLength}
                 color="error"
                 className="nav-badge"
               >
@@ -283,7 +305,8 @@ function Navbar() {
                       >
                         <Typography
                           textalign="center"
-                          onClick={() => handleLogout(navigate)}
+                          onClick={handleClickOpen}
+                          // onClick={() => handleLogout(navigate)}
                           id="logout-btn"
                         >
                           Logout
@@ -316,6 +339,34 @@ function Navbar() {
             </Menu>
           </Box>
         </Toolbar>
+
+        {/* MODAL LOGOUT */}
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <div className="modal-logout">
+            <DialogTitle
+              style={{ margin: "20px auto 0", padding: "0", fontWeight: "700" }}
+            >
+              {"SIGN OUT ?"}
+            </DialogTitle>
+            <img
+              src="https://cdn3d.iconscout.com/3d/premium/thumb/emergency-exit-7865509-6308033.png"
+              alt=""
+              width="200px"
+              height="200px"
+            />
+
+            <DialogActions style={{ textAlign: "center" }}>
+              {/* <Button onClick={handleClose}>NO</Button> */}
+              <Button onClick={() => handleLogout(navigate)}>YES</Button>
+            </DialogActions>
+          </div>
+        </Dialog>
       </Container>
     </AppBar>
   );
