@@ -8,7 +8,7 @@ import { Button, Modal, TextField } from "@mui/material";
 import GppMaybeIcon from "@mui/icons-material/GppMaybe";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 
 const SettingsPage = () => {

@@ -177,13 +177,6 @@ const PostContextProvider = ({children}) => {
           Authorization, //ключ со значением
         },
       };
-      // const currentUser = localStorage.getItem('email');
-      // const Authorization = `${currentUser}`;
-      // const config = {
-      //     headers: {
-      //         Authorization //ключ со значением
-      //     }
-      // };
 
       const res = await axios.post(`${API}/post/create_post/`, newPost, config); //куда что кто такой
       console.log(res);
@@ -288,24 +281,25 @@ const PostContextProvider = ({children}) => {
   //     navigate(url);
   //   };
 
-  // async function toggleLike (id) {
-  //     try {
-  //         const tokens = JSON.parse(localStorage.getItem('tokens'));
+  async function toggleLike (id) {
+      try {
+          const tokens = JSON.parse(localStorage.getItem('tokens'));
 
-  //         //config
-  //         const Authorization = `Bearer ${tokens.access}`;
-  //         const config = {
-  //             headers: {
-  //                 Authorization //ключ со значением
-  //             }
-  //         };
+          //config
+          const Authorization = `Bearer ${tokens.access}`;
+          const config = {
+              headers: {
+                  Authorization //ключ со значением
+              }
+          };
 
-  //         const res = await axios(`${API}/products/${id}/toggle_like/`, config);
-  //         getProducts();
-  //     } catch (err) {
-  //         console.log(err);
-  //     };
-  // }
+          const res = await axios.post(`${API}/feedback/${id}/like/`, id, config);
+          getPosts();
+
+      } catch (err) {
+          console.log(err);
+      };
+  }
 
   return (
     <postsContext.Provider
@@ -319,7 +313,7 @@ const PostContextProvider = ({children}) => {
         getOnePost,
         deletePost,
         saveEditedPost,
-        // toggleLike,
+        toggleLike,
         // fetchByParams
       }}
     >

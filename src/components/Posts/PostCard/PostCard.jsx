@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../../contexts/AuthContextProvider";
 import {postsContext} from '../../../contexts/PostContextProvider';
-import {useCart} from '../../../contexts/CartContextProvider'
+import {useCart} from '../../../contexts/CartContextProvider';
+import { useProfile } from "../../../contexts/ProfileContextProvider";
 import '../../../styles/PostCard.css';
 
 import Card from "@mui/material/Card";
@@ -29,10 +30,20 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 
 const PostCard = ({item}) => {
   const navigate = useNavigate();
-  // const {toggleLike} = useContext(postsContext);
-  const {deletePost} = useContext(postsContext);
+  const {deletePost, toggleLike} = useContext(postsContext);
   const {currentUser} = useContext(authContext);
+  const {getCurrentUser, user} = useProfile();
   const { addPostToCart, checkPostInCart } = useCart();
+
+  const [ currentPost, setCurrentPost ] = useState(item);
+
+  // useEffect( () =>{
+  //   checkLike();
+  // }, [like, ])
+
+  // useEffect(() => {
+  //   getCurrentUser()
+  // }, []);
 
   //MUI
   const [anchorEl, setAnchorEl] = useState(null);
@@ -96,7 +107,8 @@ const PostCard = ({item}) => {
       
       <CardActions className="use-block">
         <div className="btns-all">
-        <IconButton className="like-btn" style={{color: 'white'}}><img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> 100 {item.likes}  </IconButton>
+        <IconButton className="like-btn" onClick= {() => toggleLike(item.id)} style={{color: 'white'}}>
+          {item.likes.some(elem => elem.is_like === true && elem.owner === user.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  </IconButton>
           <div className="icon-btns">
           <IconButton
               size="small"
