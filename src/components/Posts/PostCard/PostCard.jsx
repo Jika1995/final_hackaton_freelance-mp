@@ -92,7 +92,7 @@ const PostCard = ({item}) => {
       className="card-img"
       src={item.image}
       alt="error :("
-      onClick={() => navigate(`/details/${item.id}`)}
+      onClick={() => currentUser ? navigate(`/details/${item.id}`) : null}
     />
     <div className="info-card">
       <div style={{display: 'flex', justifyContent: "space-between", alignItems: 'center', marginTop: '20px'}}>
@@ -105,7 +105,7 @@ const PostCard = ({item}) => {
       </div>
       </div>
       
-      <CardActions className="use-block">
+        {currentUser ? (      <CardActions className="use-block">
         <div className="btns-all">
         <IconButton className="like-btn" onClick= {() => toggleLike(item.id)} style={{color: 'white'}}>
           {item.likes.some(elem => elem.is_like === true && elem.owner === user.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  </IconButton>
@@ -130,7 +130,7 @@ const PostCard = ({item}) => {
         </IconButton>
           </div>
         </div>
-      </CardActions>
+      </CardActions>) : (<></>)}
     </div>
       </div>
   </Card>
