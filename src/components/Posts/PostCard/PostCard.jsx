@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../../contexts/AuthContextProvider";
-import {postsContext} from '../../../contexts/PostContextProvider';
-import {useCart} from '../../../contexts/CartContextProvider';
+import { postsContext } from "../../../contexts/PostContextProvider";
+import { useCart } from "../../../contexts/CartContextProvider";
 import { useProfile } from "../../../contexts/ProfileContextProvider";
+
 import { useComments } from "../../../contexts/CommentContextProvider";
 import '../../../styles/PostCard.css';
+
 
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -25,6 +27,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
 import { Button } from "@mui/material";
+
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -37,14 +40,15 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Modal from '@mui/material/Modal';
 
+
 const PostCard = ({ item }) => {
   const navigate = useNavigate();
-  const {deletePost, toggleLike} = useContext(postsContext);
-  const {currentUser} = useContext(authContext);
-  const {getCurrentUser, user} = useProfile();
+  const { deletePost, toggleLike } = useContext(postsContext);
+  const { currentUser } = useContext(authContext);
+  const { getCurrentUser, user } = useProfile();
   const { addPostToCart, checkPostInCart } = useCart();
 
-  const [ currentPost, setCurrentPost ] = useState(item);
+  const [currentPost, setCurrentPost] = useState(item);
 
   // useEffect( () =>{
   //   checkLike();
@@ -93,31 +97,33 @@ const PostCard = ({ item }) => {
 
   return (
     <Card className="main-postCard">
-      <div style={{
+      <div
+        style={{
           marginBottom: "0",
           paddingBottom: "0",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center ",
           alignItems: "end ",
-        }}>
-      <IconButton aria-label="settings" onClick={handleMenuClick}>
-          <MoreVertIcon />
-      </IconButton>
-      {item.owner === currentUser? (
-        <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
+        }}
       >
-        <MenuItem onClick={() => navigate(`/edit/${item.id}`)}>
-          Edit <SettingsSuggestIcon fontSize="small" color="warning" />
-        </MenuItem>
-        <MenuItem onClick={() => deletePost(item.id)}>
-          Delete <DeleteIcon fontSize="small" color="error" />
-        </MenuItem>
-      </Menu>
-    ) : null}
+        <IconButton aria-label="settings" onClick={handleMenuClick}>
+          <MoreVertIcon />
+        </IconButton>
+        {item.owner === currentUser ? (
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            <MenuItem onClick={() => navigate(`/edit/${item.id}`)}>
+              Edit <SettingsSuggestIcon fontSize="small" color="warning" />
+            </MenuItem>
+            <MenuItem onClick={() => deletePost(item.id)}>
+              Delete <DeleteIcon fontSize="small" color="error" />
+            </MenuItem>
+          </Menu>
+        ) : null}
       </div>
 
       <div className="card-container">
@@ -254,12 +260,12 @@ const PostCard = ({ item }) => {
               size="small"
               // onClick={() => addProductToFav(item, favUser.id)}
             >
-              {/* {checkProductInFav(item.id) ? ( */}
-                {/* <FavoriteIcon style={{ color: "#DC143C" }} /> */}
+              {/* {checkProductInFav(item.id) ? ( /}
+                {/ <FavoriteIcon style={{ color: "#DC143C" }} /> /}
                 <img src='https://i.ibb.co/C117v1b/8703847-heart-love-icon.png' width='50px' height='50px' />
-              {/* ) : ( */}
-                {/* <FavoriteBorderIcon style={{ color: "white" }} /> */}
-              {/* )} */}
+              {/ ) : ( /}
+                {/ <FavoriteBorderIcon style={{ color: "white" }} /> /}
+              {/ )} */}
         </IconButton>
         <IconButton size="small" onClick={() => addPostToCart(item)}>
               {checkPostInCart(item.id) ? (
@@ -273,11 +279,11 @@ const PostCard = ({ item }) => {
       </CardActions>) : (<></>)}
     </div>
       </div>
-  </Card>
-  )
-}
+    </Card>
+  );
+};
 
-export default PostCard
+export default PostCard;
 
 // onClick={() => toggleLike(item.id)}
 // https://i.ibb.co/RgLrdQ8/likeicon.png -like src
