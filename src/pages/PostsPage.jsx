@@ -5,9 +5,9 @@ const PostsPage = () => {
   const [page, setPage] = React.useState(1);
 
   return (
-    <div>
+    
         <PostsList page={page} setPage={setPage}/>
-    </div>
+   
   )
 }
 

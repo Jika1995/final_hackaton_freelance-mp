@@ -11,8 +11,11 @@ const PostsList = ({page, setPage}) => {
  
   useEffect(() => {
     getPosts();
-    console.log(posts);
   }, []);
+
+  useEffect(() => {
+    console.log(posts);
+  }, [])
 
   const handlePage = (e, p) => {
     setPage(p);
