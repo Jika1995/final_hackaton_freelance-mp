@@ -299,19 +299,32 @@ function Navbar() {
               {currentUser
                 ? settingsAuth.map((setting) =>
                     setting.type === "Logout" ? (
-                      <MenuItem
-                        key={setting.type}
-                        onClick={handleCloseUserMenu}
-                      >
-                        <Typography
-                          textalign="center"
-                          onClick={handleClickOpen}
-                          // onClick={() => handleLogout(navigate)}
-                          id="logout-btn"
+                      <div>
+                        <MenuItem
+                          key={setting.type}
+                          onClick={handleCloseUserMenu}
                         >
-                          Logout
-                        </Typography>
-                      </MenuItem>
+                          <Typography
+                            textalign="center"
+                            onClick={() => navigate("/settings")}
+                          >
+                            Settings
+                          </Typography>
+                        </MenuItem>
+                        <MenuItem
+                          key={setting.type}
+                          onClick={handleCloseUserMenu}
+                        >
+                          <Typography
+                            textalign="center"
+                            onClick={handleClickOpen}
+                            // onClick={() => handleLogout(navigate)}
+                            id="logout-btn"
+                          >
+                            Logout
+                          </Typography>
+                        </MenuItem>
+                      </div>
                     ) : (
                       <MenuItem
                         key={setting.type}
@@ -352,7 +365,7 @@ function Navbar() {
             <DialogTitle
               style={{ margin: "20px auto 0", padding: "0", fontWeight: "700" }}
             >
-              {"SIGN OUT ?"}
+              {"SIGN OUT?"}
             </DialogTitle>
             <img
               src="https://cdn3d.iconscout.com/3d/premium/thumb/emergency-exit-7865509-6308033.png"
