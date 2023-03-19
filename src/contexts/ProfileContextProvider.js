@@ -89,7 +89,7 @@ const ProfileContextProvider = ({ children }) => {
     }
   }
 
-  async function resetPassword(email) {
+  async function resetPassword(email, navigate) {
     try {
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
@@ -104,7 +104,11 @@ const ProfileContextProvider = ({ children }) => {
       console.log(email);
 
       await axios.post(`${API}/account/reset_password/`, email, config);
+
+      console.log("RESET PASSWORD WORKED!!!");
+
       getCurrentUser();
+      navigate("/reset");
     } catch (err) {
       console.log(err);
       setError(Object.values(err.response.data).flat(2));

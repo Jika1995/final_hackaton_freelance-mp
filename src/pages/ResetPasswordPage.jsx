@@ -11,11 +11,11 @@ const ResetPasswordPage = () => {
   const navigate = useNavigate();
   const { user, error, setError, setNewPassword, checkReset, setCheckReset } =
     useContext(profileContext);
-  const [userData, setUserData] = useState(user);
+  // const [userData, setUserData] = useState(user);
 
-  const [password, setPassword] = useState("");
-  const [passwordConf, setPasswordConf] = useState("");
-  const [code, setConf] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [passwordConf, setPasswordConf] = useState("");
+  // const [code, setConf] = useState("");
 
   const [passResetInput, setPassResetInput] = useState("");
 

@@ -20,7 +20,6 @@ const SettingsPage = () => {
     saveEditProfile,
     getCurrentUser,
     resetPassword,
-    setNewPassword,
   } = useContext(profileContext);
   const [userData, setUserData] = useState(user);
 
@@ -76,6 +75,8 @@ const SettingsPage = () => {
   };
 
   const [emailReset, setEmailReset] = useState("");
+  const [emailInp, setEmailInp] = useState("");
+  const [errorInp, setErrorInp] = useState("");
 
   useEffect(() => {
     setEmailReset();
@@ -86,11 +87,23 @@ const SettingsPage = () => {
   }, [emailReset]);
 
   const handleResetEmail = (e) => {
-    const email = {
+    setEmailInp(e.target.value);
+    const emailData = {
       email: e.target.value,
     };
+    setEmailReset(emailData);
+    console.log(emailInp);
+  };
 
-    setEmailReset(email);
+  const handleClick = () => {
+    if (emailInp.trim() === "") {
+      setErrorInp("Please enter an email address");
+      return;
+    }
+
+    setErrorInp("");
+    resetPassword(emailReset, navigate);
+    setError(false);
   };
 
   return userData ? (
@@ -168,6 +181,13 @@ const SettingsPage = () => {
                         ! {error}
                       </h2>
                     ) : null}
+
+                    {errorInp !== "" ? (
+                      <h2 style={{ color: "red", fontSize: "1.2rem" }}>
+                        ! {errorInp}
+                      </h2>
+                    ) : null}
+
                     <input
                       id="inp-email-reset"
                       type="text"
@@ -179,10 +199,7 @@ const SettingsPage = () => {
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={() => {
-                        resetPassword(emailReset);
-                        navigate("/reset");
-                      }}
+                      onClick={handleClick}
                     >
                       Send
                     </Button>
