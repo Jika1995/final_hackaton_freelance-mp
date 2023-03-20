@@ -58,14 +58,13 @@ const settingsAuth = [
     path: "/profile",
   },
   {
-    type: 'Settings',
-    path: '/settings'
+    type: "Settings",
+    path: "/settings",
   },
   {
     type: "Logout",
     path: "/",
   },
-
 ];
 
 // FOR MODAL LOGOUT
@@ -303,34 +302,32 @@ function Navbar() {
             >
               {currentUser
                 ? settingsAuth.map((setting) =>
-                setting.type === 'Settings' ? (
-                  <MenuItem
-                  key={setting.type}
-                  onClick={handleCloseUserMenu}
-                >
-                  <Typography
-                    textalign="center"
-                    onClick={() => navigate("/settings")}
-                  >
-                    Settings
-                  </Typography>
-                </MenuItem>
-                ) : setting.type === "Logout" ? (
-                      
-                        <MenuItem
-                          key={setting.type}
-                          onClick={handleCloseUserMenu}
+                    setting.type === "Settings" ? (
+                      <MenuItem
+                        key={setting.type}
+                        onClick={handleCloseUserMenu}
+                      >
+                        <Typography
+                          textalign="center"
+                          onClick={() => navigate("/settings")}
                         >
-                          <Typography
-                            textalign="center"
-                            onClick={handleClickOpen}
-                            // onClick={() => handleLogout(navigate)}
-                            id="logout-btn"
-                          >
-                            Logout
-                          </Typography>
-                        </MenuItem>
-                      
+                          Settings
+                        </Typography>
+                      </MenuItem>
+                    ) : setting.type === "Logout" ? (
+                      <MenuItem
+                        key={setting.type}
+                        onClick={handleCloseUserMenu}
+                      >
+                        <Typography
+                          textalign="center"
+                          onClick={handleClickOpen}
+                          // onClick={() => handleLogout(navigate)}
+                          id="logout-btn"
+                        >
+                          Logout
+                        </Typography>
+                      </MenuItem>
                     ) : (
                       <MenuItem
                         key={setting.type}
@@ -382,7 +379,14 @@ function Navbar() {
 
             <DialogActions style={{ textAlign: "center" }}>
               {/* <Button onClick={handleClose}>NO</Button> */}
-              <Button onClick={() => handleLogout(navigate)}>YES</Button>
+              <Button
+                onClick={() => {
+                  handleLogout(navigate);
+                  handleClose();
+                }}
+              >
+                YES
+              </Button>
             </DialogActions>
           </div>
         </Dialog>

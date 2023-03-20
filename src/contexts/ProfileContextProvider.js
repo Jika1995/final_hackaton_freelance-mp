@@ -7,13 +7,13 @@ export const useProfile = () => useContext(profileContext);
 
 const INIT_STATE = {
   name: "",
-  firstName: "",
-  lastName: "",
+  first_name: "",
+  last_name: "",
   email: "",
-  dateBirth: "",
+  date_birth: "",
   city: "",
   bio: "",
-  profileImage: null,
+  profile_image: null,
 };
 
 function reducer(state = INIT_STATE, action) {
@@ -46,11 +46,12 @@ const ProfileContextProvider = ({ children }) => {
         },
       };
 
-      const url = `${API}/account/profile/`;
+      const url = `${API}/account/profile/?t=${new Date().getTime()}`;
       const res = await axios(url, config);
       console.log(res);
       const data = res.data[0];
-      // console.log(data);
+      console.log("CURRENT USER", data);
+
       dispatch({
         type: "GET_CURRENT_USER",
         payload: data,
@@ -62,8 +63,7 @@ const ProfileContextProvider = ({ children }) => {
 
   async function saveEditProfile(userData, navigate) {
     try {
-      
-      const newData = new FormData();
+      // const newData = new FormData();
 
       // newData.append('bio', editedPost.title);
       // newData.append('desc', editedPost.description);
@@ -73,18 +73,28 @@ const ProfileContextProvider = ({ children }) => {
       //     newPost.append('image', editedPost.image);
       // }
 
-      newData.append("bio", userData.bio);
-      newData.append("city", userData.city);
-      newData.append("date_birth", userData.date_birth);
-      newData.append("email", userData.email);
-      newData.append("first_name", userData.first_name);
-      newData.append("last_name", userData.last_name);
-      newData.append("name", userData.name);
-      newData.append("password", userData.password)
+      // newData.append("bio", userData.bio);
+      // newData.append("city", userData.city);
+      // newData.append("date_birth", userData.date_birth);
+      // newData.append("email", userData.email);
+      // newData.append("first_name", userData.first_name);
+      // newData.append("last_name", userData.last_name);
+      // newData.append("name", userData.name);
+      // newData.append("password", userData.password);
+      const newData = {
+        bio: userData.bio,
+        city: userData.city,
+        date_birth: userData.date_birth,
+        email: userData.email,
+        first_name: userData.first_name,
+        last_name: userData.last_name,
+        name: userData.name,
+        password: userData.password,
+      };
 
-      if (typeof userData.profile_image === "object") {
-        newData.append("profile_image", userData.profile_image);
-      }
+      // if (typeof userData.profile_image === "object") {
+      //   newData.append("profile_image", userData.profile_image);
+      // }
 
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
@@ -99,7 +109,6 @@ const ProfileContextProvider = ({ children }) => {
       await axios.patch(`${API}/account/edit_profile/`, newData, config);
       getCurrentUser();
       navigate("/profile");
-
     } catch (err) {
       console.log(err);
     }
