@@ -67,7 +67,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   async function checkAuth() {
-    console.log('WORKED!');
+    // console.log('WORKED!');
     let tokens = JSON.parse(localStorage.getItem('tokens')) //будет JS объект с двумя ключами, refresh и access
 
     try {
@@ -80,7 +80,7 @@ const AuthContextProvider = ({ children }) => {
 
         //ОТВЕТ ПОЛУЧАЕШЬ ВСЕГДА при запросах, и put post patch delete, а НЕ ТОЛЬКО get
 
-        console.log(res);
+        // console.log(res);
 
         localStorage.setItem('tokens', JSON.stringify({
             refresh: tokens.refresh,

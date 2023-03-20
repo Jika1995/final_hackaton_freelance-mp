@@ -8,7 +8,6 @@ import { useProfile } from "../../../contexts/ProfileContextProvider";
 import { useComments } from "../../../contexts/CommentContextProvider";
 import '../../../styles/PostCard.css';
 
-
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -49,6 +48,8 @@ const PostCard = ({ item }) => {
 
   const [currentPost, setCurrentPost] = useState(item);
 
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('email'));
+
   useEffect(() => {
     getCurrentUser();
   }, []);
@@ -75,9 +76,9 @@ const PostCard = ({ item }) => {
     id: ''});
       const [edit, setEdit] = useState(false);
 
-      useEffect(() => {
-        getComments();
-      },[]);
+      // useEffect(() => {
+      //   getComments();
+      // },[]);
 
       function editComment (id) {
         setEdit(true);
@@ -141,10 +142,10 @@ const PostCard = ({ item }) => {
       </div>
       </div>
       
-        {user?.email ? ( <CardActions className="use-block">
+        {currentUser ? ( <CardActions className="use-block">
         <div className="btns-all">
-        <IconButton className="like-btn" onClick= {() => toggleLike(currentPost?.id)} style={{color: 'white'}}>
-          {item.likes.some(elem => elem.is_like === true && elem.owner == user.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  
+        <IconButton className="like-btn" onClick= {() => toggleLike(item)} style={{color: 'white'}}>
+          {item.likes.some(elem => elem.is_like === true && elem.owner == user?.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  
         </IconButton>
 
     <Button variant="text" onClick={handleOpen}>Comments...</Button>

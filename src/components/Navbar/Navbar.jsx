@@ -98,9 +98,9 @@ function Navbar() {
   const { currentUser, handleLogout, checkAuth } = useContext(authContext);
   const { cartLength } = useCart();
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+  // useEffect(() => {
+  //   console.log(currentUser);
+  // }, [currentUser]);
 
   React.useEffect(() => {
     if (localStorage.getItem("tokens")) {

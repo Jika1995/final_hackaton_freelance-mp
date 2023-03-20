@@ -48,9 +48,9 @@ const ProfileContextProvider = ({ children }) => {
 
       const url = `${API}/account/profile/`;
       const res = await axios(url, config);
-      console.log(res);
+      // console.log(res);
       const data = res.data[0];
-      console.log(data);
+      // console.log(data);
       dispatch({
         type: "GET_CURRENT_USER",
         payload: data,
