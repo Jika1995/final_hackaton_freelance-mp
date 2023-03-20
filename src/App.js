@@ -7,7 +7,6 @@ import PostContextProvider from "./contexts/PostContextProvider";
 import CartContextProvider from "./contexts/CartContextProvider";
 import ProfileContextProvider from "./contexts/ProfileContextProvider";
 import CommentContextProvider from "./contexts/CommentContextProvider";
-import "react-datepicker/dist/react-datepicker.css"
 
 const App = () => {
   return (
