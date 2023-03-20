@@ -268,7 +268,6 @@ const SettingsPage = () => {
                 color="primary"
                 onClick={() => {
                   saveEditProfile(userData, navigate);
-                  
                 }}
                 id="btn-save-settings"
               >
