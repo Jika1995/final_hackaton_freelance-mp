@@ -44,7 +44,6 @@ import Modal from '@mui/material/Modal';
 const PostCard = ({ item }) => {
   const navigate = useNavigate();
   const { deletePost, toggleLike } = useContext(postsContext);
-  const { currentUser } = useContext(authContext);
   const { getCurrentUser, user } = useProfile();
   const { addPostToCart, checkPostInCart } = useCart();
 
@@ -106,7 +105,7 @@ const PostCard = ({ item }) => {
         <IconButton aria-label="settings" onClick={handleMenuClick}>
           <MoreVertIcon />
         </IconButton>
-        {item.owner === currentUser ? (
+        {item.owner === user?.email ? (
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
@@ -129,7 +128,7 @@ const PostCard = ({ item }) => {
       className="card-img"
       src={item.image}
       alt="error :("
-      onClick={() => currentUser ? navigate(`/details/${item.id}`) : null}
+      onClick={() => user.email ? navigate(`/details/${item.id}`) : null}
     />
     <div className="info-card">
       <div style={{display: 'flex', justifyContent: "space-between", alignItems: 'center', marginTop: '20px'}}>
@@ -142,7 +141,7 @@ const PostCard = ({ item }) => {
       </div>
       </div>
       
-        {currentUser ? ( <CardActions className="use-block">
+        {user?.email ? ( <CardActions className="use-block">
         <div className="btns-all">
         <IconButton className="like-btn" onClick= {() => toggleLike(currentPost?.id)} style={{color: 'white'}}>
           {item.likes.some(elem => elem.is_like === true && elem.owner == user.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  
@@ -180,8 +179,8 @@ const PostCard = ({ item }) => {
               </React.Fragment>
             }
           />
-          {elem.owner === currentUser ? ( <><DeleteIcon fontSize="small" color="error" onClick={() => {
-            deleteComment(elem.id)
+          {elem.owner === user.email ? ( <><DeleteIcon fontSize="small" color="error" onClick={() => {
+            deleteComment(elem.id, item.id)
           }}/>
           <SettingsSuggestIcon fontSize="small" color="warning" onClick={() => editComment(elem.id)}/>
           </>) : (null)}
@@ -256,9 +255,10 @@ const PostCard = ({ item }) => {
               size="small"
               // onClick={() => addProductToFav(item, favUser.id)}
             >
+              <img src='https://i.ibb.co/C117v1b/8703847-heart-love-icon.png' width='50px' height='50px' />
+
               {/* {checkProductInFav(item.id) ? ( /}
                 {/ <FavoriteIcon style={{ color: "#DC143C" }} /> /}
-                <img src='https://i.ibb.co/C117v1b/8703847-heart-love-icon.png' width='50px' height='50px' />
               {/ ) : ( /}
                 {/ <FavoriteBorderIcon style={{ color: "white" }} /> /}
               {/ )} */}
@@ -283,7 +283,7 @@ const PostCard = ({ item }) => {
         </div>
       </div>
     </Card>
-  );
+  )
 };
 
 export default PostCard;
