@@ -38,7 +38,7 @@ const SettingsPage = () => {
   }, []);
 
   const handleInp = (e) => {
-    if (e.target.name === "image") {
+    if (e.target.name === "profile_image") {
       console.log(e);
       let userObj = {
         ...userData,
@@ -133,13 +133,12 @@ const SettingsPage = () => {
             />
             <TextField
               className="settings-inputs"
-              name="image"
-              value={userData.profile_image}
+              name="profile_image"
               onChange={handleInp}
               style={{ marginBottom: 10 }}
               type="file"
               accept="image/*"
-              // value={undefined}
+              value={undefined}
             />
             <div className="profile-reviews">
               {userData.is_buyer ? <h4>Buyer</h4> : <h4>Executor</h4>}
@@ -268,8 +267,8 @@ const SettingsPage = () => {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  saveEditProfile(userData);
-                  navigate("/profile");
+                  saveEditProfile(userData, navigate);
+                  
                 }}
                 id="btn-save-settings"
               >

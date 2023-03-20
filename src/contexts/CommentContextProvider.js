@@ -9,7 +9,7 @@ const CommentContextProvider = ({children}) => {
     const [comments, setComments] = useState([]);
     const [oneComment, setOneComment] = useState(null);
 
-    const getComments = async (id) => {
+    const getComments = async () => {
         try {
             const tokens = JSON.parse(localStorage.getItem('tokens'));
 
@@ -53,7 +53,7 @@ const CommentContextProvider = ({children}) => {
 
             let res = await axios.post(`${COMMENT_API}/`, commentData, config);
 
-            getComments(postId);
+            // getComments(postId);
         } catch(err) {
             console.log(err);
         };

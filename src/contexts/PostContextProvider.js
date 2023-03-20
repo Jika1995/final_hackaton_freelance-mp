@@ -116,13 +116,14 @@ const PostContextProvider = ({children}) => {
             newPost.append('title', editedPost.title);
             newPost.append('description', editedPost.description);
             newPost.append('price', editedPost.price);
+
             if(typeof(editedPost.image) === 'object') {
                 newPost.append('image', editedPost.image);
             }
             // console.log(newPost.entries);
-            for (var pair of newPost.entries()) {
-              console.log(pair[0]+ ', ' + pair[1]); 
-            }
+            // for (var pair of newPost.entries()) {
+            //   console.log(pair[0]+ ', ' + pair[1]); 
+            // }
 
             const tokens = JSON.parse(localStorage.getItem('tokens'));
 
