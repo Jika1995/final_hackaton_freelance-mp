@@ -53,6 +53,10 @@ const PostCard = ({ item }) => {
   useEffect(() => {
     getCurrentUser();
   }, []);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user,])
   
   //MUI
   const [anchorEl, setAnchorEl] = useState(null);
@@ -71,7 +75,7 @@ const PostCard = ({ item }) => {
       const handleClose = () => setOpen(false);
 
       //comment
-      const {comments, oneComment, getComments, addComment, deleteComment, getOneComment, saveEditedComment} = useComments();
+      const { oneComment, addComment, deleteComment, getOneComment, saveEditedComment} = useComments();
       const [commentBody, setCommentBody] = useState({body: '',
     id: ''});
       const [edit, setEdit] = useState(false);
@@ -145,7 +149,7 @@ const PostCard = ({ item }) => {
         {currentUser ? ( <CardActions className="use-block">
         <div className="btns-all">
         <IconButton className="like-btn" onClick= {() => toggleLike(item)} style={{color: 'white'}}>
-          {item.likes.some(elem => elem.is_like === true && elem.owner == user?.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  
+          {item.likes.some(elem => elem.is_like === true && elem.owner === user?.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  
         </IconButton>
 
     <Button variant="text" onClick={handleOpen}>Comments...</Button>
@@ -160,7 +164,7 @@ const PostCard = ({ item }) => {
             All comments
           </Typography>
           <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            {comments? (comments.map(elem => (
+            {item.comments? (item.comments.map(elem => (
               <div key={elem.id}>
               <ListItem alignItems="flex-start">
                   <ListItemAvatar>
@@ -180,7 +184,7 @@ const PostCard = ({ item }) => {
               </React.Fragment>
             }
           />
-          {elem.owner === user.email ? ( <><DeleteIcon fontSize="small" color="error" onClick={() => {
+          {elem.owner === user?.email ? ( <><DeleteIcon fontSize="small" color="error" onClick={() => {
             deleteComment(elem.id, item.id)
           }}/>
           <SettingsSuggestIcon fontSize="small" color="warning" onClick={() => editComment(elem.id)}/>
@@ -245,7 +249,7 @@ const PostCard = ({ item }) => {
                   Save
                 </Button>
         ) }
-        <Button onClick={() => getComments(item.id)}>Get</Button>
+        {/* <Button onClick={() => getComments(item.id)}>Get</Button> */}
       </Stack>
     </Box>
   </Card>

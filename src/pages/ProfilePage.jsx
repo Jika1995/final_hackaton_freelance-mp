@@ -92,9 +92,10 @@ const ProfilePage = () => {
                 {/* {`${user.date_birth.split("-").slice(2, 3)}.${user.date_birth
                   .split("-")
                   .slice(1, 2)}.${user.date_birth.split("-").slice(0, 1)}`} */}
-                {`${user.date_birth.split("-")[2]}.${
-                  user.date_birth.split("-")[1]
-                }.${user.date_birth.split("-")[0]}`}
+                  {user.date_birth ? (`${user.date_birth?.split("-")[2]}.${
+                  user.date_birth?.split("-")[1]
+                }.${user.date_birth?.split("-")[0]}`) : ('')}
+                
               </Typography>
               <Typography
                 gutterBottom
