@@ -6,10 +6,12 @@ import AuthContextProvider from "./contexts/AuthContextProvider";
 import PostContextProvider from "./contexts/PostContextProvider";
 import CartContextProvider from "./contexts/CartContextProvider";
 import ProfileContextProvider from "./contexts/ProfileContextProvider";
+import CommentContextProvider from "./contexts/CommentContextProvider";
 import "react-datepicker/dist/react-datepicker.css"
 
 const App = () => {
   return (
+    <CommentContextProvider>
     <ProfileContextProvider>
       <CartContextProvider>
       <PostContextProvider>
@@ -21,6 +23,7 @@ const App = () => {
       </PostContextProvider>
      </CartContextProvider>
     </ProfileContextProvider>
+    </CommentContextProvider>
   );
 };
 

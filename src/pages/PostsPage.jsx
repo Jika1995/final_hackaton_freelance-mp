@@ -16,7 +16,7 @@ const PostsPage = () => {
       {/* <SidebarPosts isSideBar={isSideBar} setPage={setPage} /> */}
       <PostsList page={page} setPage={setPage} />
     </div>
-  );
-};
+  )
+}
 
 export default PostsPage;

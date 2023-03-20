@@ -4,7 +4,10 @@ import { authContext } from "../../../contexts/AuthContextProvider";
 import { postsContext } from "../../../contexts/PostContextProvider";
 import { useCart } from "../../../contexts/CartContextProvider";
 import { useProfile } from "../../../contexts/ProfileContextProvider";
-import "../../../styles/PostCard.css";
+
+import { useComments } from "../../../contexts/CommentContextProvider";
+import '../../../styles/PostCard.css';
+
 
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -24,9 +27,19 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
 import { Button } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import {Avatar, Stack, TextField} from "@mui/material";
+import { Box } from "@mui/system";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Modal from '@mui/material/Modal';
+
 
 const PostCard = ({ item }) => {
   const navigate = useNavigate();
@@ -40,16 +53,7 @@ const PostCard = ({ item }) => {
   useEffect(() => {
     getCurrentUser();
   }, []);
-
-  useEffect(() => {
-    toggleLike();
-  }, []);
-
-  useEffect(() => {
-    setCurrentPost(item);
-  }, [item]);
-  console.log(item);
-
+  
   //MUI
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -60,6 +64,32 @@ const PostCard = ({ item }) => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+      //mui modal
+      const [open, setOpen] = React.useState(false);
+      const handleOpen = () => setOpen(true);
+      const handleClose = () => setOpen(false);
+
+      //comment
+      const {comments, oneComment, getComments, addComment, deleteComment, getOneComment, saveEditedComment} = useComments();
+      const [commentBody, setCommentBody] = useState({body: '',
+    id: ''});
+      const [edit, setEdit] = useState(false);
+
+      useEffect(() => {
+        getComments();
+      },[]);
+
+      function editComment (id) {
+        setEdit(true);
+        getOneComment(id);
+        let obj = {
+          body: oneComment?.body,
+          id: id
+        }
+        console.log(id);
+        setCommentBody(obj);
+      }
 
   return (
     <Card className="main-postCard">
@@ -93,65 +123,140 @@ const PostCard = ({ item }) => {
       </div>
 
       <div className="card-container">
-        <CardMedia
-          component="img"
-          image={item.image}
-          className="card-img"
-          src={item.image}
-          alt="error :("
-          onClick={() => (currentUser ? navigate(`/details/${item.id}`) : null)}
-        />
-        <div className="info-card">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginTop: "20px",
-            }}
-          >
-            <div className="card-titles">
-              <Typography variant="h4">{item.title}</Typography>
-              <p>by {item.owner}</p>
-            </div>
-            <div className="card-price">
-              <p>{item.price} $</p>
-            </div>
-          </div>
+      <CardMedia
+      component="img"
+      image={item.image}
+      className="card-img"
+      src={item.image}
+      alt="error :("
+      onClick={() => currentUser ? navigate(`/details/${item.id}`) : null}
+    />
+    <div className="info-card">
+      <div style={{display: 'flex', justifyContent: "space-between", alignItems: 'center', marginTop: '20px'}}>
+      <div className="card-titles">
+        <Typography variant="h4">{item.title}</Typography>
+        <p>by {item.owner}</p>
+      </div>
+      <div className="card-price">
+        <p>{item.price} $</p>
+      </div>
+      </div>
+      
+        {currentUser ? ( <CardActions className="use-block">
+        <div className="btns-all">
+        <IconButton className="like-btn" onClick= {() => toggleLike(currentPost?.id)} style={{color: 'white'}}>
+          {item.likes.some(elem => elem.is_like === true && elem.owner == user.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  
+        </IconButton>
 
-          {currentUser ? (
-            <CardActions className="use-block">
-              <div className="btns-all">
-                <IconButton
-                  className="like-btn"
-                  onClick={() => toggleLike(item?.id)}
-                  style={{ color: "white" }}
+    <Button variant="text" onClick={handleOpen}>Comments...</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box style={{width: '40%', margin: 'auto', borderRadius: '10px'}}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            All comments
+          </Typography>
+          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+            {comments? (comments.map(elem => (
+              <div key={elem.id}>
+              <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                      <Avatar alt="" src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg" />
+                  </ListItemAvatar>
+               <ListItemText
+                  primary={
+                  <React.Fragment>
+                      <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                      >
+                  {elem.body}
+                </Typography>
+              </React.Fragment>
+            }
+          />
+          {elem.owner === currentUser ? ( <><DeleteIcon fontSize="small" color="error" onClick={() => {
+            deleteComment(elem.id)
+          }}/>
+          <SettingsSuggestIcon fontSize="small" color="warning" onClick={() => editComment(elem.id)}/>
+          </>) : (null)}
+        </ListItem>
+          <Divider variant="inset" component="li" />
+          </div>
+            ))
+            ) : (<p>There is no comments yet. Be first!</p>)}
+      </List>
+      <Card style={{borderRadius: '0px'}}>
+    <Box sx={{ p: "15px" }}>
+      <Stack direction="row" spacing={2} alignItems="flex-start">
+        <Avatar
+          src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg"
+          variant="rounded"
+          alt="user-avatar"
+        />
+        <TextField
+          multiline
+          fullWidth
+          minRows={4}
+          id="outlined-multilined"
+          placeholder="Add a comment"
+          value={commentBody.body}
+          onChange={(e) => {
+            setCommentBody({body: e.target.value, id: 5})
+          }}
+        />
+        {!edit ? ( <Button
+          size="large"
+          sx={{
+            bgcolor: "blue",
+            color: "white",
+            p: "8px 25px",
+            "&:hover": {
+              bgcolor: "grey",
+            },
+          }}
+          onClick={(e) => {
+            addComment(commentBody, item.id);
+            setCommentBody({body: ''});
+          }}
+        >
+          Send
+        </Button>) : (
+                  <Button
+                  size="large"
+                  sx={{
+                    bgcolor: "blue",
+                    color: "white",
+                    p: "8px 25px",
+                    "&:hover": {
+                      bgcolor: "grey",
+                    },
+                  }}
+                  onClick={(e) => {
+                    setEdit(false); saveEditedComment(commentBody, item.id);
+                    setCommentBody({body: ''});
+                  }}
                 >
-                  {item.likes.some(
-                    (elem) => elem.is_like === true && elem.owner === user.id
-                  ) ? (
-                    <img
-                      src="https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png"
-                      width="50px"
-                      height="50px"
-                      style={{ marginRight: "5px" }}
-                    />
-                  ) : (
-                    <img
-                      src="https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png"
-                      width="50px"
-                      height="50px"
-                      style={{ marginRight: "5px" }}
-                    />
-                  )}{" "}
-                  {item.total_likes}{" "}
-                </IconButton>
-                <div className="icon-btns">
-                  <IconButton
-                    size="small"
-                    // onClick={() => addProductToFav(item, favUser.id)}
-                  >
-                    {/* {checkProductInFav(item.id) ? ( /}
+                  Save
+                </Button>
+        ) }
+        <Button onClick={() => getComments(item.id)}>Get</Button>
+      </Stack>
+    </Box>
+  </Card>
+        </Box>
+      </Modal>
+          <div className="icon-btns">
+          <IconButton
+              size="small"
+              // onClick={() => addProductToFav(item, favUser.id)}
+            >
+              {/* {checkProductInFav(item.id) ? ( /}
                 {/ <FavoriteIcon style={{ color: "#DC143C" }} /> /}
                 <img src='https://i.ibb.co/C117v1b/8703847-heart-love-icon.png' width='50px' height='50px' />
               {/ ) : ( /}
