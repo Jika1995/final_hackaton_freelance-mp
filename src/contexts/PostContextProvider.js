@@ -48,8 +48,6 @@ const PostContextProvider = ({children}) => {
 
         } catch(err) {
             console.log(err); //здесь только консоль, потому что пользователю это показывать не нужно. Дефолтное окошко можно "что то пошло не так"
-        } finally {
-          console.log('loading...');
         }
     };
 
@@ -111,10 +109,16 @@ const PostContextProvider = ({children}) => {
         try {
 
             let newPost = new FormData();
-            for (let i in editedPost) {
-              newPost.append(`${i}`, editedPost[i])
-              // console.log(post[i]);
-            };
+            // for (let i in editedPost) {
+            //   newPost.append(`${i}`, editedPost[i])
+            //   // console.log(post[i]);
+            // };
+            newPost.append('title', editedPost.title);
+            newPost.append('description', editedPost.description);
+            newPost.append('price', editedPost.price);
+            if(typeof(editedPost.image) === 'object') {
+                newPost.append('image', editedPost.image);
+            }
             // console.log(newPost.entries);
             for (var pair of newPost.entries()) {
               console.log(pair[0]+ ', ' + pair[1]); 
@@ -130,7 +134,7 @@ const PostContextProvider = ({children}) => {
                 }
             };
 
-            await axios.put(`${API}/post/change/${editedPost.id}/`, newPost, config);
+            await axios.patch(`${API}/post/change/${editedPost.id}/`, newPost, config);
             getPosts();
 
         } catch(err) {
@@ -170,7 +174,7 @@ const PostContextProvider = ({children}) => {
   //     navigate(url);
   //   };
 
-  async function toggleLike (id) {
+  async function toggleLike (item) {
       try {
 
           const tokens = JSON.parse(localStorage.getItem('tokens'));
@@ -183,7 +187,8 @@ const PostContextProvider = ({children}) => {
               }
           };
 
-          const res = await axios.post(`${API}/feedback/${id}/like/`, id, config);
+          const res = await axios.post(`${API}/feedback/${item.id}/like/`, item, config);
+          console.log(res);
           getPosts();
 
       } catch (err) {
