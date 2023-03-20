@@ -58,9 +58,14 @@ const settingsAuth = [
     path: "/profile",
   },
   {
+    type: 'Settings',
+    path: '/settings'
+  },
+  {
     type: "Logout",
     path: "/",
   },
+
 ];
 
 // FOR MODAL LOGOUT
@@ -298,21 +303,22 @@ function Navbar() {
             >
               {currentUser
                 ? settingsAuth.map((setting) =>
-                    setting.type === "Logout" ? (
-                      <div>
+                setting.type === 'Settings' ? (
+                  <MenuItem
+                  key={setting.type}
+                  onClick={handleCloseUserMenu}
+                >
+                  <Typography
+                    textalign="center"
+                    onClick={() => navigate("/settings")}
+                  >
+                    Settings
+                  </Typography>
+                </MenuItem>
+                ) : setting.type === "Logout" ? (
+                      
                         <MenuItem
                           key={setting.type}
-                          onClick={handleCloseUserMenu}
-                        >
-                          <Typography
-                            textalign="center"
-                            onClick={() => navigate("/settings")}
-                          >
-                            Settings
-                          </Typography>
-                        </MenuItem>
-                        <MenuItem
-                          key={setting.type - Date.now()}
                           onClick={handleCloseUserMenu}
                         >
                           <Typography
@@ -324,7 +330,7 @@ function Navbar() {
                             Logout
                           </Typography>
                         </MenuItem>
-                      </div>
+                      
                     ) : (
                       <MenuItem
                         key={setting.type}
