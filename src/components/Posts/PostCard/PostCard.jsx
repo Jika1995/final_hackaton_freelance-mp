@@ -37,13 +37,17 @@ const PostCard = ({ item }) => {
 
   const [currentPost, setCurrentPost] = useState(item);
 
-  // useEffect( () =>{
-  //   checkLike();
-  // }, [like, ])
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
-  // useEffect(() => {
-  //   getCurrentUser()
-  // }, []);
+  useEffect(() => {
+    toggleLike();
+  }, []);
+
+  useEffect(() => {
+    setCurrentPost(item);
+  }, [item]);
   console.log(item);
 
   //MUI
@@ -89,52 +93,89 @@ const PostCard = ({ item }) => {
       </div>
 
       <div className="card-container">
-      <CardMedia
-      component="img"
-      image={item.image}
-      className="card-img"
-      src={item.image}
-      alt="error :("
-      onClick={() => currentUser ? navigate(`/details/${item.id}`) : null}
-    />
-    <div className="info-card">
-      <div style={{display: 'flex', justifyContent: "space-between", alignItems: 'center', marginTop: '20px'}}>
-      <div className="card-titles">
-        <Typography variant="h4">{item.title}</Typography>
-        <p>by {item.owner}</p>
-      </div>
-      <div className="card-price">
-        <p>{item.price} $</p>
-      </div>
-      </div>
-      
-        {currentUser ? (      <CardActions className="use-block">
-        <div className="btns-all">
-        <IconButton className="like-btn" onClick= {() => toggleLike(item.id)} style={{color: 'white'}}>
-          {item.likes.some(elem => elem.is_like === true && elem.owner === user.id) ? (  <img src='https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/> ) : ( <img src='https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png' width='50px' height='50px' style={{marginRight: '5px'}}/>) }  {item.total_likes}  </IconButton>
-          <div className="icon-btns">
-          <IconButton
-              size="small"
-              // onClick={() => addProductToFav(item, favUser.id)}
-            >
-              {/* {checkProductInFav(item.id) ? ( /}
+        <CardMedia
+          component="img"
+          image={item.image}
+          className="card-img"
+          src={item.image}
+          alt="error :("
+          onClick={() => (currentUser ? navigate(`/details/${item.id}`) : null)}
+        />
+        <div className="info-card">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginTop: "20px",
+            }}
+          >
+            <div className="card-titles">
+              <Typography variant="h4">{item.title}</Typography>
+              <p>by {item.owner}</p>
+            </div>
+            <div className="card-price">
+              <p>{item.price} $</p>
+            </div>
+          </div>
+
+          {currentUser ? (
+            <CardActions className="use-block">
+              <div className="btns-all">
+                <IconButton
+                  className="like-btn"
+                  onClick={() => toggleLike(item?.id)}
+                  style={{ color: "white" }}
+                >
+                  {item.likes.some(
+                    (elem) => elem.is_like === true && elem.owner === user.id
+                  ) ? (
+                    <img
+                      src="https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png"
+                      width="50px"
+                      height="50px"
+                      style={{ marginRight: "5px" }}
+                    />
+                  ) : (
+                    <img
+                      src="https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png"
+                      width="50px"
+                      height="50px"
+                      style={{ marginRight: "5px" }}
+                    />
+                  )}{" "}
+                  {item.total_likes}{" "}
+                </IconButton>
+                <div className="icon-btns">
+                  <IconButton
+                    size="small"
+                    // onClick={() => addProductToFav(item, favUser.id)}
+                  >
+                    {/* {checkProductInFav(item.id) ? ( /}
                 {/ <FavoriteIcon style={{ color: "#DC143C" }} /> /}
                 <img src='https://i.ibb.co/C117v1b/8703847-heart-love-icon.png' width='50px' height='50px' />
               {/ ) : ( /}
                 {/ <FavoriteBorderIcon style={{ color: "white" }} /> /}
               {/ )} */}
-        </IconButton>
-        <IconButton size="small" onClick={() => addPostToCart(item)}>
-              {checkPostInCart(item.id) ? (
-                <ShoppingCartIcon style={{ color: "white" }} />
-              ) : (
-                <img src='https://i.ibb.co/L9TY739/8703873-bag-shopping-basket-cart-icon.png' width='50px' height='50px' /> 
-              )}
-        </IconButton>
-          </div>
+                  </IconButton>
+                  <IconButton size="small" onClick={() => addPostToCart(item)}>
+                    {checkPostInCart(item.id) ? (
+                      <ShoppingCartIcon style={{ color: "white" }} />
+                    ) : (
+                      <img
+                        src="https://i.ibb.co/L9TY739/8703873-bag-shopping-basket-cart-icon.png"
+                        width="50px"
+                        height="50px"
+                      />
+                    )}
+                  </IconButton>
+                </div>
+              </div>
+            </CardActions>
+          ) : (
+            <></>
+          )}
         </div>
-      </CardActions>) : (<></>)}
-    </div>
       </div>
     </Card>
   );

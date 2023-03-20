@@ -3,12 +3,13 @@ import { useSearchParams } from "react-router-dom"; //следит за сост
 import { postsContext } from "../../../contexts/PostContextProvider";
 import PostCard from "../PostCard/PostCard";
 import { Pagination } from "@mui/material";
-import '../../../styles/PostsPage.css'
+import "../../../styles/PostsPage.css";
+import SidebarPosts from "../SidebarPosts/SidebarPosts";
 
-const PostsList = ({page, setPage}) => {
+const PostsList = ({ page, setPage }) => {
   const { getPosts, posts, pages } = useContext(postsContext);
   const [searchParams, setSearchParams] = useSearchParams();
- 
+
   useEffect(() => {
     getPosts();
     console.log(posts);
@@ -26,12 +27,12 @@ const PostsList = ({page, setPage}) => {
     setSearchParams({
       page: page, //adress?page=...
     });
-  }, [page, ]);
+  }, [page]);
 
   return (
     <div className="posts-main">
       <div className="posts-block">
-      {posts ? (
+        {posts ? (
           posts.map((item) => <PostCard key={item.id} item={item} />)
         ) : (
           <h3>Loading...</h3>
@@ -43,8 +44,8 @@ const PostsList = ({page, setPage}) => {
         onChange={handlePage}
         id="pagination"
         color="secondary"
-        variant="outlined" 
-        style={{ marginTop: "30px", marginBottom: '30px' }}
+        variant="outlined"
+        style={{ marginTop: "30px", marginBottom: "30px" }}
       />
     </div>
   );

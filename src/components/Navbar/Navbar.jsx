@@ -312,7 +312,7 @@ function Navbar() {
                           </Typography>
                         </MenuItem>
                         <MenuItem
-                          key={setting.type}
+                          key={setting.type - Date.now()}
                           onClick={handleCloseUserMenu}
                         >
                           <Typography
