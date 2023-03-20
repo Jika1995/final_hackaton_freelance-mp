@@ -59,7 +59,7 @@ const CommentContextProvider = ({children}) => {
         };
     };
 
-    const deleteComment = async(id) => {
+    const deleteComment = async(id, postId) => {
         try {
             const tokens = JSON.parse(localStorage.getItem("tokens"));
       
@@ -72,7 +72,8 @@ const CommentContextProvider = ({children}) => {
             };
       
             await axios.delete(`${COMMENT_API}/${id}`, config);
-            getComments(id)
+            getComments(postId)
+
           } catch (err) {
             console.log(err);
           }

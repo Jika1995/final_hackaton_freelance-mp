@@ -16,10 +16,6 @@ const ProfilePage = () => {
     getCurrentUser();
   }, []);
 
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
-
   return user ? (
     <div className="profile-page">
       <div className="header-profile-page">
