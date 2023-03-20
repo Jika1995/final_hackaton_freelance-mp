@@ -50,14 +50,10 @@ const PostCard = ({ item }) => {
 
   const [currentPost, setCurrentPost] = useState(item);
 
-  // useEffect( () =>{
-  //   checkLike();
-  // }, [like, ])
-
   useEffect(() => {
     getCurrentUser();
   }, []);
-
+  
   //MUI
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -266,18 +262,25 @@ const PostCard = ({ item }) => {
               {/ ) : ( /}
                 {/ <FavoriteBorderIcon style={{ color: "white" }} /> /}
               {/ )} */}
-        </IconButton>
-        <IconButton size="small" onClick={() => addPostToCart(item)}>
-              {checkPostInCart(item.id) ? (
-                <ShoppingCartIcon style={{ color: "white" }} />
-              ) : (
-                <img src='https://i.ibb.co/L9TY739/8703873-bag-shopping-basket-cart-icon.png' width='50px' height='50px' /> 
-              )}
-        </IconButton>
-          </div>
+                  </IconButton>
+                  <IconButton size="small" onClick={() => addPostToCart(item)}>
+                    {checkPostInCart(item.id) ? (
+                      <ShoppingCartIcon style={{ color: "white" }} />
+                    ) : (
+                      <img
+                        src="https://i.ibb.co/L9TY739/8703873-bag-shopping-basket-cart-icon.png"
+                        width="50px"
+                        height="50px"
+                      />
+                    )}
+                  </IconButton>
+                </div>
+              </div>
+            </CardActions>
+          ) : (
+            <></>
+          )}
         </div>
-      </CardActions>) : (<></>)}
-    </div>
       </div>
     </Card>
   );
