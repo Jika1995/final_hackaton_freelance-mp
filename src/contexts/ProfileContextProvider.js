@@ -63,38 +63,20 @@ const ProfileContextProvider = ({ children }) => {
 
   async function saveEditProfile(userData, navigate) {
     try {
-      // const newData = new FormData();
+      const newData = new FormData();
 
-      // newData.append('bio', editedPost.title);
-      // newData.append('desc', editedPost.description);
-      // newData.append('price', editedPost.price);
+      newData.append("bio", userData.bio);
+      newData.append("city", userData.city);
+      newData.append("date_birth", userData.date_birth);
+      newData.append("email", userData.email);
+      newData.append("first_name", userData.first_name);
+      newData.append("last_name", userData.last_name);
+      newData.append("name", userData.name);
+      newData.append("password", userData.password);
 
-      // if(typeof(editedPost.image) === 'object') {
-      //     newPost.append('image', editedPost.image);
-      // }
-
-      // newData.append("bio", userData.bio);
-      // newData.append("city", userData.city);
-      // newData.append("date_birth", userData.date_birth);
-      // newData.append("email", userData.email);
-      // newData.append("first_name", userData.first_name);
-      // newData.append("last_name", userData.last_name);
-      // newData.append("name", userData.name);
-      // newData.append("password", userData.password);
-      const newData = {
-        bio: userData.bio,
-        city: userData.city,
-        date_birth: userData.date_birth,
-        email: userData.email,
-        first_name: userData.first_name,
-        last_name: userData.last_name,
-        name: userData.name,
-        password: userData.password,
-      };
-
-      // if (typeof userData.profile_image === "object") {
-      //   newData.append("profile_image", userData.profile_image);
-      // }
+      if (typeof userData.profile_image === "object") {
+        newData.append("profile_image", userData.profile_image);
+      }
 
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
