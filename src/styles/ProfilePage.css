@@ -272,6 +272,11 @@
        flex-direction: column;
 }
 
+.user-data-info {
+       color: #a512da;
+       text-shadow: 0 13.36px 8.896px #b45eea,0 -2px 1px #ee82ff;
+}
+
 @media all and (max-width: 370px) {
        .settings-inputs {
               width: 230px !important;

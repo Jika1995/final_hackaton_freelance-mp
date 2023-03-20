@@ -61,8 +61,12 @@ const ProfilePage = () => {
         <div className="right-body-profile">
           <div className="about-user-info">
             <div className="header-user-info">
-              <h1>{user.name}</h1>
-              <h2>{user.bio}</h2>
+              <span className="user-data-info">
+                <h1>{user.name}</h1>
+              </span>
+              <span className="user-data-info">
+                <h2>{user.bio}</h2>
+              </span>
             </div>
             <div className="user-details">
               <Typography
@@ -72,7 +76,7 @@ const ProfilePage = () => {
                 className="profile-info-text"
               >
                 First Name: <br />
-                {user.first_name}
+                <span className="user-data-info"> {user.first_name}</span>
               </Typography>
               <Typography
                 gutterBottom
@@ -80,7 +84,8 @@ const ProfilePage = () => {
                 component="div"
                 className="profile-info-text"
               >
-                Last Name: <br /> {user.last_name}
+                Last Name: <br />
+                <span className="user-data-info">{user.last_name}</span>
               </Typography>
               <Typography
                 gutterBottom
@@ -88,7 +93,8 @@ const ProfilePage = () => {
                 component="div"
                 className="profile-info-text"
               >
-                Email: <br /> {user.email}
+                Email: <br />
+                <span className="user-data-info">{user.email}</span>
               </Typography>
               <Typography
                 gutterBottom
@@ -100,11 +106,14 @@ const ProfilePage = () => {
                 {/* {`${user.date_birth.split("-").slice(2, 3)}.${user.date_birth
                   .split("-")
                   .slice(1, 2)}.${user.date_birth.split("-").slice(0, 1)}`} */}
-                {user.date_birth
-                  ? `${user.date_birth?.split("-")[2]}.${
-                      user.date_birth?.split("-")[1]
-                    }.${user.date_birth?.split("-")[0]}`
-                  : ""}
+                <span className="user-data-info">
+                  {" "}
+                  {user.date_birth
+                    ? `${user.date_birth?.split("-")[2]}.${
+                        user.date_birth?.split("-")[1]
+                      }.${user.date_birth?.split("-")[0]}`
+                    : ""}
+                </span>
               </Typography>
               <Typography
                 gutterBottom
@@ -112,7 +121,7 @@ const ProfilePage = () => {
                 component="div"
                 className="profile-info-text"
               >
-                City: {user.city}
+                City: <br /> <span className="user-data-info">{user.city}</span>
               </Typography>
             </div>
           </div>
