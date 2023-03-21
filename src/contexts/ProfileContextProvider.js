@@ -48,9 +48,8 @@ const ProfileContextProvider = ({ children }) => {
 
       const url = `${API}/account/profile/?t=${new Date().getTime()}`;
       const res = await axios(url, config);
-      console.log(res);
       const data = res.data[0];
-      console.log("CURRENT USER", data);
+      // console.log("CURRENT USER", data);
 
       dispatch({
         type: "GET_CURRENT_USER",
@@ -108,11 +107,11 @@ const ProfileContextProvider = ({ children }) => {
         },
       };
 
-      console.log(email);
+      // console.log(email);
 
       await axios.post(`${API}/account/reset_password/`, email, config);
 
-      console.log("RESET PASSWORD WORKED!!!");
+      // console.log("RESET PASSWORD WORKED!!!");
 
       getCurrentUser();
       navigate("/reset");
@@ -136,7 +135,7 @@ const ProfileContextProvider = ({ children }) => {
         },
       };
 
-      console.log(newData);
+      // console.log(newData);
 
       await axios.post(
         `${API}/account/reset_password_complete/`,
@@ -145,7 +144,7 @@ const ProfileContextProvider = ({ children }) => {
       );
 
       setCheckReset(true);
-      console.log("Password reset WORKED!!!");
+      // console.log("Password reset WORKED!!!");
       handleOpen();
       setTimeout(() => navigate("/profile"), 3000);
       setCheckReset(false);

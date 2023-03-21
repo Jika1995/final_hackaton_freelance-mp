@@ -7,22 +7,25 @@ import PostContextProvider from "./contexts/PostContextProvider";
 import CartContextProvider from "./contexts/CartContextProvider";
 import ProfileContextProvider from "./contexts/ProfileContextProvider";
 import CommentContextProvider from "./contexts/CommentContextProvider";
+import FavoritesContextProvider from "./contexts/FavoritesContextProvider";
 
 const App = () => {
   return (
-    <PostContextProvider>
-    <CommentContextProvider>
-    <ProfileContextProvider>
-      <CartContextProvider>
-        <AuthContextProvider>
-          <Navbar />
-          <MainRoutes />
-          <Footer />
-        </AuthContextProvider>
-     </CartContextProvider>
-    </ProfileContextProvider>
-    </CommentContextProvider>
-    </PostContextProvider>
+    <FavoritesContextProvider>
+      <PostContextProvider>
+        <CommentContextProvider>
+          <ProfileContextProvider>
+            <CartContextProvider>
+              <AuthContextProvider>
+                <Navbar />
+                <MainRoutes />
+                <Footer />
+              </AuthContextProvider>
+            </CartContextProvider>
+          </ProfileContextProvider>
+        </CommentContextProvider>
+      </PostContextProvider>
+    </FavoritesContextProvider>
   );
 };
 

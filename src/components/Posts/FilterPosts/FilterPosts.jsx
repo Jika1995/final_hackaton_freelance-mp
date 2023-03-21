@@ -31,14 +31,14 @@ const FilterPosts = () => {
 
   const [sort, setSort] = useState("");
 
-  const handleChange = (e) => {
-    setSort(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setSort(e.target.value);
+  // };
 
   return (
     <ThemeProvider theme={darkTheme}>
       <div>
-        <FormControl variant="standard" sx={{ m: 1, width: 180 }}>
+        {/* <FormControl variant="standard" sx={{ m: 1, width: 180 }}>
           <InputLabel id="demo-simple-select-standard-label">
             Sort by:
           </InputLabel>
@@ -48,7 +48,7 @@ const FilterPosts = () => {
             value={sort}
             onChange={(e) => {
               fetchByParams("ordering", e.target.value);
-              handleChange(e.target.value);
+              // handleChange(e.target.value);
             }}
             label="Sort by:"
           >
@@ -68,12 +68,14 @@ const FilterPosts = () => {
               Less Comments
             </MenuItem>
             <MenuItem value={"title"} key="5">
-              Title
+              A-B
             </MenuItem>
           </Select>
-        </FormControl>
-
-        {/* <RadioGroup
+        </FormControl> */}
+        <FormLabel id="demo-radio-buttons-group-label" className="label-filter">
+          Filter by:
+        </FormLabel>
+        <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           defaultValue=""
           name="radio-buttons-group"
@@ -81,17 +83,39 @@ const FilterPosts = () => {
           className="radio-btns"
         >
           <FormControlLabel
+            value="all"
+            control={<Radio />}
+            label="Filter reset"
+          />
+          <FormControlLabel value="title" control={<Radio />} label="A-B " />
+          <FormControlLabel value="-title" control={<Radio />} label="B-A " />
+          <FormControlLabel
             value="-price"
             control={<Radio />}
             label="Expensive "
           />
           <FormControlLabel value="price" control={<Radio />} label="Cheap " />
           <FormControlLabel
+            value="likes"
+            control={<Radio />}
+            label="More Likes"
+          />
+          <FormControlLabel
             value="-likes"
             control={<Radio />}
-            label="Likes descending"
+            label="Less Likes"
           />
-        </RadioGroup> */}
+          <FormControlLabel
+            value="comments"
+            control={<Radio />}
+            label="More comments"
+          />
+          <FormControlLabel
+            value="-comments"
+            control={<Radio />}
+            label="Less Comments"
+          />
+        </RadioGroup>
       </div>
     </ThemeProvider>
   );

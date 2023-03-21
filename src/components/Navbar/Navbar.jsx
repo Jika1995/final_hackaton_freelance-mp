@@ -99,9 +99,9 @@ function Navbar() {
   const { cartLength } = useCart();
   const { user, getCurrentUser } = useProfile();
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+  // useEffect(() => {
+  //   console.log(currentUser);
+  // }, [currentUser]);
 
   React.useEffect(() => {
     if (localStorage.getItem("tokens")) {
@@ -281,7 +281,10 @@ function Navbar() {
                 sx={{ p: "12px" }}
                 className="icon-btns-nav"
               >
-                <Avatar alt="error:(" src={user?.profile_image} />
+                <Avatar
+                  alt="error:("
+                  src={currentUser ? user?.profile_image : null}
+                />
                 {/* <Avatar src="..." /> */}
               </IconButton>
             </Tooltip>
