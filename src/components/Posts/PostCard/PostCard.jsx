@@ -41,7 +41,7 @@ import Modal from "@mui/material/Modal";
 
 const PostCard = ({ item }) => {
   const navigate = useNavigate();
-  const { deletePost, toggleLike } = useContext(postsContext);
+  const { deletePost, toggleLike, getPosts, getOnePost, onePost } = useContext(postsContext);
   const { getCurrentUser, user } = useProfile();
   const { addPostToCart, checkPostInCart } = useCart();
 
@@ -49,13 +49,41 @@ const PostCard = ({ item }) => {
 
   const [currentUser, setCurrentUser] = useState(localStorage.getItem("email"));
 
+    //comment
+    const {
+      comments,
+      getComments,
+      oneComment,
+      addComment,
+      deleteComment,
+      getOneComment,
+      saveEditedComment,
+    } = useComments();
+  
+    const [commentBody, setCommentBody] = useState({body: '', id: ''});
+    const [editedComment, setEditedComment] = useState('');
+    const [edit, setEdit] = useState(false);
+
   useEffect(() => {
     getCurrentUser();
   }, []);
 
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    getPosts()
+  }, [])
+
+  useEffect(() => {
+    getComments(item);
+  },[]);
+
+
+  // useEffect(() => {
+  //   getOnePost(item.id)
+  // }, [])
+
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   //MUI
   const [anchorEl, setAnchorEl] = useState(null);
@@ -73,30 +101,15 @@ const PostCard = ({ item }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  //comment
-  const {
-    oneComment,
-    addComment,
-    deleteComment,
-    getOneComment,
-    saveEditedComment,
-  } = useComments();
-  const [commentBody, setCommentBody] = useState({ body: "", id: "" });
-  const [edit, setEdit] = useState(false);
-
-  // useEffect(() => {
-  //   getComments();
-  // },[]);
-
-  function editComment(id) {
+  async function editComment(id) {
     setEdit(true);
-    getOneComment(id);
-    let obj = {
-      body: oneComment?.body,
-      id: id,
-    };
-    console.log(id);
-    setCommentBody(obj);
+    await getOneComment(id);
+    // console.log(commentBody);
+    // console.log(oneComment);
+  
+    commentBody.body = oneComment?.body;
+    commentBody.id = id;
+    setCommentBody({...commentBody});
   }
 
   return (
@@ -239,13 +252,13 @@ const PostCard = ({ item }) => {
                                     fontSize="small"
                                     color="error"
                                     onClick={() => {
-                                      deleteComment(elem.id, item.id);
+                                      deleteComment(elem.id, item);
                                     }}
                                   />
                                   <SettingsSuggestIcon
                                     fontSize="small"
                                     color="warning"
-                                    onClick={() => editComment(elem.id)}
+                                    onClick={() => { editComment(elem.id); setEditedComment(oneComment?.body);} }
                                   />
                                 </>
                               ) : null}
@@ -275,9 +288,10 @@ const PostCard = ({ item }) => {
                             minRows={4}
                             id="outlined-multilined"
                             placeholder="Add a comment"
-                            value={commentBody.body}
+                            value={commentBody?.body}
                             onChange={(e) => {
-                              setCommentBody({ body: e.target.value, id: 5 });
+                              commentBody.body = e.target.value;
+                              setCommentBody({...commentBody})
                             }}
                           />
                           {!edit ? (
@@ -292,7 +306,7 @@ const PostCard = ({ item }) => {
                                 },
                               }}
                               onClick={(e) => {
-                                addComment(commentBody, item.id);
+                                addComment(commentBody, item);
                                 setCommentBody({ body: "" });
                               }}
                             >
@@ -311,7 +325,7 @@ const PostCard = ({ item }) => {
                               }}
                               onClick={(e) => {
                                 setEdit(false);
-                                saveEditedComment(commentBody, item.id);
+                                saveEditedComment(commentBody, item);
                                 setCommentBody({ body: "" });
                               }}
                             >
@@ -362,6 +376,7 @@ const PostCard = ({ item }) => {
       </div>
     </Card>
   );
+
 };
 
 export default PostCard;
