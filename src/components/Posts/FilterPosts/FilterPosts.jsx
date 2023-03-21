@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -6,9 +6,13 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 
 //custom
 import { usePosts } from "../../../contexts/PostContextProvider";
+import { useSearchParams } from "react-router-dom";
 
 const darkTheme = createTheme({
   palette: {
@@ -18,70 +22,76 @@ const darkTheme = createTheme({
 
 const FilterPosts = () => {
   const { fetchByParams } = usePosts();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { getPosts } = usePosts();
+
+  useEffect(() => {
+    getPosts();
+  }, [searchParams]);
+
+  const [sort, setSort] = useState("");
+
+  const handleChange = (e) => {
+    setSort(e.target.value);
+  };
 
   return (
     <ThemeProvider theme={darkTheme}>
       <div>
-        <FormControl>
-          <FormLabel
-            id="demo-radio-buttons-group-label"
-            className="label-filter"
+        <FormControl variant="standard" sx={{ m: 1, width: 180 }}>
+          <InputLabel id="demo-simple-select-standard-label">
+            Sort by:
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-standard-label"
+            id="demo-simple-select-standard"
+            value={sort}
+            onChange={(e) => {
+              fetchByParams("ordering", e.target.value);
+              handleChange(e.target.value);
+            }}
+            label="Sort by:"
           >
-            CATEGORIES
-          </FormLabel>
-          {/* <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="all"
-            name="radio-buttons-group"
-            onChange={(e) => fetchByParams("category", e.target.value)}
-            className="radio-btns"
-          >
-            <FormControlLabel value="all" control={<Radio />} label="All" />
-            <FormControlLabel
-              value="Brandy"
-              control={<Radio />}
-              label="Brandy"
-            />
-            <FormControlLabel value="Vodka" control={<Radio />} label="Vodka" />
-            <FormControlLabel
-              value="Whiskey"
-              control={<Radio />}
-              label="Whiskey"
-            />
-            <FormControlLabel value="Rum" control={<Radio />} label="Rum" />
-            <FormControlLabel
-              value="Tequila"
-              control={<Radio />}
-              label="Tequila"
-            />
-            <FormControlLabel value="Gin" control={<Radio />} label="Gin" />
-            <FormControlLabel
-              value="Red Wine"
-              control={<Radio />}
-              label="Red Wine"
-            />
-            <FormControlLabel
-              value="White Wine"
-              control={<Radio />}
-              label="White Wine"
-            />
-            <FormControlLabel
-              value="Champagne"
-              control={<Radio />}
-              label="Champagne"
-            />
-            <FormControlLabel
-              value="Absinthe"
-              control={<Radio />}
-              label="Absinthe"
-            />
-            <FormControlLabel
-              value="Cognac"
-              control={<Radio />}
-              label="Cognac"
-            />
-          </RadioGroup> */}
+            <MenuItem value={"all"} key="-1">
+              All
+            </MenuItem>
+            <MenuItem value={"-price"} key="1">
+              Price: High to Low
+            </MenuItem>
+            <MenuItem value={"price"} key="2">
+              Price: Low to High
+            </MenuItem>
+            <MenuItem value={"comments"} key="3">
+              Most Comments
+            </MenuItem>
+            <MenuItem value={"-comments"} key="4">
+              Less Comments
+            </MenuItem>
+            <MenuItem value={"title"} key="5">
+              Title
+            </MenuItem>
+          </Select>
         </FormControl>
+
+        {/* <RadioGroup
+          aria-labelledby="demo-radio-buttons-group-label"
+          defaultValue=""
+          name="radio-buttons-group"
+          onChange={(e) => fetchByParams("ordering", e.target.value)}
+          className="radio-btns"
+        >
+          <FormControlLabel
+            value="-price"
+            control={<Radio />}
+            label="Expensive "
+          />
+          <FormControlLabel value="price" control={<Radio />} label="Cheap " />
+          <FormControlLabel
+            value="-likes"
+            control={<Radio />}
+            label="Likes descending"
+          />
+        </RadioGroup> */}
       </div>
     </ThemeProvider>
   );

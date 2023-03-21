@@ -85,7 +85,7 @@ const Puller = styled(Box)(({ theme }) => ({
 const SidebarPosts = ({ isSideBar, page, setPage }, props) => {
   const { posts, getPosts } = usePosts();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [search, setSearch] = useState(searchParams.get("q") || "");
+  const [search, setSearch] = useState(searchParams.get("search") || "");
 
   useEffect(() => {
     setSearchParams({
@@ -95,7 +95,7 @@ const SidebarPosts = ({ isSideBar, page, setPage }, props) => {
 
   useEffect(() => {
     getPosts();
-    setPage(1); //обновление страницы на первую setPage(1)
+    // setPage(1); //обновление страницы на первую setPage(1)
   }, [searchParams]);
 
   // MUI
