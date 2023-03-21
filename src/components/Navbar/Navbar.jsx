@@ -3,6 +3,7 @@ import "../../styles/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../contexts/AuthContextProvider";
 import { useCart } from "../../contexts/CartContextProvider";
+import { useProfile } from "../../contexts/ProfileContextProvider";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -96,10 +97,11 @@ function Navbar() {
   const navigate = useNavigate();
   const { currentUser, handleLogout, checkAuth } = useContext(authContext);
   const { cartLength } = useCart();
+  const { user, getCurrentUser } = useProfile();
 
-  // useEffect(() => {
-  //   console.log(currentUser);
-  // }, [currentUser]);
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   React.useEffect(() => {
     if (localStorage.getItem("tokens")) {
@@ -279,8 +281,8 @@ function Navbar() {
                 sx={{ p: "12px" }}
                 className="icon-btns-nav"
               >
-                {/* <Avatar alt={user} src="..." /> */}
-                <Avatar src="..." />
+                <Avatar alt="error:(" src={user?.profile_image} />
+                {/* <Avatar src="..." /> */}
               </IconButton>
             </Tooltip>
 
