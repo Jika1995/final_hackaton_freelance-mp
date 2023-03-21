@@ -13,10 +13,10 @@ const PostsPage = () => {
 
   return (
     <div>
-      {/* <SidebarPosts isSideBar={isSideBar} setPage={setPage} /> */}
+      <SidebarPosts isSideBar={isSideBar} setPage={setPage} />
       <PostsList page={page} setPage={setPage} />
     </div>
-  )
-}
+  );
+};
 
 export default PostsPage;

@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { useEffect } from "react";
 
 import { Button, Modal, TextField } from "@mui/material";
-import GppMaybeIcon from "@mui/icons-material/GppMaybe";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
@@ -27,11 +26,8 @@ const SettingsPage = () => {
 
   useEffect(() => {
     setUserData(user);
-  }, [user]);
-
-  useEffect(() => {
     console.log(userData);
-  }, [userData]);
+  }, [user]);
 
   useEffect(() => {
     setError(false);

@@ -8,7 +8,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 //custom
-import { useProducts } from "../../../contexts/ProductContextProvider";
+import { usePosts } from "../../../contexts/PostContextProvider";
 
 const darkTheme = createTheme({
   palette: {
@@ -16,8 +16,8 @@ const darkTheme = createTheme({
   },
 });
 
-const FilterProduct = () => {
-  const { fetchByParams } = useProducts();
+const FilterPosts = () => {
+  const { fetchByParams } = usePosts();
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -29,7 +29,7 @@ const FilterProduct = () => {
           >
             CATEGORIES
           </FormLabel>
-          <RadioGroup
+          {/* <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="all"
             name="radio-buttons-group"
@@ -80,11 +80,11 @@ const FilterProduct = () => {
               control={<Radio />}
               label="Cognac"
             />
-          </RadioGroup>
+          </RadioGroup> */}
         </FormControl>
       </div>
     </ThemeProvider>
   );
 };
 
-export default FilterProduct;
+export default FilterPosts;
