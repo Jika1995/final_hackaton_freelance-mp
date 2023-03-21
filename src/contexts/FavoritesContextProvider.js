@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 export const favoritesContext = createContext();
 export const useFavorites = () => useContext(favoritesContext);
 
-// const API = "http://localhost:8000/users";
+const API = "http://34.141.58.26/feedback";
 
 const FavoritesContextProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
@@ -13,7 +13,7 @@ const FavoritesContextProvider = ({ children }) => {
 
   const getFavUser = async () => {
     let { data } = await axios(API);
-    // console.log(data);
+    console.log(data);
 
     let email = JSON.parse(localStorage.getItem("email"));
     let userObj = data.find((item) => item.email === email);
@@ -26,31 +26,52 @@ const FavoritesContextProvider = ({ children }) => {
   };
 
   const getFavorites = async () => {
-    let { data } = await axios(API);
+    let { data } = await axios(`${API}/favorite`);
     let email = JSON.parse(localStorage.getItem("email"));
-    let userObj = data.find((item) => item.email === email);
+    // let userObj = data.find((item) => item.email === email);
 
-    userObj.favorites
-      ? setFavLength(userObj.favorites.length)
-      : setFavLength(0);
-    setFavorites(userObj.favorites);
+    // userObj.favorites
+    //   ? setFavLength(userObj.favorites.length)
+    //   : setFavLength(0);
+    // setFavorites(userObj.favorites);
   };
 
-  const addPostToFav = async (post, userId) => {
-    let favList = favorites;
+  // ADD FAVORITES
+  const addPostToFav = async (post) => {
+    try {
+      const objFav = new FormData();
+      objFav.append("owner", post.owner);
+      objFav.append("title", post.title);
+      objFav.append("description", post.description);
+      objFav.append("price", post.price);
 
-    let favPostToFind = favList.find((item) => item.id === post.id);
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
 
-    if (favPostToFind) {
-      favList = favList.filter((item) => item.id !== post.id);
-    } else {
-      favList.push(post);
+      //config
+      const Authorization = `Bearer ${tokens.access}`;
+      const config = {
+        headers: {
+          Authorization, //ключ со значением
+        },
+      };
+
+      await axios.post(`${API}/${post.id}/like/`, objFav, config);
+      getFavorites();
+    } catch (err) {
+      console.log(err);
     }
 
-    await axios.patch(`${API}/${userId}`, { favorites: favList });
+    // let favList = favorites;
+
+    // let favPostToFind = favList.find((item) => item.id === post.id);
+
+    // if (favPostToFind) {
+    //   favList = favList.filter((item) => item.id !== post.id);
+    // } else {
+    //   favList.push(post);
+    // }
 
     // setFavorites(favList);
-    getFavorites();
   };
 
   const deletePostFromFav = async (postId, userId) => {

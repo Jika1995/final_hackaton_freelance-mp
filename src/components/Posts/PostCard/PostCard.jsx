@@ -4,6 +4,7 @@ import { authContext } from "../../../contexts/AuthContextProvider";
 import { postsContext } from "../../../contexts/PostContextProvider";
 import { useCart } from "../../../contexts/CartContextProvider";
 import { useProfile } from "../../../contexts/ProfileContextProvider";
+import { useFavorites } from "../../../contexts/FavoritesContextProvider";
 
 import { useComments } from "../../../contexts/CommentContextProvider";
 import "../../../styles/PostCard.css";
@@ -27,9 +28,6 @@ import Menu from "@mui/material/Menu";
 
 import { Button } from "@mui/material";
 
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { Avatar, Stack, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import List from "@mui/material/List";
@@ -41,7 +39,8 @@ import Modal from "@mui/material/Modal";
 
 const PostCard = ({ item }) => {
   const navigate = useNavigate();
-  const { deletePost, toggleLike, getPosts, getOnePost, onePost } = useContext(postsContext);
+  const { deletePost, toggleLike, getPosts, getOnePost, onePost } =
+    useContext(postsContext);
   const { getCurrentUser, user } = useProfile();
   const { addPostToCart, checkPostInCart } = useCart();
 
@@ -49,33 +48,32 @@ const PostCard = ({ item }) => {
 
   const [currentUser, setCurrentUser] = useState(localStorage.getItem("email"));
 
-    //comment
-    const {
-      comments,
-      getComments,
-      oneComment,
-      addComment,
-      deleteComment,
-      getOneComment,
-      saveEditedComment,
-    } = useComments();
-  
-    const [commentBody, setCommentBody] = useState({body: '', id: ''});
-    const [editedComment, setEditedComment] = useState('');
-    const [edit, setEdit] = useState(false);
+  //comment
+  const {
+    comments,
+    getComments,
+    oneComment,
+    addComment,
+    deleteComment,
+    getOneComment,
+    saveEditedComment,
+  } = useComments();
+
+  const [commentBody, setCommentBody] = useState({ body: "", id: "" });
+  const [editedComment, setEditedComment] = useState("");
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     getCurrentUser();
   }, []);
 
   useEffect(() => {
-    getPosts()
-  }, [])
+    getPosts();
+  }, []);
 
   useEffect(() => {
     getComments(item);
-  },[]);
-
+  }, []);
 
   // useEffect(() => {
   //   getOnePost(item.id)
@@ -84,6 +82,10 @@ const PostCard = ({ item }) => {
   // useEffect(() => {
   //   console.log(user);
   // }, [user]);
+
+  // FAVORITES
+  const { addPostToFav } = useFavorites();
+  // console.log(item);
 
   //MUI
   const [anchorEl, setAnchorEl] = useState(null);
@@ -106,10 +108,10 @@ const PostCard = ({ item }) => {
     await getOneComment(id);
     // console.log(commentBody);
     // console.log(oneComment);
-  
+
     commentBody.body = oneComment?.body;
     commentBody.id = id;
-    setCommentBody({...commentBody});
+    setCommentBody({ ...commentBody });
   }
 
   return (
@@ -258,7 +260,10 @@ const PostCard = ({ item }) => {
                                   <SettingsSuggestIcon
                                     fontSize="small"
                                     color="warning"
-                                    onClick={() => { editComment(elem.id); setEditedComment(oneComment?.body);} }
+                                    onClick={() => {
+                                      editComment(elem.id);
+                                      setEditedComment(oneComment?.body);
+                                    }}
                                   />
                                 </>
                               ) : null}
@@ -291,7 +296,7 @@ const PostCard = ({ item }) => {
                             value={commentBody?.body}
                             onChange={(e) => {
                               commentBody.body = e.target.value;
-                              setCommentBody({...commentBody})
+                              setCommentBody({ ...commentBody });
                             }}
                           />
                           {!edit ? (
@@ -339,10 +344,7 @@ const PostCard = ({ item }) => {
                   </Box>
                 </Modal>
                 <div className="icon-btns">
-                  <IconButton
-                    size="small"
-                    // onClick={() => addProductToFav(item, favUser.id)}
-                  >
+                  <IconButton size="small" onClick={() => addPostToFav(item)}>
                     <img
                       src="https://i.ibb.co/C117v1b/8703847-heart-love-icon.png"
                       width="50px"
@@ -376,7 +378,6 @@ const PostCard = ({ item }) => {
       </div>
     </Card>
   );
-
 };
 
 export default PostCard;
