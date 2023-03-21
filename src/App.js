@@ -10,19 +10,19 @@ import CommentContextProvider from "./contexts/CommentContextProvider";
 
 const App = () => {
   return (
+    <PostContextProvider>
     <CommentContextProvider>
     <ProfileContextProvider>
       <CartContextProvider>
-      <PostContextProvider>
         <AuthContextProvider>
           <Navbar />
           <MainRoutes />
           <Footer />
         </AuthContextProvider>
-      </PostContextProvider>
      </CartContextProvider>
     </ProfileContextProvider>
     </CommentContextProvider>
+    </PostContextProvider>
   );
 };
 
