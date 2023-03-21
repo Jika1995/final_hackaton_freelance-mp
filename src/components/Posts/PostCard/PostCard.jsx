@@ -4,7 +4,7 @@ import { authContext } from "../../../contexts/AuthContextProvider";
 import { postsContext } from "../../../contexts/PostContextProvider";
 import { useCart } from "../../../contexts/CartContextProvider";
 import { useProfile } from "../../../contexts/ProfileContextProvider";
-import { useFavorites } from "../../../contexts/FavoritesContextProvider";
+import {useFavorites} from '../../../contexts/FavoritesContextProvider';
 
 import { useComments } from "../../../contexts/CommentContextProvider";
 import "../../../styles/PostCard.css";
@@ -25,6 +25,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import { Button } from "@mui/material";
 
@@ -44,7 +45,7 @@ const PostCard = ({ item }) => {
   const { getCurrentUser, user } = useProfile();
   const { addPostToCart, checkPostInCart } = useCart();
 
-  const [currentPost, setCurrentPost] = useState(item);
+  // const [currentPost, setCurrentPost] = useState(item);
 
   const [currentUser, setCurrentUser] = useState(localStorage.getItem("email"));
 
@@ -84,9 +85,13 @@ const PostCard = ({ item }) => {
   // }, [user]);
 
   // FAVORITES
-  const { addPostToFav } = useFavorites();
+  const { addPostToFav, checkPostInFav, getFavorites } = useFavorites();
   // console.log(item);
 
+  useEffect(() => {
+    getFavorites()
+  }, [])
+  
   //MUI
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -337,25 +342,20 @@ const PostCard = ({ item }) => {
                               Save
                             </Button>
                           )}
-                          {/* <Button onClick={() => getComments(item.id)}>Get</Button> */}
                         </Stack>
                       </Box>
                     </Card>
                   </Box>
                 </Modal>
                 <div className="icon-btns">
-                  <IconButton size="small" onClick={() => addPostToFav(item)}>
-                    <img
+                  <IconButton size="small" onClick={() => addPostToFav(item.id)}>
+                    {/* <img
                       src="https://i.ibb.co/C117v1b/8703847-heart-love-icon.png"
                       width="50px"
                       height="50px"
-                    />
+                    /> */}
+                    {checkPostInFav(item.id) ? (<FavoriteIcon style={{ color: "#DC143C" }} />) : (<FavoriteBorderIcon style={{ color: "white" }} />)}
 
-                    {/* {checkProductInFav(item.id) ? ( /}
-                {/ <FavoriteIcon style={{ color: "#DC143C" }} /> /}
-              {/ ) : ( /}
-                {/ <FavoriteBorderIcon style={{ color: "white" }} /> /}
-              {/ )} */}
                   </IconButton>
                   <IconButton size="small" onClick={() => addPostToCart(item)}>
                     {checkPostInCart(item.id) ? (

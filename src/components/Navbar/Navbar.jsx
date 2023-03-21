@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { authContext } from "../../contexts/AuthContextProvider";
 import { useCart } from "../../contexts/CartContextProvider";
 import { useProfile } from "../../contexts/ProfileContextProvider";
+import { useFavorites } from "../../contexts/FavoritesContextProvider";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -98,6 +99,7 @@ function Navbar() {
   const { currentUser, handleLogout, checkAuth } = useContext(authContext);
   const { cartLength } = useCart();
   const { user, getCurrentUser } = useProfile();
+  const {favLength} = useFavorites();
 
   // useEffect(() => {
   //   console.log(currentUser);
@@ -254,7 +256,7 @@ function Navbar() {
             >
               <Badge
                 color="error"
-                //   badgeContent={favLength}
+                  badgeContent={favLength}
                 className="nav-badge"
               >
                 <FavoriteBorderIcon />

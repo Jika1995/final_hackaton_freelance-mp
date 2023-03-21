@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ChatPage from "./pages/ChatPage";
 import ProfilePage from "./pages/ProfilePage";
 import OrdersPage from "./pages/OrdersPage";
+import Favorites from "./components/Favorites/Favorites";
 
 import PostsPage from "./pages/PostsPage";
 import PostDetailsPage from "./pages/PostDetailsPage";
@@ -94,6 +95,11 @@ const MainRoutes = () => {
       link: "/reset",
       element: <ResetPasswordPage />,
       id: 15,
+    },
+    {
+      link: "/favorites",
+      element: <Favorites />,
+      id: 16,
     },
   ];
 
