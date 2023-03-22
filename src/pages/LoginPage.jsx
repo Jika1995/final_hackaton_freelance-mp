@@ -36,7 +36,7 @@ const LoginPage = () => {
         <Box className='welcome-block'>
           <Box className='welcome-info'>
             <img src='https://i.ibb.co/CWxG1Th/Rectangle.png' width='150px' id="zamok"/>
-            <Typography variant="h4" style={{fontFamily: 'Mulish', fontWeight: '700', fontSize: '50px'}}>
+            <Typography variant="h4" style={{fontFamily: 'Mulish', fontWeight: '700', fontSize: '50px'}} id='welcome-title'> 
               WELCOME TO FREE HUB!
             </Typography>
             <p>
@@ -47,7 +47,7 @@ const LoginPage = () => {
         <Box className='auth-block'>
           <Box className='reg-block'>
           <div className="sign-block">
-            <Typography variant="h2"  color='rgba(0, 0, 0, 0.87)' style={{cursor: 'pointer', fontFamily: 'Mulish', fontWeight: '700', fontSize: '50px'}} onClick={() => navigate('/login')} >Sign in</Typography>
+            <Typography variant="h2"  color='rgba(0, 0, 0, 0.87)' style={{cursor: 'pointer', fontFamily: 'Mulish', fontWeight: '700', fontSize: '50px'}} onClick={() => navigate('/login')} id="signup-title">Sign in</Typography>
             <Typography variant="h2"  color='grey' style={{cursor: 'pointer', fontFamily: 'Mulish', fontWeight: '700', fontSize: '50px'}} onClick={() => navigate('/register')} id='sign-nav'>Sign up</Typography>
           </div>
           <div className="inputs-block">

@@ -106,3 +106,70 @@
 .checkbox-block {
     color: #322a33 !important;
 }
+
+@media all and (max-width: 1024px) {
+    .auth-container {
+        width: 90% !important;
+    }
+    #auth-img {
+        width: 500px !important;
+        height: 300px !important
+    }
+    #welcome-title {
+        font-size: 40px !important;
+    }
+    #sign-nav {
+        font-size: 40px !important;
+    }
+    #signup-title {
+        font-size: 40px !important;
+    }
+}
+
+@media all and (max-width: 768px) {
+    #auth-img {
+        width: 400px !important;
+        height: 200px;
+    }
+    .auth-container {
+        width: 90% !important;
+    }
+    #welcome-title {
+        font-size: 30px !important;
+    }
+    #sign-nav {
+        font-size: 30px !important;
+    }
+    #signup-title {
+        font-size: 30px !important;
+    }
+}
+
+@media all and (max-width: 320px) {
+
+    #auth-img {
+        width: 320px !important;
+        height: 200px;
+    }
+    .auth-container {
+        width: 90% !important;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #welcome-title {
+        font-size: 20px !important;
+    }
+    #sign-nav {
+        font-size: 20px !important;
+    }
+    #signup-title {
+        font-size: 20px !important;
+    }
+    .left-block{
+        width: 100%;
+    }
+    
+}

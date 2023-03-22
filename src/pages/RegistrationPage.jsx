@@ -68,6 +68,7 @@ const RegistrationPage = () => {
                   fontWeight: "700",
                   fontSize: "50px",
                 }}
+                id='welcome-title'
               >
                 WELCOME TO FREE HUB!
               </Typography>
@@ -104,6 +105,7 @@ const RegistrationPage = () => {
                     fontWeight: "700",
                     fontSize: "50px",
                   }}
+                  id="signup-title"
                 >
                   Sign up
                 </Typography>
