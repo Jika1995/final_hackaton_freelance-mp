@@ -70,6 +70,8 @@ const UsersContextProvider = ({children}) => {
 
             let res = await axios.post(`${RATING_API}/${userId}/rating/`, ratingValue, config);
             console.log(res);
+            getExecutants();
+            getBuyers();
             
         } catch(err) {
             console.log(err);

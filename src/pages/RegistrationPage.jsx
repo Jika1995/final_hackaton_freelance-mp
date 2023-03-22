@@ -66,7 +66,7 @@ const RegistrationPage = () => {
                 style={{
                   fontFamily: "Mulish",
                   fontWeight: "700",
-                  fontSize: "50px",
+                  fontSize: "45px",
                 }}
                 id='welcome-title'
               >
@@ -89,7 +89,7 @@ const RegistrationPage = () => {
                     cursor: "pointer",
                     fontFamily: "Mulish",
                     fontWeight: "700",
-                    fontSize: "50px",
+                    fontSize: "45px",
                   }}
                   onClick={() => navigate("/login")}
                   id="sign-nav"
@@ -103,7 +103,7 @@ const RegistrationPage = () => {
                     cursor: "pointer",
                     fontFamily: "Mulish",
                     fontWeight: "700",
-                    fontSize: "50px",
+                    fontSize: "45px",
                   }}
                   id="signup-title"
                 >
