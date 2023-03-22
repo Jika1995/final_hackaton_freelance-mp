@@ -37,10 +37,11 @@ const pages = [
     type: "Market",
     path: "/posts",
   },
-  {
-    type: "Add Post",
-    path: "/addpost",
-  },
+  // {
+  //   type: "Add Post",
+  //   path: "/addpost",
+  // },
+  
 ];
 
 const settingsNoAuth = [
@@ -110,6 +111,10 @@ function Navbar() {
       checkAuth();
     }
   }, []);
+
+  React.useEffect(() => {
+    getCurrentUser();
+  }, [])
 
   // for animate nav
   const [visible, setVisible] = useState(true);
@@ -209,6 +214,35 @@ function Navbar() {
                   </Typography>
                 </MenuItem>
               ))}
+              {user?.is_buyer ? 
+        
+              <MenuItem key='executants' onClick={handleCloseNavMenu}>
+                  <Typography
+                    textalign="center"
+                    onClick={() => navigate('/allusers')}
+                    id="box-nav-btns"
+                  >
+                    Executants
+                  </Typography>
+                </MenuItem> : <>
+                <MenuItem key='addpost' onClick={handleCloseNavMenu}>
+                  <Typography
+                    textalign="center"
+                    onClick={() => navigate('/addpost')}
+                    id="box-nav-btns"
+                  >
+                    Add Post
+                  </Typography>
+                </MenuItem>
+                <MenuItem key='buyers' onClick={handleCloseNavMenu}>
+                  <Typography
+                    textalign="center"
+                    onClick={() => navigate('/allusers')}
+                    id="box-nav-btns"
+                  >
+                    Buyers
+                  </Typography>
+                </MenuItem></> }
             </Menu>
           </Box>
 
@@ -245,6 +279,36 @@ function Navbar() {
                 {page.type}
               </Button>
             ))}
+            {user?.is_buyer ? 
+                  
+                  <Button
+                    key='Executants'
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={() => navigate('/allusers')}
+                className="icon-btns-nav"
+              >
+                Executants
+              </Button>
+             
+                 :     
+                 
+                 <>
+                 <Button
+                    key='AddPost'
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={() => navigate('/addpost')}
+                className="icon-btns-nav"
+              >
+                Add Post
+              </Button>
+                 <Button
+                 key='Buyers'
+             sx={{ my: 2, color: "white", display: "block" }}
+             onClick={() => navigate('/allusers')}
+             className="icon-btns-nav"
+           >
+             Buyers
+           </Button></>}
           </Box>
 
           <Box sx={{ flexGrow: 0 }} className="icon-box">
