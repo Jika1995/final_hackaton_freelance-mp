@@ -20,7 +20,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const UserCard = ({ item }) => {
   const { user, getCurrentUser } = useProfile();
-  const { putRating } = useUsers();
+  const { putRating, getBuyers, getExecutants, buyers, executants } =
+    useUsers();
 
   //mui
   const [value, setValue] = React.useState(item.ratings?.rating__avg);
@@ -33,6 +34,14 @@ const UserCard = ({ item }) => {
 
   useEffect(() => {
     getCurrentUser();
+  }, []);
+
+  useEffect(() => {
+    getBuyers();
+  }, []);
+
+  useEffect(() => {
+    getExecutants();
   }, []);
 
   return (
@@ -55,7 +64,6 @@ const UserCard = ({ item }) => {
         />
         <CardContent className="card-text">
           <Typography variant="body2" color="text.secondary">
-            <br />
             <span id="user-bio-text">{item.bio}</span>
           </Typography>
         </CardContent>
@@ -77,6 +85,7 @@ const UserCard = ({ item }) => {
                 margin: "auto",
                 borderRadius: "10px",
               }}
+              className="modal-user-card"
             >
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Rate from 1 to 5 stars
@@ -89,7 +98,15 @@ const UserCard = ({ item }) => {
                   setValue2(newValue);
                 }}
               />
-              <Button onClick={() => putRating(item.id, value2)}>Rate</Button>
+              <Button
+                onClick={() => {
+                  putRating(item.id, value2);
+                  handleClose();
+                }}
+                className="modal-user-card-btn"
+              >
+                Rate
+              </Button>
             </Box>
           </Modal>{" "}
         </CardActions>
