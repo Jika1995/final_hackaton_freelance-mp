@@ -15,7 +15,7 @@ const AuthContextProvider = ({ children }) => {
   async function handleRegister(formData, navigate) {
     setLoading(true);
     for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
+      console.log(pair[0] + ", " + pair[1]);
     }
 
     try {
@@ -23,78 +23,78 @@ const AuthContextProvider = ({ children }) => {
       console.log(res);
       alert("Success!");
       navigate("/login");
-
     } catch (err) {
       console.log(err);
       setError(Object.values(err.response.data).flat(2));
-
     } finally {
       setLoading(false);
     }
   }
 
-  async function handleLogin (formData, email, navigate) {
+  async function handleLogin(formData, email, navigate) {
     setLoading(true);
 
     try {
       const res = await axios.post(`${API}/account/login/`, formData);
-      localStorage.setItem('tokens', JSON.stringify(res.data));
-      localStorage.setItem('email', email);
+      localStorage.setItem("tokens", JSON.stringify(res.data));
+      localStorage.setItem("email", email);
       setCurrentUser(email);
       console.log(res);
-      navigate('/profile');
+      navigate("/profile");
       let cart = {
         posts: [],
         totalPrice: 0,
       };
 
       localStorage.setItem("cart", JSON.stringify(cart));
-
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       setError([err.response.data.detail]);
-
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   function handleLogout(navigate) {
     localStorage.removeItem("tokens");
     localStorage.removeItem("email");
+    localStorage.removeItem("cart");
+
     setCurrentUser(false);
     navigate("/");
-  };
+  }
 
   async function checkAuth() {
     // console.log('WORKED!');
-    let tokens = JSON.parse(localStorage.getItem('tokens')) //будет JS объект с двумя ключами, refresh и access
+    let tokens = JSON.parse(localStorage.getItem("tokens")); //будет JS объект с двумя ключами, refresh и access
 
     try {
-        const Authorization = `Bearer ${tokens.access}`; //получили авторизацию
-        let res = await axios.post(
-            `${API}/account/refresh/`, //куда - запрос должен быть авторизованный
-            { refresh: tokens.refresh }, //что отправить
-            { headers: { Authorization }} //кто такой - просто передается как объект
-        ); //res - ответ от сервера на мой отправленный запрос post
+      const Authorization = `Bearer ${tokens.access}`; //получили авторизацию
+      let res = await axios.post(
+        `${API}/account/refresh/`, //куда - запрос должен быть авторизованный
+        { refresh: tokens.refresh }, //что отправить
+        { headers: { Authorization } } //кто такой - просто передается как объект
+      ); //res - ответ от сервера на мой отправленный запрос post
 
-        //ОТВЕТ ПОЛУЧАЕШЬ ВСЕГДА при запросах, и put post patch delete, а НЕ ТОЛЬКО get
+      //ОТВЕТ ПОЛУЧАЕШЬ ВСЕГДА при запросах, и put post patch delete, а НЕ ТОЛЬКО get
 
-        // console.log(res);
+      // console.log(res);
 
-        localStorage.setItem('tokens', JSON.stringify({
-            refresh: tokens.refresh,
-            access: res.data.access
-        }));
+      localStorage.setItem(
+        "tokens",
+        JSON.stringify({
+          refresh: tokens.refresh,
+          access: res.data.access,
+        })
+      );
 
-        let currentUser = localStorage.getItem('email'); //на всякий случай обновляем юзера
-        setCurrentUser(currentUser);
-
+      let currentUser = localStorage.getItem("email"); //на всякий случай обновляем юзера
+      setCurrentUser(currentUser);
     } catch (error) {
-        console.log(error);
-        handleLogout();
+      console.log(error);
+      handleLogout();
     }
-}
+  }
 
   const values = {
     currentUser,
@@ -106,7 +106,7 @@ const AuthContextProvider = ({ children }) => {
     handleRegister,
     handleLogin,
     handleLogout,
-    checkAuth
+    checkAuth,
   };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };
