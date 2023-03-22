@@ -94,3 +94,40 @@
 .slick-arrow {
   display: none !important;
 }
+
+@media all and (max-width: 1024px) {
+  .promo-home-text {
+    font-size: 2rem !important;
+  }
+  .slider-img-box>img {
+    width: 325px !important;
+  }
+  .promo-home-bottom-text {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .promo-home-text {
+    font-size: 1.5rem !important;
+  }
+  .slider-img-box>img {
+    width: 250px !important;
+  }
+  .promo-home-bottom-text {
+    font-size: 1rem !important;
+  }
+
+}
+@media all and (max-width: 320px) {
+  .promo-home-text {
+    font-size: 1.5rem !important;
+  }
+  .slider-img-box>img {
+    width: 250px !important;
+  }
+  .promo-home-bottom-text {
+    font-size: 1rem !important;
+  }
+
+}
