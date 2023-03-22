@@ -28,7 +28,6 @@ const UsersListPage = () => {
           </>
         ) : (
           <>
-            <h1>List of buyers</h1>
             {buyers?.map((item) => (
               <UserCard key={item.id} item={item} />
             ))}
