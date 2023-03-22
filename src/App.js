@@ -8,9 +8,11 @@ import CartContextProvider from "./contexts/CartContextProvider";
 import ProfileContextProvider from "./contexts/ProfileContextProvider";
 import CommentContextProvider from "./contexts/CommentContextProvider";
 import FavoritesContextProvider from "./contexts/FavoritesContextProvider";
+import UsersContextProvider from "./contexts/UsersContextProvider";
 
 const App = () => {
   return (
+    <UsersContextProvider>
     <FavoritesContextProvider>
       <PostContextProvider>
         <CommentContextProvider>
@@ -26,6 +28,7 @@ const App = () => {
         </CommentContextProvider>
       </PostContextProvider>
     </FavoritesContextProvider>
+    </UsersContextProvider>
   );
 };
 
