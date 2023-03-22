@@ -41,7 +41,6 @@ const pages = [
   //   type: "Add Post",
   //   path: "/addpost",
   // },
-  
 ];
 
 const settingsNoAuth = [
@@ -100,7 +99,7 @@ function Navbar() {
   const { currentUser, handleLogout, checkAuth } = useContext(authContext);
   const { cartLength } = useCart();
   const { user, getCurrentUser } = useProfile();
-  const {favLength} = useFavorites();
+  const { favLength } = useFavorites();
 
   // useEffect(() => {
   //   console.log(currentUser);
@@ -114,7 +113,7 @@ function Navbar() {
 
   React.useEffect(() => {
     getCurrentUser();
-  }, [])
+  }, []);
 
   // for animate nav
   const [visible, setVisible] = useState(true);
@@ -214,36 +213,38 @@ function Navbar() {
                   </Typography>
                 </MenuItem>
               ))}
-              {user?.is_buyer ? null : <MenuItem key='addpost' onClick={handleCloseNavMenu}>
+              {user?.is_buyer ? null : (
+                <MenuItem key="addpost" onClick={handleCloseNavMenu}>
                   <Typography
                     textalign="center"
-                    onClick={() => navigate('/addpost')}
+                    onClick={() => navigate("/addpost")}
                     id="box-nav-btns"
                   >
                     Add Post
                   </Typography>
-                </MenuItem>}
-              {user?.is_buyer ? 
-        
-              <MenuItem key='executants' onClick={handleCloseNavMenu}>
+                </MenuItem>
+              )}
+              {user?.is_buyer ? (
+                <MenuItem key="executants" onClick={handleCloseNavMenu}>
                   <Typography
                     textalign="center"
-                    onClick={() => navigate('/allusers')}
+                    onClick={() => navigate("/allusers")}
                     id="box-nav-btns"
                   >
                     Executants
                   </Typography>
-                </MenuItem> : 
-               
-                <MenuItem key='buyers' onClick={handleCloseNavMenu}>
+                </MenuItem>
+              ) : (
+                <MenuItem key="buyers" onClick={handleCloseNavMenu}>
                   <Typography
                     textalign="center"
-                    onClick={() => navigate('/allusers')}
+                    onClick={() => navigate("/allusers")}
                     id="box-nav-btns"
                   >
                     Buyers
                   </Typography>
-                </MenuItem>}
+                </MenuItem>
+              )}
             </Menu>
           </Box>
 
@@ -280,35 +281,35 @@ function Navbar() {
                 {page.type}
               </Button>
             ))}
-            {user?.is_buyer ? null :  <Button
-                    key='AddPost'
+            {user?.is_buyer ? null : (
+              <Button
+                key="AddPost"
                 sx={{ my: 2, color: "white", display: "block" }}
-                onClick={() => navigate('/addpost')}
+                onClick={() => navigate("/addpost")}
                 className="icon-btns-nav"
               >
                 Add Post
-              </Button>}
-            {user?.is_buyer ? 
-                  
-                  <Button
-                key='Executants'
+              </Button>
+            )}
+            {user?.is_buyer ? (
+              <Button
+                key="Executants"
                 sx={{ my: 2, color: "white", display: "block" }}
-                onClick={() => navigate('/allusers')}
+                onClick={() => navigate("/allusers")}
                 className="icon-btns-nav"
               >
                 Executants
               </Button>
-             
-                 :     
-                 
-                 <Button
-                 key='Buyers'
-             sx={{ my: 2, color: "white", display: "block" }}
-             onClick={() => navigate('/allusers')}
-             className="icon-btns-nav"
-           >
-             Buyers
-           </Button>}
+            ) : (
+              <Button
+                key="Buyers"
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={() => navigate("/allusers")}
+                className="icon-btns-nav"
+              >
+                Buyers
+              </Button>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }} className="icon-box">
@@ -320,7 +321,7 @@ function Navbar() {
             >
               <Badge
                 color="error"
-                  badgeContent={favLength}
+                badgeContent={favLength}
                 className="nav-badge"
               >
                 <FavoriteBorderIcon />
@@ -339,6 +340,11 @@ function Navbar() {
                 className="nav-badge"
               >
                 <LocalMallIcon />
+                {/* <img
+                  src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-premium/512/wallet-dynamic-premium.png"
+                  alt=""
+                  width="40px"
+                /> */}
               </Badge>
             </IconButton>
             <Tooltip title="Account">
