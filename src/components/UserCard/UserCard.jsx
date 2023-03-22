@@ -36,14 +36,6 @@ const UserCard = ({ item }) => {
     getCurrentUser();
   }, []);
 
-  useEffect(() => {
-    getBuyers();
-  }, []);
-
-  useEffect(() => {
-    getExecutants();
-  }, []);
-
   return (
     <Card className="card-user" key={item.id}>
       <CardMedia
@@ -108,7 +100,7 @@ const UserCard = ({ item }) => {
                 Rate
               </Button>
             </Box>
-          </Modal>{" "}
+          </Modal>
         </CardActions>
       </div>
     </Card>
