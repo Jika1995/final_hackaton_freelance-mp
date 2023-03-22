@@ -1,125 +1,14 @@
-/* .main {
-       height: 50%;
-       width: 50%;
-       position: relative;
-       margin-top: 30%;
-       left: 5%
-     }
-     .d1 {
-       position: absolute;
-       background-image: url(https://api.time.com/wp-content/uploads/2021/02/laptop-home-office.jpg);
-       background-size: 2700px 1500px;
-     
-       height: 30vh;
-       width: 15vw;
-     
-       background-position: 0 50%;
-     
-       box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
-       top: 50%;
-       transform: translateY(-50%);
-       z-index: 2;
-       animation: dd1 10s 1, dd12 10s 1;
-       animation-delay: 4s, 14s;
-     }
-     .d2 {
-       position: absolute;
-       background-image: url(https://api.time.com/wp-content/uploads/2021/02/laptop-home-office.jpg);
-       background-size: 2700px 1500px;
-     
-       height: 50vh;
-       width: 25vw;
-     
-       background-position: -10vw 50%;
-       left: 10vw;
-     
-       top: 50%;
-       transform: translateY(-50%);
-       z-index: 1;
-       animation: dd2 10s 2;
-       animation-delay: 4s;
-     }
-     .d3 {
-       position: absolute;
-       background-image: url(https://api.time.com/wp-content/uploads/2021/02/laptop-home-office.jpg);
-       background-size: 2700px 1500px;
-       overflow: hidden;
-     
-       height: 100vh;
-       width: 40vw;
-       left: 25vw;
-       box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
-       background-position: -35vw 50%;
-     
-       top: 50%;
-       transform: translateY(-50%);
-       z-index: 3;
-       animation: dd3 10s 2;
-       animation-delay: 4s;
-     }
-     .d4 {
-       position: absolute;
-       overflow: hidden;
-       background-image: url(https://api.time.com/wp-content/uploads/2021/02/laptop-home-office.jpg);
-       background-size: 2700px 1500px;
-     
-       height: 80vh;
-       width: 25vw;
-       left: 60vw;
-       background-position: -70vw 50%;
-     
-       top: 50%;
-       transform: translateY(-50%);
-       z-index: 1;
-       animation: dd4 10s 2;
-       animation-delay: 4s;
-     }
-     
-     @keyframes dd1 {
-       0% {
-       }
-       50% {
-         width: 95vw;
-       }
-     }
-     @keyframes dd12 {
-       0% {
-       }
-       50% {
-         background-position: Calc(0vw - 40px) 50%;
-       }
-     }
-     @keyframes dd2 {
-       0% {
-       }
-       50% {
-         background-position: Calc(-10vw - 40px) 50%;
-       }
-     }
-     @keyframes dd3 {
-       0% {
-       }
-       50% {
-         background-position: Calc(-35vw - 40px) 50%;
-       }
-     }
-     @keyframes dd4 {
-       0% {
-       }
-       50% {
-         background-position: Calc(-70vw - 40px) 50%;
-       }
-     } */
-
 .container-home {
   background-color: #1F1720;
   height: 100% !important;
-  padding: 10px;
+  /* padding: 10px; */
+  position: relative;
 }
 
 .slider-container-header {
   /* width: 100%; */
-  margin: auto;
+  margin: 0 auto 30px;
+  padding-top: 70px;
 }
 
 .slider-container-header>button {
@@ -127,15 +16,15 @@
 }
 
 .slider-img-box-header>img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100% !important;
   height: 500px;
+  border-radius: 20px !important;
 }
 
 .slider-container {
   margin: 100px auto;
   width: 70%;
-  margin: 20px auto;
   text-align: center;
   color: azure;
 }
@@ -151,17 +40,17 @@
 .promo-home {
   width: 70%;
   object-fit: cover;
-
+  margin: 100px auto !important;
 }
 
 .promo-home>img {
-
+  border-radius: 50px;
   object-fit: cover;
 }
 
 .promo-home {
   width: 80%;
-  margin: auto !important;
+  margin: 150px auto !important;
   position: relative;
 }
 
@@ -182,7 +71,7 @@
 
 .promo-home-bottom {
   width: 80%;
-  margin: 20px auto !important;
+  margin: auto ;
   position: relative;
 }
 
@@ -200,4 +89,8 @@
   margin-top: 70px;
   margin-left: 10%;
   text-align: center;
+}
+
+.slick-arrow {
+  display: none !important;
 }
