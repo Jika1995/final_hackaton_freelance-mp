@@ -1,33 +1,24 @@
-#cleanFav-btn {
-    width: 35% !important;
-    height: 50px;
-    background: #bc9366;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    margin-bottom: 20px !important;
-
-  }
-  
-  #cleanFav-btn:hover{
-    background: rgba(0, 0, 0, 0.84);
-    /* background-color: #bc9366; */
-    box-shadow: 4px 4px 8px 0px rgba(10, 16, 20, 0.801);
-    border: none;
-  }
-
-@media all and (max-width: 768px) {
-  #cleanFav-btn {
-    width: 50% !important;
-  }
+.posts-list {
+  background-color: #38153eea;
 }
 
-@media all and (max-width: 768px) {
-  #cleanFav-btn {
-    width: 100% !important;
-    font-size: 13px;
-  }
+.container-post {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  margin:  auto;
+}
+
+.card-prod {
+  width: 80%;
+  margin: 100px auto;
+  border-radius: 30px !important;
+  background: #a6379b !important;
+  color: azure !important;
+  box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset !important;
+}
+
+.card-image {
+  object-fit: contain;
+  height: 300px;
 }
