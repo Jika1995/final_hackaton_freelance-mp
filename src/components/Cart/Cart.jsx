@@ -297,7 +297,7 @@ export default function Cart() {
                                   id="checkout-btn"
                                   onClick={() => {
                                     // cartCleaner();
-                                    // navigate("/payment");
+                                    navigate("/payment");
                                     handleChange();
                                   }}
                                 >

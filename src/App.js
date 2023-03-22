@@ -9,9 +9,11 @@ import ProfileContextProvider from "./contexts/ProfileContextProvider";
 import CommentContextProvider from "./contexts/CommentContextProvider";
 import FavoritesContextProvider from "./contexts/FavoritesContextProvider";
 import UsersContextProvider from "./contexts/UsersContextProvider";
+import OrderContextProvider from "./contexts/OrderContextProvider";
 
 const App = () => {
   return (
+    <OrderContextProvider>
     <UsersContextProvider>
       <FavoritesContextProvider>
         <PostContextProvider>
@@ -29,6 +31,7 @@ const App = () => {
         </PostContextProvider>
       </FavoritesContextProvider>
     </UsersContextProvider>
+    </OrderContextProvider>
   );
 };
 

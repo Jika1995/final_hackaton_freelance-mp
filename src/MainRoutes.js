@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import OrdersPage from "./pages/OrdersPage";
 import Favorites from "./components/Favorites/Favorites";
 import UsersListPage from "./pages/UsersListPage";
+import PaymentPage from './pages/PaymentPage';
 
 import PostsPage from "./pages/PostsPage";
 import PostDetailsPage from "./pages/PostDetailsPage";
@@ -106,6 +107,11 @@ const MainRoutes = () => {
       link: "/allusers",
       element: <UsersListPage />,
       id: 17,
+    },
+    {
+      link: "/payment",
+      element: <PaymentPage />,
+      id: 18,
     },
   ];
 
