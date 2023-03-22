@@ -95,7 +95,7 @@ const FilterPosts = () => {
             label="Expensive "
           />
           <FormControlLabel value="price" control={<Radio />} label="Cheap " />
-          <FormControlLabel
+          {/* <FormControlLabel
             value="likes"
             control={<Radio />}
             label="More Likes"
@@ -114,7 +114,10 @@ const FilterPosts = () => {
             value="-comments"
             control={<Radio />}
             label="Less Comments"
-          />
+          /> */}
+
+          <FormControlLabel value="owner" control={<Radio />} label="Owner" />
+          <FormControlLabel value="-owner" control={<Radio />} label="Owner" />
         </RadioGroup>
       </div>
     </ThemeProvider>
