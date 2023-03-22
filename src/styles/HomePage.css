@@ -117,17 +117,29 @@
   .promo-home-bottom-text {
     font-size: 1rem !important;
   }
-
 }
+
 @media all and (max-width: 320px) {
   .promo-home-text {
-    font-size: 1.5rem !important;
+    font-size: 10px !important;
+    margin-top: 20px;
   }
   .slider-img-box>img {
     width: 250px !important;
   }
   .promo-home-bottom-text {
-    font-size: 1rem !important;
+    font-size: 10px !important;
+    margin-top: 10px;
+    margin-left: -2%;
+    width: 50%;
   }
-
+  .promo-home{
+    margin: 0 auto !important;
+  }
+  .slider-img-box-header>img {
+    height: 200px !important;
+  }
+  .slider-container{
+    margin: 50px auto !important;
+  }
 }
