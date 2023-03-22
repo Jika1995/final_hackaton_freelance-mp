@@ -13,21 +13,21 @@ import UsersContextProvider from "./contexts/UsersContextProvider";
 const App = () => {
   return (
     <UsersContextProvider>
-    <FavoritesContextProvider>
-      <PostContextProvider>
-        <CommentContextProvider>
-          <ProfileContextProvider>
-            <CartContextProvider>
+      <FavoritesContextProvider>
+        <PostContextProvider>
+          <CommentContextProvider>
+            <ProfileContextProvider>
               <AuthContextProvider>
-                <Navbar />
-                <MainRoutes />
-                <Footer />
+                <CartContextProvider>
+                  <Navbar />
+                  <MainRoutes />
+                  <Footer />
+                </CartContextProvider>
               </AuthContextProvider>
-            </CartContextProvider>
-          </ProfileContextProvider>
-        </CommentContextProvider>
-      </PostContextProvider>
-    </FavoritesContextProvider>
+            </ProfileContextProvider>
+          </CommentContextProvider>
+        </PostContextProvider>
+      </FavoritesContextProvider>
     </UsersContextProvider>
   );
 };

@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Button, TextField, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { useCart } from '../../contexts/CartContextProvider';
+import { useCart } from "../../contexts/CartContextProvider";
 import { useNavigate } from "react-router-dom";
-import '../../styles/Cart.css'
+import "../../styles/Cart.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useProfile } from "../../contexts/ProfileContextProvider";
+import { authContext } from "../../contexts/AuthContextProvider";
 
 export default function Cart() {
-  const {
-    getCart,
-    cart,
-    changePostCount,
-    deletePostFromCart,
-    cartLength,
-  } = useCart();
+  const { getCart, cart, changePostCount, deletePostFromCart, cartLength } =
+    useCart();
+  const { currentUser, handleLogout, checkAuth } = useContext(authContext);
+
+  const { user, getCurrentUser } = useProfile();
 
   React.useEffect(() => {
     getCart();
@@ -90,14 +90,14 @@ export default function Cart() {
 
   return (
     <>
-      <div style={{ backgroundColor: "#eee" }}>
+      <div className="cart-page">
         <div className="mybox h-100">
           <div className=" main-body d-flex justify-content-center align-items-center h-100">
             <div className="col">
               <div className="main-card">
-                <div className="card-body main-cardbody">
-                  <div className="row w-100">
-                    <div>
+                <div className="card-body main-cardbody d-flex m-auto">
+                  <div className="row w-100 ">
+                    <div className="card-body">
                       <h5 className="mb-3 continue-title">
                         <a
                           onClick={() => navigate("/posts")}
@@ -138,7 +138,7 @@ export default function Cart() {
                                 </div>
 
                                 <div className="price-block">
-                                  <TextField
+                                  {/* <TextField
                                     style={{ width: "60px", height: "40px" }}
                                     type="number"
                                     value={elem.count}
@@ -148,7 +148,7 @@ export default function Cart() {
                                         elem.item.id
                                       )
                                     }
-                                  />
+                                  /> */}
 
                                   <h5 className="mb-0">{elem.item.price}</h5>
 
@@ -172,49 +172,50 @@ export default function Cart() {
                         </div>
 
                         <div className="details__block">
-                          <div
-                            className="card text-white rounded-3"
-                            style={{ backgroundColor: "#111111" }}
-                          >
+                          <div className="card text-white rounded-3 card-details">
                             <div className="card-body-details">
-                              <div className="d-flex justify-content-between align-items-center mb-4">
-                                <h5 className="mb-0">Card details</h5>
+                              <div className="d-flex justify-content-between align-items-center mb-4 card-details-header">
+                                <h5 className="card-details-title">
+                                  Card details
+                                </h5>
                                 <img
-                                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                                  src={currentUser ? user?.profile_image : null}
                                   className="img-fluid rounded-3"
-                                  style={{ width: "45px" }}
+                                  style={{ width: "60px", margin: "10px" }}
                                   alt="Avatar"
                                 />
+
+                                <p
+                                  className="mb-2"
+                                  style={{
+                                    color: "aliceblue",
+                                    fontSize: "20px",
+                                  }}
+                                >
+                                  Card type
+                                </p>
+                                <div className="payment-cards">
+                                  <a href="#!" type="submit">
+                                    <img
+                                      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/visa-card.svg"
+                                      alt="error :("
+                                    />
+                                  </a>
+                                  <a href="#!" type="submit">
+                                    <img
+                                      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/amex-card.svg"
+                                      alt="error :("
+                                    />
+                                  </a>
+                                  <a href="#!" type="submit">
+                                    <img
+                                      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/mastercard.svg"
+                                      alt="error :("
+                                    />
+                                  </a>
+                                </div>
                               </div>
-                              <p
-                                className="mb-2"
-                                style={{
-                                  textAlign: "left",
-                                  color: "aliceblue",
-                                }}
-                              >
-                                Card type
-                              </p>
-                              <div className="payment-cards">
-                                <a href="#!" type="submit">
-                                  <img
-                                    src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/visa-card.svg"
-                                    alt="error :("
-                                  />
-                                </a>
-                                <a href="#!" type="submit">
-                                  <img
-                                    src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/amex-card.svg"
-                                    alt="error :("
-                                  />
-                                </a>
-                                <a href="#!" type="submit">
-                                  <img
-                                    src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/mastercard.svg"
-                                    alt="error :("
-                                  />
-                                </a>
-                              </div>
+
                               <ThemeProvider theme={theme}>
                                 <form className="mt-4">
                                   <div className="form-outline form-white mb-4">
