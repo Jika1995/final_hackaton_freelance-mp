@@ -64,36 +64,29 @@ const HomePage = () => {
   };
   return (
     <div className="container-home">
-      {/* <div className="main">
-        <div className="d1"></div>
-        <div className="d2"></div>
-        <div className="d3"></div>
-        <div className="d4"></div>
-      </div> */}
-
       <div className="header-home">
         <Slider {...settingsHeader} className="slider-container-header">
-          <div className="slider-img-box-header-header">
+          <div className="slider-img-box-header">
             <img
-              src="https://png.pngtree.com/thumb_back/fh260/background/20220427/pngtree-home-office-banner-freelance-work-image_1091574.jpg"
+              src="https://contently.net/wp-content/uploads/2022/05/tfc-self-review-1024x512.jpeg"
               alt=""
             />
           </div>
           <div className="slider-img-box-header">
             <img
-              src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_450,dpr_1.0/v1/attachments/generic_asset/asset/d532c0ad4feed007b3899cebad595286-1599611560157/guide-start-online-business-552-x2.png"
+              src="https://resources.clearvoice.com/wp-content/uploads/2020/06/06.26.20_Hero_1360x646.png"
               alt=""
             />
           </div>
           <div className="slider-img-box-header">
             <img
-              src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615106/skydesigner.png"
+              src="https://uploads-ssl.webflow.com/5e9033e54576bc13f0b47167/606f2df1587cfc55f95d3abc_5-reason-why-you%27re-not-making-it-as.jpg"
               alt=""
             />
           </div>
-          <div className="slider-img-box">
+          <div className="slider-img-box-header">
             <img
-              src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/aa2ff6a65708e858cd563bedbc1f9e48-1617004762616/spickex.jpeg"
+              src="https://consultport.com/wp-content/uploads/2021/03/104-012.01.png"
               alt=""
             />
           </div>
@@ -112,32 +105,36 @@ const HomePage = () => {
 
       <Slider {...settings} className="slider-container">
         <div className="slider-img-box">
-          <h3>Slide 1</h3>
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_450,dpr_1.0/v1/attachments/generic_asset/asset/d532c0ad4feed007b3899cebad595286-1599611560168/guide-digital-marketing-552-x2.png"
             alt=""
           />
+          <h3>Start an online business and work from home</h3>
+          <p>A complete guide to starting a small business online</p>
         </div>
         <div className="slider-img-box">
-          <h3>Slide 2</h3>
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_450,dpr_1.0/v1/attachments/generic_asset/asset/d532c0ad4feed007b3899cebad595286-1599611560157/guide-start-online-business-552-x2.png"
             alt=""
           />
+          <h3>Digital marketing made easy</h3>
+          <p>A practical guide to understand what is digital marketing</p>
         </div>
         <div className="slider-img-box">
-          <h3>Slide 3</h3>
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615106/skydesigner.png"
             alt=""
           />
+          <h3>Create a logo for your business</h3>
+          <p>A step-by-step guide to create a memorable business logo</p>
         </div>
         <div className="slider-img-box">
-          <h3>Slide 4</h3>
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/aa2ff6a65708e858cd563bedbc1f9e48-1617004762616/spickex.jpeg"
             alt=""
           />
+          <h3>Slide 4</h3>
+          <p></p>
         </div>
       </Slider>
 
