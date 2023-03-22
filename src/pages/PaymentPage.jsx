@@ -48,7 +48,7 @@ const PaymentPage = () => {
     palette: {
       mode: "dark",
       primary: {
-        main: "#bc9366",
+        main: "#38153eea",
       },
     },
   });
@@ -57,17 +57,18 @@ const PaymentPage = () => {
 
   return (
     <ThemeProvider theme={theme2}>
+      <>
       <div className="page">
-        <div className="container">
+        <div className="container-payment">
           <h1>Checkout</h1>
           <div className="delivery">
-            <hr />
-            <img src="" alt="" />
+            <hr style={{width: '100%'}}/>
+            <img src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-gradient/256/card-dynamic-gradient.png" alt="error:(" />
             <h6>DELIVERY</h6>
             <h6>
               <b>Shipping</b>
             </h6>
-            <hr />
+            <hr style={{width: '100%'}}/>
           </div>
           <div className="info">
             <h5>Enter details to receive your purchases</h5>
@@ -142,7 +143,7 @@ const PaymentPage = () => {
             className="card-success"
             style={{
               borderRadius: "200px",
-              background: "beige",
+              background: "#b3a4f5",
               position: "absolute",
               top: "50%",
               left: "50%",
@@ -154,14 +155,18 @@ const PaymentPage = () => {
             {/* <div > */}
             <i className="checkmark">✓</i>
             {/* </div> */}
-            <h1 style={{ color: "black" }}>Success</h1>
+            <h1 style={{ color: "azure" }}>Success</h1>
             <p>
-              We received your purchase request;
-              <br /> we'll be in touch shortly!
+              We've sent you purchase confirmation!
+              <br /> 
+              Please check your email,
+              <br /> 
+              we'll be in touch shortly!
             </p>
           </div>
         </Collapse>
       </div>
+      </>
     </ThemeProvider>
   );
 };

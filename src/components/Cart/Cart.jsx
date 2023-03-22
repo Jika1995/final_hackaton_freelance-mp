@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
+import PortraitIcon from '@mui/icons-material/Portrait';
 
 import { useCart } from "../../contexts/CartContextProvider";
 import { useNavigate } from "react-router-dom";
@@ -32,6 +33,10 @@ export default function Cart() {
     localStorage.removeItem("cart");
     getCart();
   }
+
+  React.useEffect(() => {
+    getCurrentUser()
+  },[])
 
   const [promo, setPromo] = React.useState("");
   const [sale, setSale] = React.useState(0);
@@ -123,7 +128,7 @@ export default function Cart() {
                       <div className="info-block">
                         <div className="cards-list">
                           {cart?.posts.map((elem) => (
-                            <div className="card mb-3" key={elem.item.id}>
+                            <div className="card mb-3" key={elem.item.id} style={{marginBottom: '15px'}}>
                               <div className="card-body-prod">
                                 <div className="box-img">
                                   <img
@@ -150,10 +155,10 @@ export default function Cart() {
                                     }
                                   /> */}
 
-                                  <h5 className="mb-0">{elem.item.price}</h5>
+                                  <h5 className="mb-0">{elem.item.price}$</h5>
 
                                   <h5 className="mb-0">
-                                    Sub Price: {elem.subPrice}
+                                    Sub Price: {elem.subPrice}$
                                   </h5>
 
                                   <a
@@ -163,7 +168,7 @@ export default function Cart() {
                                       deletePostFromCart(elem.item.id)
                                     }
                                   >
-                                    <DeleteIcon />
+                                    <img src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-gradient/256/trash-can-dynamic-gradient.png" alt="error:(" width='40px'/>
                                   </a>
                                 </div>
                               </div>
@@ -179,7 +184,7 @@ export default function Cart() {
                                   Card details
                                 </h5>
                                 <img
-                                  src={currentUser ? user?.profile_image : null}
+                                  src={user?.profile_image ? user.profile_image : 'https://icon-library.com/images/portrait-icon/portrait-icon-18.jpg'}
                                   className="img-fluid rounded-3"
                                   style={{ width: "60px", margin: "10px" }}
                                   alt="Avatar"
