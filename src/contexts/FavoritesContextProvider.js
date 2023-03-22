@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 export const favoritesContext = createContext();
 export const useFavorites = () => useContext(favoritesContext);
 
-const API = "http://34.141.58.26/feedback";
+const API = "http://34.141.58.26/feedback/favorite";
 
 const FavoritesContextProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
@@ -26,7 +26,7 @@ const FavoritesContextProvider = ({ children }) => {
   };
 
   const getFavorites = async () => {
-    let { data } = await axios(`${API}/favorite`);
+    let { data } = await axios(`${API}`);
     let email = JSON.parse(localStorage.getItem("email"));
     // let userObj = data.find((item) => item.email === email);
 
@@ -39,11 +39,11 @@ const FavoritesContextProvider = ({ children }) => {
   // ADD FAVORITES
   const addPostToFav = async (post) => {
     try {
-      const objFav = new FormData();
-      objFav.append("owner", post.owner);
-      objFav.append("title", post.title);
-      objFav.append("description", post.description);
-      objFav.append("price", post.price);
+      // const objFav = new FormData();
+      // objFav.append("owner", post.owner);
+      // objFav.append("title", post.title);
+      // objFav.append("description", post.description);
+      // objFav.append("price", post.price);
 
       const tokens = JSON.parse(localStorage.getItem("tokens"));
 
@@ -55,7 +55,7 @@ const FavoritesContextProvider = ({ children }) => {
         },
       };
 
-      await axios.post(`${API}/${post.id}/like/`, objFav, config);
+      await axios.post(`${API}`, post.id, config);
       getFavorites();
     } catch (err) {
       console.log(err);
