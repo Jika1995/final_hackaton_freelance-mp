@@ -25,26 +25,53 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Favorites = () => {
-    const {deletePostFromFav, favCleaner, favorites, favUser, getFavUser, getFavorites, checkPostInFav} = useFavorites();
+    const {deletePostFromFav, favorites, getFavorites, checkPostInFav} = useFavorites();
+    const {getPosts, posts} = usePosts();
+    const [favPosts, setFavPosts] = useState([]);
 
     useEffect(() => {
-      getFavUser();
+      getFavorites();
     }, []);
 
     useEffect(() => {
-      getFavorites()
+      getPosts();
     }, []);
+
+    useEffect(() => {
+      getCommonObjects(favorites, posts);
+    }, [favorites]);
+
+    function getCommonObjects(array1, array2) {
+      const commonObjects = [];
+      console.log(array1, array2);
+
+      for (let i = 0; i < array1.length; i++) {
+        console.log(array1[i].post, 'worked');
+        const idToCompare = array1[i].post;
+        const foundObject = array2.find(obj => {
+          return obj.id === idToCompare;
+        });
+        
+        if (foundObject) {
+          commonObjects.push(foundObject);
+        }
+      }
+
+      setFavPosts(commonObjects);
+
+      console.log(commonObjects);
+      
+      return commonObjects;
+    };
 
     const navigate = useNavigate();
-    const { deletePost } = usePosts();
     const { addPostToCart, checkPostInCart } = useCart();
-    // style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', margin: '20px 0px'}}
-    // style={{display: 'flex', flexWrap: 'wrap', width: '70%', justifyContent: 'center', margin: 'auto' }}
+
   return (
     <div className='products-list'>
       <div className="container-prods">
        
-        {favorites.length !== 0 ? (favorites?.map(item => (
+        {favPosts?.length !== 0 ? (favPosts?.map(item => (
               <Card className="card-prod" key={item.id}> 
               <div
                 style={{
@@ -70,8 +97,8 @@ const Favorites = () => {
               <div className="content-block">
                 <CardHeader
                   className="card-title"
-                  title={item.name}
-                  subheader={`VOLUME : ${item.volume}L | ABV : ${item.alcohol_percentage}%`}
+                  title={item.title}
+                  subheader={`By ${item.owner}`}
                   style={{ fontWeight: "bold !important" }}
                 />
         
@@ -85,7 +112,7 @@ const Favorites = () => {
                   <div className="btns-user">
                     <IconButton
                       size="small"
-                      onClick={() => deletePostFromFav(item.id, favUser.id)}
+                      onClick={() => deletePostFromFav(item.id)}
                     >
                       {checkPostInFav(item.id) ? (
                         <FavoriteIcon style={{ color: "#DC143C" }} />
@@ -103,7 +130,7 @@ const Favorites = () => {
                     </IconButton>
                   </div>
         
-                  <div className="btns-admin">
+                  {/* <div className="btns-admin">
                     <Button
                       variant="outlined"
                       className="btns-prod"
@@ -129,7 +156,7 @@ const Favorites = () => {
                     >
                       Delete <DeleteIcon fontSize="small" />
                     </Button>
-                  </div>
+                  </div> */}
                 </CardActions>
               </div>
             </Card>
@@ -137,13 +164,13 @@ const Favorites = () => {
             <h1 style={{fontSize: '30px', color: 'black', marginBottom: '20px'}}>Your Favorites List is empty!</h1>
             </div>)}
         
-        <div style={{width: '70%'}}>
-      <Button id='cleanFav-btn'
+        {/* <div style={{width: '70%'}}> */}
+      {/* <Button id='cleanFav-btn'
       variant="outlined" style={{width: '20%', margin: 'auto'}}
       onClick={() => favCleaner(favUser.id)}>
       Clean my favList <DeleteIcon fontSize="medium" style={{color: '#bf4545', marginLeft: '2px'}}/>
-      </Button>
-      </div>
+      </Button> */}
+      {/* </div> */}
       </div>
     </div>
   )
