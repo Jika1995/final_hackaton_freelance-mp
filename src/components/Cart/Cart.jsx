@@ -174,7 +174,7 @@ export default function Cart() {
                         <div className="details__block">
                           <div
                             className="card text-white rounded-3"
-                            style={{ backgroundColor: "#111111" }}
+                            style={{ backgroundColor: "blue" }}
                           >
                             <div className="card-body-details">
                               <div className="d-flex justify-content-between align-items-center mb-4">
@@ -296,7 +296,7 @@ export default function Cart() {
                                   id="checkout-btn"
                                   onClick={() => {
                                     // cartCleaner();
-                                    // navigate("/payment");
+                                    navigate("/payment");
                                     handleChange();
                                   }}
                                 >
