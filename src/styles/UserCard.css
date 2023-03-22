@@ -1,0 +1,26 @@
+.card-user {
+       width: 300px;
+       margin: 30px;
+       background: #a6379b !important;
+       text-align: center;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       color: azure !important;
+       box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset !important;
+
+}
+
+.card-user-image {
+       width: 200px !important;
+       border-radius: 50%;
+       margin: 20px auto;
+}
+
+#btn-user-card {
+       color: azure !important;
+}
+
+#user-bio-text {
+       color: azure;
+}

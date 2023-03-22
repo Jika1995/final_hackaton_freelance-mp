@@ -1,41 +1,42 @@
-import React, { useEffect } from 'react';
-import {useProfile} from '../contexts/ProfileContextProvider';
-import { useUsers } from '../contexts/UsersContextProvider';
-import UserCard from '../components/UserCard/UserCard';
+import React, { useEffect } from "react";
+import { useProfile } from "../contexts/ProfileContextProvider";
+import { useUsers } from "../contexts/UsersContextProvider";
+import UserCard from "../components/UserCard/UserCard";
+import "../styles/UsersListPage.css";
 
 const UsersListPage = () => {
+  const { user, getCurrentUser } = useProfile();
+  const { buyers, executants, getBuyers, getExecutants } = useUsers();
 
-    const {user, getCurrentUser} = useProfile();
-    const {buyers, executants, getBuyers, getExecutants} = useUsers();
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
-    useEffect(() => {
-        getCurrentUser();
-    }, []);
-
-    useEffect(() => {
-        getBuyers();
-        getExecutants();
-    }, []);
+  useEffect(() => {
+    getBuyers();
+    getExecutants();
+  }, []);
 
   return (
-    <div>
+    <div className="users-page">
+      <div className="users-page-list">
         {user?.is_buyer ? (
-            <div>
-                <h1>List of executants</h1>
-                {executants?.map(item => (
-                    <UserCard key={item.id} item={item}/>
-                )) }
-            </div>
+          <>
+            {executants?.map((item) => (
+              <UserCard key={item.id} item={item} />
+            ))}
+          </>
         ) : (
-            <div>
+          <>
             <h1>List of buyers</h1>
-            {buyers?.map(item => (
-               <UserCard key={item.id} item={item}/>
-            )) }
-        </div>
+            {buyers?.map((item) => (
+              <UserCard key={item.id} item={item} />
+            ))}
+          </>
         )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default UsersListPage
+export default UsersListPage;

@@ -1,0 +1,12 @@
+.users-page {
+       background-color: #38153eea;
+}
+
+.users-page-list {
+       width: 80%;
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       margin: auto;
+       padding-top: 100px;
+}
