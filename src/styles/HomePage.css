@@ -158,3 +158,46 @@
 
   object-fit: cover;
 }
+
+.promo-home {
+  width: 80%;
+  margin: auto !important;
+  position: relative;
+}
+
+.promo-home>img {
+  object-fit: cover;
+  width: 100%;
+  margin: auto !important;
+}
+
+.promo-home-text {
+  position: absolute;
+  color: azure;
+  font-size: 3rem;
+  width: 40%;
+  margin-top: 70px;
+  margin-left: 10%;
+}
+
+.promo-home-bottom {
+  width: 80%;
+  margin: 20px auto !important;
+  position: relative;
+}
+
+.promo-home-bottom>img {
+  object-fit: cover;
+  width: 100%;
+  margin: auto !important;
+}
+
+.promo-home-bottom-text {
+  position: absolute;
+  color: azure;
+  font-size: 2.5rem;
+  width: 40%;
+  margin-top: 70px;
+  margin-left: 10%;
+  text-align: center;
+}
