@@ -5,7 +5,8 @@ export const usersContext = createContext();
 export const useUsers = () => useContext(usersContext);
 
 const BUYERS_API = 'http://34.141.58.26/account/buyers/';
-const EXECUTANTS_API = 'http://34.141.58.26/account/executants/'
+const EXECUTANTS_API = 'http://34.141.58.26/account/executants/';
+const RATING_API = 'http://34.141.58.26/feedback'
 
 const UsersContextProvider = ({children}) => {
     const [buyers, setBuyers] = useState([]);
@@ -53,6 +54,28 @@ const UsersContextProvider = ({children}) => {
         }
     } 
 
+    async function putRating (userId, rateValue) {
+        try {
+            const tokens = JSON.parse(localStorage.getItem("tokens"));
+
+            //config
+            const Authorization = `Bearer ${tokens.access}`;
+            const config = {
+                headers: {
+                Authorization, //ключ со значением
+            }};
+
+            const ratingValue = new FormData();
+            ratingValue.append("rating", rateValue);
+
+            let res = await axios.post(`${RATING_API}/${userId}/rating/`, ratingValue, config);
+            console.log(res);
+            
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     return (
         
         <usersContext.Provider value={{
@@ -60,7 +83,8 @@ const UsersContextProvider = ({children}) => {
             executants,
 
             getBuyers,
-            getExecutants
+            getExecutants,
+            putRating
         }}>
             {children}
         </usersContext.Provider>
