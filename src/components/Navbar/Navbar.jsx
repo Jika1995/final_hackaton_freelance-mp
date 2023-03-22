@@ -214,6 +214,15 @@ function Navbar() {
                   </Typography>
                 </MenuItem>
               ))}
+              {user?.is_buyer ? null : <MenuItem key='addpost' onClick={handleCloseNavMenu}>
+                  <Typography
+                    textalign="center"
+                    onClick={() => navigate('/addpost')}
+                    id="box-nav-btns"
+                  >
+                    Add Post
+                  </Typography>
+                </MenuItem>}
               {user?.is_buyer ? 
         
               <MenuItem key='executants' onClick={handleCloseNavMenu}>
@@ -224,16 +233,8 @@ function Navbar() {
                   >
                     Executants
                   </Typography>
-                </MenuItem> : <>
-                <MenuItem key='addpost' onClick={handleCloseNavMenu}>
-                  <Typography
-                    textalign="center"
-                    onClick={() => navigate('/addpost')}
-                    id="box-nav-btns"
-                  >
-                    Add Post
-                  </Typography>
-                </MenuItem>
+                </MenuItem> : 
+               
                 <MenuItem key='buyers' onClick={handleCloseNavMenu}>
                   <Typography
                     textalign="center"
@@ -242,7 +243,7 @@ function Navbar() {
                   >
                     Buyers
                   </Typography>
-                </MenuItem></> }
+                </MenuItem>}
             </Menu>
           </Box>
 
@@ -279,10 +280,18 @@ function Navbar() {
                 {page.type}
               </Button>
             ))}
+            {user?.is_buyer ? null :  <Button
+                    key='AddPost'
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={() => navigate('/addpost')}
+                className="icon-btns-nav"
+              >
+                Add Post
+              </Button>}
             {user?.is_buyer ? 
                   
                   <Button
-                    key='Executants'
+                key='Executants'
                 sx={{ my: 2, color: "white", display: "block" }}
                 onClick={() => navigate('/allusers')}
                 className="icon-btns-nav"
@@ -292,15 +301,6 @@ function Navbar() {
              
                  :     
                  
-                 <>
-                 <Button
-                    key='AddPost'
-                sx={{ my: 2, color: "white", display: "block" }}
-                onClick={() => navigate('/addpost')}
-                className="icon-btns-nav"
-              >
-                Add Post
-              </Button>
                  <Button
                  key='Buyers'
              sx={{ my: 2, color: "white", display: "block" }}
@@ -308,7 +308,7 @@ function Navbar() {
              className="icon-btns-nav"
            >
              Buyers
-           </Button></>}
+           </Button>}
           </Box>
 
           <Box sx={{ flexGrow: 0 }} className="icon-box">
