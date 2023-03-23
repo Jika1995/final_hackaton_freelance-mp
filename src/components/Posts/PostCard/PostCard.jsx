@@ -200,7 +200,11 @@ const PostCard = ({ item }) => {
           >
             <div className="card-titles">
               <Typography variant="h4">{item.title}</Typography>
+              <div>
+                {/* <Avatar src=''/> */}
               <p>by {item.owner}</p>
+              </div>
+              
             </div>
           </div>
 
@@ -259,13 +263,14 @@ const PostCard = ({ item }) => {
                         margin: "auto",
                         borderRadius: "10px",
                       }}
+                      className='comment-modal'
                     >
                       <Typography
                         id="modal-modal-title"
                         variant="h6"
                         component="h2"
                       >
-                        All comments
+                        {/* All comments */}
                       </Typography>
                       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
                         {item.comments ? (
@@ -275,7 +280,7 @@ const PostCard = ({ item }) => {
                                 <ListItemAvatar>
                                   <Avatar
                                     alt=""
-                                    src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg"
+                                    src={elem?.profile_image}
                                   />
                                 </ListItemAvatar>
                                 <ListItemText
@@ -319,17 +324,19 @@ const PostCard = ({ item }) => {
                           <p>There is no comments yet. Be first!</p>
                         )}
                       </List>
-                      <Card style={{ borderRadius: "0px" }}>
-                        <Box sx={{ p: "15px" }}>
+                      <Card style={{ borderRadius: "0px" }} >
+                        <Box sx={{ p: "15px" }} >
                           <Stack
                             direction="row"
                             spacing={2}
                             alignItems="flex-start"
+                            className='add-comm-block'
                           >
                             <Avatar
-                              src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg"
+                              src={user.profile_image}
                               variant="rounded"
                               alt="user-avatar"
+                              className="comm-avatar-add"
                             />
                             <TextField
                               multiline
@@ -342,6 +349,7 @@ const PostCard = ({ item }) => {
                                 commentBody.body = e.target.value;
                                 setCommentBody({ ...commentBody });
                               }}
+                              className='addcomm-inp'
                             />
                             {!edit ? (
                               <Button
@@ -354,6 +362,7 @@ const PostCard = ({ item }) => {
                                     bgcolor: "grey",
                                   },
                                 }}
+                                className="add-comm-btn"
                                 onClick={(e) => {
                                   addComment(commentBody, item);
                                   setCommentBody({ body: "" });
@@ -372,6 +381,7 @@ const PostCard = ({ item }) => {
                                     bgcolor: "grey",
                                   },
                                 }}
+                                className="add-comm-btn"
                                 onClick={(e) => {
                                   setEdit(false);
                                   saveEditedComment(commentBody, item);

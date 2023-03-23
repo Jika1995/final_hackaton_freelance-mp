@@ -44,12 +44,7 @@
     border: #A658B3 2px solid;
     height: 24px;
 }
-.like-btn {
-    /* background-image: 
-        radial-gradient(at 47% 50%, hsl(291.63, 67%, 38%) 0, transparent 59%), 
-        radial-gradient(at 65% 65%, hsl(288.00, 18%, 11%) 0, transparent 55%); */
-    /* width: 25%; */
-}
+
 .btns-all {
     display: flex;
     justify-content: space-between !important;
@@ -125,5 +120,27 @@
     .main-postCard {
         width: 80% !important;
     }
+}
+
+@media all and (max-width: 320px) {
+    .comment-modal {
+        width: 81% !important;
+    }
+   .add-comm-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+   }
+   #outlined-multilined {
+    height: 23px !important;
+   }
+   .comm-avatar-add {
+    margin-bottom: 5px !important;
+   }
+   .add-comm-btn {
+    margin-top: 5px !important;
+    width: 60px !important;
+   }
 }
 
