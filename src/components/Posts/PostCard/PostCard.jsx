@@ -280,7 +280,7 @@ const PostCard = ({ item }) => {
                                 <ListItemAvatar>
                                   <Avatar
                                     alt=""
-                                    src={elem?.profile_image}
+                                    src={`http://34.141.58.26${elem?.profile_image}`}
                                   />
                                 </ListItemAvatar>
                                 <ListItemText
