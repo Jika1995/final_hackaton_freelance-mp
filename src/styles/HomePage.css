@@ -94,3 +94,8 @@
 .slick-arrow {
   display: none !important;
 }
+
+.slide-info-text {
+  width: 300px;
+  margin: auto;
+}

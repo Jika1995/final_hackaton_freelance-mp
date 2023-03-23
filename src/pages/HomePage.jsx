@@ -109,32 +109,43 @@ const HomePage = () => {
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_450,dpr_1.0/v1/attachments/generic_asset/asset/d532c0ad4feed007b3899cebad595286-1599611560168/guide-digital-marketing-552-x2.png"
             alt=""
           />
-          <h3>Start an online business and work from home</h3>
-          <p>A complete guide to starting a small business online</p>
+          <div className="slide-info-text">
+            <h3>Start an online business and work from home</h3>
+            <p>A complete guide to starting a small business online</p>
+          </div>
         </div>
         <div className="slider-img-box">
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_450,dpr_1.0/v1/attachments/generic_asset/asset/d532c0ad4feed007b3899cebad595286-1599611560157/guide-start-online-business-552-x2.png"
             alt=""
           />
-          <h3>Digital marketing made easy</h3>
-          <p>A practical guide to understand what is digital marketing</p>
+          <div className="slide-info-text">
+            <h3>Digital marketing made easy</h3>
+            <p>A practical guide to understand what is digital marketing</p>
+          </div>
         </div>
         <div className="slider-img-box">
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615106/skydesigner.png"
             alt=""
           />
-          <h3>Create a logo for your business</h3>
-          <p>A step-by-step guide to create a memorable business logo</p>
+          <div className="slide-info-text">
+            <h3>Create a logo for your business</h3>
+            <p>A step-by-step guide to create a memorable business logo</p>
+          </div>
         </div>
         <div className="slider-img-box">
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/aa2ff6a65708e858cd563bedbc1f9e48-1617004762616/spickex.jpeg"
             alt=""
           />
-          <h3>Slide 4</h3>
-          <p></p>
+          <div className="slide-info-text">
+            <h3>Book trailer examples & How to make a book trailer</h3>
+            <p>
+              Read our guide on how to make a stunning book trailer for your new
+              book.
+            </p>
+          </div>
         </div>
       </Slider>
 
