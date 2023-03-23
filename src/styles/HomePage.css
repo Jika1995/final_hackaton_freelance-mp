@@ -95,7 +95,12 @@
   display: none !important;
 }
 
-@media all and (max-width: 1024px) {
+.slide-info-text {
+  width: 300px;
+  margin: auto;
+}
+
+  @media all and (max-width: 1024px) {
   .promo-home-text {
     font-size: 2rem !important;
   }

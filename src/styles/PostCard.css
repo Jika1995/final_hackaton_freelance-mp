@@ -1,15 +1,18 @@
 .main-postCard {
     /* backdrop-filter: blur(16px) saturate(169%) !important;
     -webkit-backdrop-filter: blur(16px) saturate(169%) !important; */
-    background-color: #7b0f89af !important;
+    /* background-color: #7b0f89af !important; */
+    background-image: linear-gradient(to bottom, #836fdc, #9557c4, #a045a8, #a6379b, #a027cc);
     border-radius: 30px !important;
     border: 1px solid rgba(255, 255, 255, 0.125) !important;
-    width: 80% !important;
+    width: 60% !important;
     margin: 20px auto !important;
     transition: 0.7;
     color: white !important;
     font-family: 'Mulish', sans-serif !important;
     filter: drop-shadow(5px 5px 30px rgba(0, 0, 0, 0.11));
+    box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
 }
 .main-postCard:hover {
     transform: scale(1.02);
@@ -17,16 +20,15 @@
     transition: 0.8s;
 }
 .card-container {
-    width: 90%;
+    width: 80%;
     margin: auto;
     display: flex;
     flex-direction: column;
 }
 .card-img {
     object-fit: contain !important;
-    height: 270px;
-    border-radius: 30px 30px 0 0;
-    margin: 5px 0;
+    height: 250px;
+    /* margin: 40px auto 20px; */
 }
 .card-titles{
     width: 60%;
@@ -46,11 +48,82 @@
     /* background-image: 
         radial-gradient(at 47% 50%, hsl(291.63, 67%, 38%) 0, transparent 59%), 
         radial-gradient(at 65% 65%, hsl(288.00, 18%, 11%) 0, transparent 55%); */
-    width: 25%;
+    /* width: 25%; */
 }
 .btns-all {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between !important;
     width: 100%;
     align-items: center;
 }
+
+#btn-post-card-settings {
+    margin: 5px;
+}
+
+#btn-post-card-comm {
+    color: azure;
+}
+
+.btns-all {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#total-likes-text {
+    /* border-radius: 50%; */
+    margin: 10px;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: #ad238b; */
+    box-shadow: rgba(11, 40, 73, 0.4) 0px 0px 0px 2px, rgba(20, 55, 95, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;    
+    border-radius: 5px;
+}
+
+.card-info-values {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#card-price-text {
+    box-shadow: rgba(11, 40, 73, 0.4) 0px 0px 0px 2px, rgba(20, 55, 95, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;    
+    border-radius: 5px;
+    padding: 5px;
+    height: 40px;
+    /* background: #9a58c1; */
+}
+
+@media all and (max-width: 450px) {
+    .main-postCard {
+        width: 320px !important;
+    }
+}
+
+@media all and (max-width: 360px) {
+    .main-postCard {
+        width: 290px !important;
+    }
+
+    .btns-all {
+        justify-content: center !important;
+    }
+
+    .btns-all>button {
+        margin: auto 10px;
+    }
+}
+
+
+@media all and (max-width: 520px) {
+    .main-postCard {
+        width: 80% !important;
+    }
+}
+

@@ -4,7 +4,7 @@ import { authContext } from "../../../contexts/AuthContextProvider";
 import { postsContext } from "../../../contexts/PostContextProvider";
 import { useCart } from "../../../contexts/CartContextProvider";
 import { useProfile } from "../../../contexts/ProfileContextProvider";
-import {useFavorites} from '../../../contexts/FavoritesContextProvider';
+import { useFavorites } from "../../../contexts/FavoritesContextProvider";
 
 import { useComments } from "../../../contexts/CommentContextProvider";
 import "../../../styles/PostCard.css";
@@ -25,7 +25,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { Button } from "@mui/material";
 
@@ -89,9 +89,9 @@ const PostCard = ({ item }) => {
   // console.log(item);
 
   useEffect(() => {
-    getFavorites()
-  }, [])
-  
+    getFavorites();
+  }, []);
+
   //MUI
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -131,9 +131,38 @@ const PostCard = ({ item }) => {
           alignItems: "end ",
         }}
       >
-        <IconButton aria-label="settings" onClick={handleMenuClick}>
-          <MoreVertIcon />
+        {user?.email === item.owner ? (
+          <IconButton aria-label="settings" onClick={handleMenuClick}>
+            {/* <MoreVertIcon /> */}
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-premium/512/setting-dynamic-premium.png"
+              alt=""
+              width="50px"
+              id="btn-post-card-settings"
+            />
+          </IconButton>
+        ) : null}
+
+        <IconButton
+          size="small"
+          onClick={() => addPostToFav(item.id)}
+          style={{ margin: "10px" }}
+        >
+          {checkPostInFav(item.id) ? (
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-color/512/bookmark-fav-dynamic-color.png"
+              alt="error:("
+              width="50px"
+            />
+          ) : (
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-color/512/bookmark-dynamic-color.png"
+              alt="error:("
+              width="50px"
+            />
+          )}
         </IconButton>
+
         {item.owner === user?.email ? (
           <Menu
             anchorEl={anchorEl}
@@ -166,211 +195,220 @@ const PostCard = ({ item }) => {
               justifyContent: "space-between",
               alignItems: "center",
               marginTop: "20px",
+              flexWrap: "wrap",
             }}
           >
             <div className="card-titles">
               <Typography variant="h4">{item.title}</Typography>
               <p>by {item.owner}</p>
             </div>
-            <div className="card-price">
-              <p>{item.price} $</p>
-            </div>
           </div>
 
           {currentUser ? (
-            <CardActions className="use-block">
-              <div className="btns-all">
-                <IconButton
-                  className="like-btn"
-                  onClick={() => toggleLike(item)}
-                  style={{ color: "white" }}
-                >
-                  {item.likes.some(
-                    (elem) => elem.is_like === true && elem.owner === user?.id
-                  ) ? (
-                    <img
-                      src="https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png"
-                      width="50px"
-                      height="50px"
-                      style={{ marginRight: "5px" }}
-                    />
-                  ) : (
-                    <img
-                      src="https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png"
-                      width="50px"
-                      height="50px"
-                      style={{ marginRight: "5px" }}
-                    />
-                  )}{" "}
-                  {item.total_likes}
-                </IconButton>
-
-                <Button variant="text" onClick={handleOpen}>
-                  Comments...
-                </Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box
-                    style={{
-                      width: "40%",
-                      margin: "auto",
-                      borderRadius: "10px",
-                    }}
+            <>
+              <div className="card-info-values">
+                <h3 id="total-likes-text">{item.total_likes} likes</h3>
+                <h3 id="card-price-text">{item.price} $</h3>
+              </div>
+              <CardActions className="use-block">
+                <div className="btns-all">
+                  <IconButton
+                    className="like-btn"
+                    onClick={() => toggleLike(item)}
+                    style={{ color: "white" }}
                   >
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                    >
-                      All comments
-                    </Typography>
-                    <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-                      {item.comments ? (
-                        item.comments.map((elem) => (
-                          <div key={elem.id}>
-                            <ListItem alignItems="flex-start">
-                              <ListItemAvatar>
-                                <Avatar
-                                  alt=""
-                                  src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg"
-                                />
-                              </ListItemAvatar>
-                              <ListItemText
-                                primary={
-                                  <React.Fragment>
-                                    <Typography
-                                      sx={{ display: "inline" }}
-                                      component="span"
-                                      variant="body2"
-                                      color="text.primary"
-                                    >
-                                      {elem.body}
-                                    </Typography>
-                                  </React.Fragment>
-                                }
-                              />
-                              {elem.owner === user?.email ? (
-                                <>
-                                  <DeleteIcon
-                                    fontSize="small"
-                                    color="error"
-                                    onClick={() => {
-                                      deleteComment(elem.id, item);
-                                    }}
-                                  />
-                                  <SettingsSuggestIcon
-                                    fontSize="small"
-                                    color="warning"
-                                    onClick={() => {
-                                      editComment(elem.id);
-                                      setEditedComment(oneComment?.body);
-                                    }}
-                                  />
-                                </>
-                              ) : null}
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                          </div>
-                        ))
-                      ) : (
-                        <p>There is no comments yet. Be first!</p>
-                      )}
-                    </List>
-                    <Card style={{ borderRadius: "0px" }}>
-                      <Box sx={{ p: "15px" }}>
-                        <Stack
-                          direction="row"
-                          spacing={2}
-                          alignItems="flex-start"
-                        >
-                          <Avatar
-                            src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg"
-                            variant="rounded"
-                            alt="user-avatar"
-                          />
-                          <TextField
-                            multiline
-                            fullWidth
-                            minRows={4}
-                            id="outlined-multilined"
-                            placeholder="Add a comment"
-                            value={commentBody?.body}
-                            onChange={(e) => {
-                              commentBody.body = e.target.value;
-                              setCommentBody({ ...commentBody });
-                            }}
-                          />
-                          {!edit ? (
-                            <Button
-                              size="large"
-                              sx={{
-                                bgcolor: "blue",
-                                color: "white",
-                                p: "8px 25px",
-                                "&:hover": {
-                                  bgcolor: "grey",
-                                },
-                              }}
-                              onClick={(e) => {
-                                addComment(commentBody, item);
-                                setCommentBody({ body: "" });
-                              }}
-                            >
-                              Send
-                            </Button>
-                          ) : (
-                            <Button
-                              size="large"
-                              sx={{
-                                bgcolor: "blue",
-                                color: "white",
-                                p: "8px 25px",
-                                "&:hover": {
-                                  bgcolor: "grey",
-                                },
-                              }}
-                              onClick={(e) => {
-                                setEdit(false);
-                                saveEditedComment(commentBody, item);
-                                setCommentBody({ body: "" });
-                              }}
-                            >
-                              Save
-                            </Button>
-                          )}
-                        </Stack>
-                      </Box>
-                    </Card>
-                  </Box>
-                </Modal>
-                <div className="icon-btns">
-                  <IconButton size="small" onClick={() => addPostToFav(item.id)}>
-                    {/* <img
-                      src="https://i.ibb.co/C117v1b/8703847-heart-love-icon.png"
-                      width="50px"
-                      height="50px"
-                    /> */}
-                    {checkPostInFav(item.id) ? (<FavoriteIcon style={{ color: "#DC143C" }} />) : (<FavoriteBorderIcon style={{ color: "white" }} />)}
-
-                  </IconButton>
-                  <IconButton size="small" onClick={() => addPostToCart(item)}>
-                    {checkPostInCart(item.id) ? (
-                      <ShoppingCartIcon style={{ color: "white" }} />
-                    ) : (
+                    {item.likes.some(
+                      (elem) => elem.is_like === true && elem.owner === user?.id
+                    ) ? (
                       <img
-                        src="https://i.ibb.co/L9TY739/8703873-bag-shopping-basket-cart-icon.png"
+                        src="https://i.ibb.co/5ryz8nj/8703849-thumb-down-thumbs-down-dislike-icon.png"
                         width="50px"
                         height="50px"
+                        style={{ margin: "5px" }}
+                      />
+                    ) : (
+                      <img
+                        src="https://i.ibb.co/J5pQBPY/8703802-thumb-up-thumbs-up-agree-icon.png"
+                        width="50px"
+                        height="50px"
+                        style={{ margin: "5px" }}
                       />
                     )}
                   </IconButton>
+
+                  <Button
+                    variant="text"
+                    onClick={handleOpen}
+                    id="btn-post-card-comm"
+                  >
+                    <img
+                      src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-gradient/256/chat-bubble-dynamic-gradient.png"
+                      alt=""
+                      width="50px"
+                    />
+                  </Button>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box
+                      style={{
+                        width: "40%",
+                        margin: "auto",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                      >
+                        All comments
+                      </Typography>
+                      <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+                        {item.comments ? (
+                          item.comments.map((elem) => (
+                            <div key={elem.id}>
+                              <ListItem alignItems="flex-start">
+                                <ListItemAvatar>
+                                  <Avatar
+                                    alt=""
+                                    src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg"
+                                  />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  primary={
+                                    <React.Fragment>
+                                      <Typography
+                                        sx={{ display: "inline" }}
+                                        component="span"
+                                        variant="body2"
+                                        color="text.primary"
+                                      >
+                                        {elem.body}
+                                      </Typography>
+                                    </React.Fragment>
+                                  }
+                                />
+                                {elem.owner === user?.email ? (
+                                  <>
+                                    <DeleteIcon
+                                      fontSize="small"
+                                      color="error"
+                                      onClick={() => {
+                                        deleteComment(elem.id, item);
+                                      }}
+                                    />
+                                    <SettingsSuggestIcon
+                                      fontSize="small"
+                                      color="warning"
+                                      onClick={() => {
+                                        editComment(elem.id);
+                                        setEditedComment(oneComment?.body);
+                                      }}
+                                    />
+                                  </>
+                                ) : null}
+                              </ListItem>
+                              <Divider variant="inset" component="li" />
+                            </div>
+                          ))
+                        ) : (
+                          <p>There is no comments yet. Be first!</p>
+                        )}
+                      </List>
+                      <Card style={{ borderRadius: "0px" }}>
+                        <Box sx={{ p: "15px" }}>
+                          <Stack
+                            direction="row"
+                            spacing={2}
+                            alignItems="flex-start"
+                          >
+                            <Avatar
+                              src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg"
+                              variant="rounded"
+                              alt="user-avatar"
+                            />
+                            <TextField
+                              multiline
+                              fullWidth
+                              minRows={4}
+                              id="outlined-multilined"
+                              placeholder="Add a comment"
+                              value={commentBody?.body}
+                              onChange={(e) => {
+                                commentBody.body = e.target.value;
+                                setCommentBody({ ...commentBody });
+                              }}
+                            />
+                            {!edit ? (
+                              <Button
+                                size="large"
+                                sx={{
+                                  bgcolor: "blue",
+                                  color: "white",
+                                  p: "8px 25px",
+                                  "&:hover": {
+                                    bgcolor: "grey",
+                                  },
+                                }}
+                                onClick={(e) => {
+                                  addComment(commentBody, item);
+                                  setCommentBody({ body: "" });
+                                }}
+                              >
+                                Send
+                              </Button>
+                            ) : (
+                              <Button
+                                size="large"
+                                sx={{
+                                  bgcolor: "blue",
+                                  color: "white",
+                                  p: "8px 25px",
+                                  "&:hover": {
+                                    bgcolor: "grey",
+                                  },
+                                }}
+                                onClick={(e) => {
+                                  setEdit(false);
+                                  saveEditedComment(commentBody, item);
+                                  setCommentBody({ body: "" });
+                                }}
+                              >
+                                Save
+                              </Button>
+                            )}
+                          </Stack>
+                        </Box>
+                      </Card>
+                    </Box>
+                  </Modal>
+                  <div className="icon-btns">
+                    <IconButton
+                      size="small"
+                      onClick={() => addPostToCart(item)}
+                    >
+                      {checkPostInCart(item.id) ? (
+                        <img
+                          src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-color/512/eth-dynamic-color.png"
+                          width="50px"
+                          height="50px"
+                        />
+                      ) : (
+                        <img
+                          src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-gradient/512/eth-dynamic-gradient.png"
+                          width="50px"
+                          height="50px"
+                        />
+                      )}
+                    </IconButton>
+                  </div>
                 </div>
-              </div>
-            </CardActions>
+              </CardActions>
+            </>
           ) : (
             <></>
           )}

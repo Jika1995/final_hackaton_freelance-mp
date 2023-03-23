@@ -63,7 +63,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.udemy.com/ru/" target="_blank">
+                  <a href="https://habr.com/ru/all/" target="_blank">
                     Habr
                   </a>
                 </li>
@@ -79,7 +79,7 @@ const Footer = () => {
         <div className="footer-icons">
           <IconButton
             component={Link}
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/makerskg/"
             target="_blank"
             rel="noopener"
             aria-label="instagram"
@@ -109,7 +109,7 @@ const Footer = () => {
           </IconButton>
           <IconButton
             component={Link}
-            href="https://telegram.org/"
+            href="https://t.me/makerskg"
             target="_blank"
             rel="noopener"
             aria-label="telegram"

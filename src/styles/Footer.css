@@ -17,9 +17,10 @@ footer {
 }
 
 .footer-content {
+       width: 100%;
        display: flex;
        justify-content: center;
-       margin: auto 20px;
+       margin: 20px auto;
        align-items: center;
        flex-wrap: wrap;
 }
@@ -43,7 +44,7 @@ footer {
 }
 
 .footer-info {
-       width: 60%;
+       width: 90%;
        display: flex;
        justify-content: center;
        color: whitesmoke !important;
@@ -117,4 +118,14 @@ footer {
 .icons-btns:hover>.icons {
        color: rgb(240, 93, 245);
        transition: 0.4s ease-in-out;
+}
+
+@media all and (max-width: 1090px) {
+       .footer-body {
+              width: 90%;
+       }
+
+       .footer-icons {
+              width: 90%;
+       }
 }
