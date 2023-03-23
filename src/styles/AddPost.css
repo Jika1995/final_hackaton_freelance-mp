@@ -61,3 +61,15 @@
  #edit-nav:hover {
     color: #A658B3 !important;
  }
+
+ @media all and (max-width: 320px) {
+    .add-block{
+        width: 90%;
+    }
+    #add-nav {
+        font-size: 35px !important;
+    }
+    #edit-nav {
+        font-size: 35px !important;
+    }
+ }

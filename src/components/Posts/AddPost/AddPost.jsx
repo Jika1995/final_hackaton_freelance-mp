@@ -45,7 +45,7 @@ const AddPost = () => {
                   style={{
                     fontFamily: "Mulish",
                     fontWeight: "700",
-                    fontSize: "50px",
+                    fontSize: "45px",
                   }}
                   id="add-nav"
                 >

@@ -36,6 +36,20 @@ const UserCard = ({ item }) => {
     getCurrentUser();
   }, []);
 
+  useEffect(() => {
+    console.log('changed');
+    setValue(item.ratings?.rating__avg)
+  }, [item])
+
+  // useEffect(() => {
+  //   getBuyers();
+  // }, []);
+
+  useEffect(() => {
+    getExecutants();
+    console.log('changed');
+  }, [item]);
+
   return (
     <Card className="card-user" key={item.id}>
       <CardMedia
@@ -93,6 +107,7 @@ const UserCard = ({ item }) => {
               <Button
                 onClick={() => {
                   putRating(item.id, value2);
+                  setValue2(0);
                   handleClose();
                 }}
                 className="modal-user-card-btn"
