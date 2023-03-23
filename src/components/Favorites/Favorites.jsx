@@ -95,10 +95,18 @@ const Favorites = () => {
                       onClick={() => deletePostFromFav(item.id)}
                     >
                       {checkPostInFav(item.id) ? (
-                        <FavoriteIcon style={{ color: "#DC143C" }} />
-                      ) : (
-                        <FavoriteBorderIcon style={{ color: "white" }} />
-                      )}
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-color/512/bookmark-fav-dynamic-color.png"
+              alt="error:("
+              width="50px"
+            />
+          ) : (
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-color/512/bookmark-dynamic-color.png"
+              alt="error:("
+              width="50px"
+            />
+          )}
                     </IconButton>
 
                     <IconButton
@@ -108,19 +116,16 @@ const Favorites = () => {
                       {checkPostInCart(item.id) ? (
                         // <ShoppingCartIcon style={{ color: "white" }} />
                         <img
-                          src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-color/512/bookmark-fav-dynamic-color.png"
-                          alt=""
-                          width="40px"
-                        />
-                      ) : (
-                        // <AddShoppingCartOutlinedIcon
-                        //   style={{ color: "white" }}
-                        // />
-                        <img
-                          src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-color/512/bookmark-fav-dynamic-color.png"
-                          alt=""
-                          width="40px"
-                        />
+                        src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-color/512/eth-dynamic-color.png"
+                        width="50px"
+                        height="50px"
+                      />
+                    ) : (
+                      <img
+                        src="https://cdn0.iconfinder.com/data/icons/3d-dynamic-gradient/512/eth-dynamic-gradient.png"
+                        width="50px"
+                        height="50px"
+                      />
                       )}
                     </IconButton>
                   </div>
