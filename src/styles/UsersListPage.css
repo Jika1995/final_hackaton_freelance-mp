@@ -10,3 +10,18 @@
        margin: auto;
        padding-top: 100px;
 }
+
+@media all and (max-width: 320px) {
+       .users-page-list {
+              width: 90%;
+       }
+       .card-user {
+              margin: 10px 0;
+       }
+       #modal-modal-title {
+              font-size: 15px;
+       }
+       .modal-user-card {
+              width: 55% !important;
+       }
+}
