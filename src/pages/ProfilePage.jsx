@@ -6,6 +6,7 @@ import { useProfile } from "../contexts/ProfileContextProvider";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import Rating from "@mui/material/Rating";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,12 @@ const ProfilePage = () => {
   useEffect(() => {
     getCurrentUser();
   }, []);
+
+  // useEffect(() => {
+  //   setValue(user?.ratings?.rating__avg)
+  // },[user,])
+
+  // const [value, setValue] = React.useState(user?.ratings?.rating__avg);
 
   // useEffect(() => {
   //   getCurrentUser(user);
@@ -53,8 +60,10 @@ const ProfilePage = () => {
             <div className="profile-reviews">
               {user.is_buyer ? <h4>Buyer</h4> : <h4>Executor</h4>}
               <h4>Rating</h4>
-              <h4>Reviews</h4>
-              <h4>Followers</h4>
+              <Rating name="read-only" value={user.ratings?.rating__avg} readOnly />
+              <p>{user.ratings?.rating__avg}</p>
+              {/* <h4>Reviews</h4>
+              <h4>Followers</h4> */}
             </div>
           </div>
         </div>
