@@ -6,20 +6,20 @@
     font-family: 'Mulish', sans-serif !important;
 }
 .btn-back-details {
-    background: #a6379b;
+    background: #a6379b !important;
     width: 10%;
     border-radius: 10px;
     color: azure;
     margin: auto;
-    box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    transition: box-shadow 0.7s ease-in-out;
-    margin-left: 30px;
+    box-shadow: rgba(0, 0, 0, 0.259) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset !important;
+    transition: box-shadow 0.7s ease-in-out !important;
+    margin-left: 30px !important;
 }
 
 .btn-back-details:hover {
-    background-color: #441a40;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-    transition: box-shadow 0.7s ease-in-out;
+    background-color: #441a40 !important;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
+    transition: box-shadow 0.7s ease-in-out !important;
 }
 
 .prod-card-container {
@@ -37,11 +37,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid gainsboro;
+    
 }
 
 .image-block img {
-    height: 600px !important;
     overflow: hidden;
     transition: 0.4s;
 }
@@ -141,5 +140,26 @@
     }
     .info-block-details {
            width: 100%;
+    }
+    .desc-btn {
+        width: 86%;
+    }
+    .desc-btn>button {
+        width: 80% !important;
+    }
+    .btn-back-details{
+        width: 25% !important;
+    }
+    
+}
+
+@media all and (max-width: 1024px) {
+    .desc-btn>button {
+        width: 60%;
+    }
+}
+@media all and (max-width: 768px) {
+    .desc-btn {
+        width: 86%;
     }
 }
