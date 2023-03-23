@@ -29,10 +29,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 
 const pages = [
-  {
-    type: "Chat",
-    path: "/chat",
-  },
+  // {
+  //   type: "Chat",
+  //   path: "/chat",
+  // },
   {
     type: "Market",
     path: "/posts",

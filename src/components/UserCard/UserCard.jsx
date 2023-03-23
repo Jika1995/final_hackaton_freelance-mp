@@ -115,7 +115,7 @@ const UserCard = ({ item }) => {
                 Rate
               </Button>
             </Box>
-          </Modal>{" "}
+          </Modal>
         </CardActions>
       </div>
     </Card>
